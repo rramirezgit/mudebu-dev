@@ -1,5 +1,5 @@
 // @mui
-import { useTheme } from '@mui/material/styles';
+import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -48,10 +48,8 @@ export default function Header() {
             easing: theme.transitions.easing.easeInOut,
             duration: theme.transitions.duration.shorter,
           }),
+          backgroundColor: alpha(theme.palette.background.paper, 0.99),
           ...(offsetTop && {
-            ...bgBlur({
-              color: theme.palette.background.default,
-            }),
             height: {
               md: HEADER.H_DESKTOP_OFFSET,
             },
@@ -59,38 +57,19 @@ export default function Header() {
         }}
       >
         <Container sx={{ height: 1, display: 'flex', alignItems: 'center' }}>
-          <Badge
-            sx={{
-              [`& .${badgeClasses.badge}`]: {
-                top: 8,
-                right: -16,
-              },
-            }}
-            badgeContent={
-              <Link
-                href={paths.changelog}
-                target="_blank"
-                rel="noopener"
-                underline="none"
-                sx={{ ml: 1 }}
-              >
-                <Label color="info" sx={{ textTransform: 'unset', height: 22, px: 0.5 }}>
-                  v5.4.0
-                </Label>
-              </Link>
-            }
-          >
-            <Logo />
-          </Badge>
+          <Logo />
 
           <Box sx={{ flexGrow: 1 }} />
 
           {mdUp && <NavDesktop offsetTop={offsetTop} data={navConfig} />}
 
           <Stack alignItems="center" direction={{ xs: 'row', md: 'row-reverse' }}>
-            <Button variant="contained" target="_blank" rel="noopener" href={paths.minimalUI}>
-              Purchase Now
-            </Button>
+            <Stack alignItems="center" direction={{ xs: 'row', md: 'row' }} gap={1}>
+              <Button variant="contained">Cotizar</Button>
+              <Button variant="contained" color="secondary">
+                Dashboard
+              </Button>
+            </Stack>
 
             {mdUp && <LoginButton />}
 
