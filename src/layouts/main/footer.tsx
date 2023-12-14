@@ -76,7 +76,8 @@ export default function Footer() {
       component="footer"
       sx={{
         position: 'relative',
-        bgcolor: 'background.default',
+        bgcolor: 'primary.main',
+        color: 'common.white',
       }}
     >
       <Divider />
@@ -88,7 +89,7 @@ export default function Footer() {
           textAlign: { xs: 'center', md: 'unset' },
         }}
       >
-        <Logo sx={{ mb: 3 }} />
+        <Logo sx={{ mb: 3 }} white />
 
         <Grid
           container
@@ -169,5 +170,6 @@ export default function Footer() {
     </Box>
   );
 
-  return isHome ? simpleFooter : mainFooter;
+  // return isHome ? simpleFooter : mainFooter;
+  return mainFooter;
 }
