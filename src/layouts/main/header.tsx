@@ -64,12 +64,14 @@ export default function Header() {
           {mdUp && <NavDesktop offsetTop={offsetTop} data={navConfig} />}
 
           <Stack alignItems="center" direction={{ xs: 'row', md: 'row-reverse' }}>
-            <Stack alignItems="center" direction={{ xs: 'row', md: 'row' }} gap={1}>
-              <Button variant="contained">Cotizar</Button>
-              <Button variant="contained" color="secondary">
-                Dashboard
-              </Button>
-            </Stack>
+            {mdUp && (
+              <Stack alignItems="center" direction={{ xs: 'row', md: 'row' }} gap={1}>
+                <Button variant="contained">Cotizar</Button>
+                <Button variant="contained" color="secondary">
+                  Dashboard
+                </Button>
+              </Stack>
+            )}
 
             {mdUp && <LoginButton />}
 
