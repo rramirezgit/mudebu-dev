@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 // theme
 import SearchField from 'src/components/search-field/search-field';
 import { primaryFont } from 'src/theme/typography';
-import { textGradient, bgGradient, bgBlur } from 'src/theme/css';
+import { textGradient, bgGradient } from 'src/theme/css';
 // layouts
 import { HEADER } from 'src/layouts/config-layout';
 // components

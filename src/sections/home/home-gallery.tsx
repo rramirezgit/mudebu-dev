@@ -9,7 +9,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 // hooks
 import { Dialog } from '@mui/material';
-import { varFade } from 'src/components/animate';
+import { MotionViewport, varFade } from 'src/components/animate';
 import { useResponsive } from 'src/hooks/use-responsive';
 
 interface BoxProps {
@@ -117,6 +117,7 @@ const BoxAnimate = ({ animationY, duration, zIndexColums }: any) => {
         { duration, repeat: Infinity, repeatType: 'loop', ease: 'linear' }
       )
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleMouseEnter = (back: boolean) => {
@@ -232,9 +233,7 @@ export default function HomeHero() {
       }}
     >
       <BoxAnimate animationY={arriba} duration={80} zIndexColums={0} />
-
       <BoxAnimate animationY={abajo} duration={100} zIndexColums={1} />
-
       <BoxAnimate animationY={arriba} duration={50} zIndexColums={0} />
     </Stack>
   );
@@ -242,7 +241,7 @@ export default function HomeHero() {
   return (
     <StyledRoot ref={heroRef}>
       <StyledWrapper>
-        <Container>{renderSlides}</Container>
+        <Container component={MotionViewport}>{renderSlides}</Container>
       </StyledWrapper>
     </StyledRoot>
   );

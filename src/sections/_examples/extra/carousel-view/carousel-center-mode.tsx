@@ -5,6 +5,7 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import CardContent from '@mui/material/CardContent';
 // theme
+import { Button, Typography } from '@mui/material';
 import { bgGradient } from 'src/theme/css';
 // components
 import Image from 'src/components/image';
@@ -26,8 +27,10 @@ type Props = {
 export default function CarouselCenterMode({ data }: Props) {
   const carousel = useCarousel({
     slidesToShow: 3,
-    centerMode: true,
-    centerPadding: '60px',
+    className: 'slider variable-width',
+    swipeToSlide: true,
+    variableWidth: true,
+    infinite: true,
     responsive: [
       {
         breakpoint: 1024,
@@ -53,7 +56,7 @@ export default function CarouselCenterMode({ data }: Props) {
     >
       <CarouselArrows
         filled
-        icon="noto:rightwards-hand"
+        icon="mingcute:right-line"
         onNext={carousel.onNext}
         onPrev={carousel.onPrev}
       >
@@ -87,46 +90,63 @@ function CarouselItem({ item }: CarouselItemProps) {
   return (
     <Paper
       sx={{
-        borderRadius: 2,
+        borderRadius: 300,
         overflow: 'hidden',
         position: 'relative',
+        width: {
+          xs: '287px',
+          sm: '310px',
+        },
+        height: {
+          xs: '500px',
+          sm: '539px',
+        },
+        backgroundImage: `url(${coverUrl}) `,
+        backgroundSize: 'cover',
       }}
     >
-      <Image alt={title} src={coverUrl} ratio="3/4" />
-
       <CardContent
+        onMouseEnter={(e) => {
+          e.currentTarget.style.opacity = '1';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.opacity = '0';
+        }}
         sx={{
-          bottom: 0,
           zIndex: 9,
           width: '100%',
+          opacity: 0,
+          height: '100%',
           textAlign: 'left',
+          transition: 'all 0.5s ease-in-out',
           position: 'absolute',
           color: 'common.white',
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'column',
+          justifyContent: 'center',
           ...bgGradient({
             direction: 'to top',
-            startColor: `${theme.palette.grey[900]} 25%`,
+            startColor: `${theme.palette.grey[900]} 0%`,
             endColor: `${alpha(theme.palette.grey[900], 0)} 100%`,
           }),
         }}
       >
-        <TextMaxLine variant="h4" sx={{ mb: 2 }}>
+        <TextMaxLine variant="h4" sx={{ mb: 2, textAlign: 'center' }}>
           {title}
         </TextMaxLine>
-
-        <Link
-          color="inherit"
-          variant="overline"
+        <Typography variant="body2" sx={{ mb: 2, textAlign: 'center' }}>
+          {item.description}
+        </Typography>
+        <Button
+          variant="contained"
+          color="secondary"
           sx={{
-            opacity: 0.72,
-            alignItems: 'center',
-            display: 'inline-flex',
-            transition: theme.transitions.create(['opacity']),
-            '&:hover': { opacity: 1 },
+            width: '40%',
           }}
         >
-          learn More
-          <Iconify icon="eva:arrow-forward-fill" width={16} sx={{ ml: 1 }} />
-        </Link>
+          Ver más
+        </Button>
       </CardContent>
     </Paper>
   );

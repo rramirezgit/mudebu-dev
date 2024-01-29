@@ -2,8 +2,7 @@
 
 import { useScroll } from 'framer-motion';
 // @mui
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 // layouts
 import MainLayout from 'src/layouts/main';
 // components
@@ -11,6 +10,9 @@ import ScrollProgress from 'src/components/scroll-progress';
 //
 import HomeHero from '../home-hero';
 import HomeGallery from '../home-gallery';
+import HomeServices from '../home-services';
+import HomeContactUs from '../home-contact-us';
+import HomeModel from '../home-model';
 
 export default function HomeView() {
   const { scrollYProgress } = useScroll();
@@ -20,7 +22,6 @@ export default function HomeView() {
       <ScrollProgress scrollYProgress={scrollYProgress} />
 
       <HomeHero />
-
       <Box
         sx={{
           overflow: 'hidden',
@@ -28,7 +29,10 @@ export default function HomeView() {
           bgcolor: 'background.default',
         }}
       >
+        <HomeServices />
+        <HomeModel />
         <HomeGallery />
+        <HomeContactUs />
       </Box>
     </MainLayout>
   );
