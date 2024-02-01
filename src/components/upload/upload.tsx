@@ -1,11 +1,12 @@
 import { useDropzone } from 'react-dropzone';
 // @mui
 import { alpha } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // assets
 import { UploadIllustration } from 'src/assets/illustrations';
 //

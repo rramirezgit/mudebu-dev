@@ -1,16 +1,15 @@
 /* eslint-disable no-nested-ternary */
 import { m, useAnimate } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 // @mui
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
 // hooks
-import { Dialog } from '@mui/material';
+import { Box, Dialog } from '@mui/material';
 import { MotionViewport, varFade } from 'src/components/animate';
 import { useResponsive } from 'src/hooks/use-responsive';
+/* eslint-disable import/order */
 
 interface BoxProps {
   handleMouseEnter: (back: boolean) => void;
@@ -34,6 +33,7 @@ const BoxComponent = ({
 
   return (
     <Box
+      component={m.div}
       sx={{
         marginTop: 2,
         backgroundImage: `url(https://assets.codepen.io/721952/${item}.jpg)`,
@@ -59,6 +59,7 @@ const BoxComponent = ({
       onClick={() => hanldeClick(item)}
     >
       <Box
+        component={m.div}
         sx={{
           position: 'absolute',
           width: '90%',
@@ -92,16 +93,16 @@ const BoxAnimate = ({ animationY, duration, zIndexColums }: any) => {
   const [open, setOpen] = useState<boolean>(false);
   const [indexSelected, setindexSelected] = useState<number>(0);
 
-  const smDown = useResponsive('down', 'xl');
-
   const handleClose = () => {
     setOpen(false);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    if (!scope1?.current) return;
+    if (!scope2?.current) return;
     setAnimation1(
       animate1(
-        scope1.current,
+        scope1?.current,
         {
           y: animationY[0],
         },
@@ -110,7 +111,7 @@ const BoxAnimate = ({ animationY, duration, zIndexColums }: any) => {
     );
     setAnimation2(
       animate2(
-        scope2.current,
+        scope2?.current,
         {
           y: animationY[1],
         },
@@ -152,7 +153,7 @@ const BoxAnimate = ({ animationY, duration, zIndexColums }: any) => {
           zIndex: zIndexColums,
         }}
       >
-        <Box ref={scope1} sx={{ position: 'absolute', mt: -0.2, zIndex: zIndex1 }}>
+        <Box component="div" ref={scope1} sx={{ position: 'absolute', mt: -0.2, zIndex: zIndex1 }}>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
             <BoxComponent
               key={index}
@@ -164,7 +165,7 @@ const BoxAnimate = ({ animationY, duration, zIndexColums }: any) => {
             />
           ))}
         </Box>
-        <Box ref={scope2} sx={{ position: 'absolute', zIndex: zIndex2 }}>
+        <Box component="div" ref={scope2} sx={{ position: 'absolute', zIndex: zIndex2 }}>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
             <BoxComponent
               key={index}

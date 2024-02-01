@@ -3,7 +3,8 @@ import flatten from 'lodash/flatten';
 import { useEffect, useCallback } from 'react';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Stack from '@mui/material/Stack';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';

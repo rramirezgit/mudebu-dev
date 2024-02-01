@@ -1,7 +1,8 @@
 import { useEffect, useCallback } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 // @mui
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';

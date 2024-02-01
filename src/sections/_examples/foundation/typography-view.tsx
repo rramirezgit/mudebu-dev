@@ -2,7 +2,8 @@
 
 // @mui
 import { Variant } from '@mui/material/styles/createTypography';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';

@@ -4,7 +4,8 @@ import { m } from 'framer-motion';
 import { useState, useCallback } from 'react';
 // @mui
 import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Tabs from '@mui/material/Tabs';
 import List from '@mui/material/List';
 import Stack from '@mui/material/Stack';

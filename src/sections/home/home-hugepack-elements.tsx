@@ -2,7 +2,8 @@ import { useState, useCallback } from 'react';
 import { m } from 'framer-motion';
 // @mui
 import { alpha } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Fab from '@mui/material/Fab';
 import Tab from '@mui/material/Tab';
 import Chip from '@mui/material/Chip';

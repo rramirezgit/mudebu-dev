@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 // @mui
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Button from '@mui/material/Button';
 import Switch from '@mui/material/Switch';
 import MenuItem from '@mui/material/MenuItem';

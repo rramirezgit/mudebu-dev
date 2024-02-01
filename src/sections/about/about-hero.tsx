@@ -2,8 +2,10 @@ import { m, MotionProps } from 'framer-motion';
 // @mui
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // components
 import { MotionContainer, varFade } from 'src/components/animate';
 

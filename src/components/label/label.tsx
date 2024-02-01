@@ -1,7 +1,8 @@
 import { forwardRef } from 'react';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 //
 import { StyledLabel } from './styles';
 import { LabelProps } from './types';

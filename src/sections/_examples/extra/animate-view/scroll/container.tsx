@@ -1,7 +1,8 @@
 import { m } from 'framer-motion';
 import { useRef } from 'react';
 // @mui
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 // components

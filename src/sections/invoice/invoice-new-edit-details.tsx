@@ -2,7 +2,6 @@ import sum from 'lodash/sum';
 import { useCallback, useEffect } from 'react';
 import { useFormContext, useFieldArray } from 'react-hook-form';
 // @mui
-import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
@@ -10,6 +9,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import { inputBaseClasses } from '@mui/material/InputBase';
 import InputAdornment from '@mui/material/InputAdornment';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // utils
 import { fCurrency } from 'src/utils/format-number';
 // _mock

@@ -2,7 +2,9 @@ import { forwardRef } from 'react';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import Link from '@mui/material/Link';
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // routes
 import { RouterLink } from 'src/routes/components';
 

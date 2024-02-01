@@ -1,7 +1,6 @@
 import { useFormContext, Controller } from 'react-hook-form';
 // @mui
 import { Theme, SxProps } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import MenuItem from '@mui/material/MenuItem';
 import Checkbox from '@mui/material/Checkbox';
@@ -11,6 +10,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import FormHelperText from '@mui/material/FormHelperText';
 import Select, { SelectProps } from '@mui/material/Select';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 
 // ----------------------------------------------------------------------
 

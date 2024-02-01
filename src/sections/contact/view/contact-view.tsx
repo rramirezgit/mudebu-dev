@@ -1,7 +1,8 @@
 'use client';
 
 // @mui
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Container from '@mui/material/Container';
 // _mock
 import { _mapContact } from 'src/_mock';

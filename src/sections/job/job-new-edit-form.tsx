@@ -5,7 +5,8 @@ import { useForm, Controller } from 'react-hook-form';
 // @mui
 import LoadingButton from '@mui/lab/LoadingButton';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Chip from '@mui/material/Chip';
 import Card from '@mui/material/Card';
 import Paper from '@mui/material/Paper';

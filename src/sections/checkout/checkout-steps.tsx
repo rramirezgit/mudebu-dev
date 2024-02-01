@@ -1,6 +1,7 @@
 // @mui
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Step from '@mui/material/Step';
 import Stack from '@mui/material/Stack';
 import Stepper, { StepperProps } from '@mui/material/Stepper';

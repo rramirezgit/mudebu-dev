@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react';
 // @mui
 import { alpha } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';

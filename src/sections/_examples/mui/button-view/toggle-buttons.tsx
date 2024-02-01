@@ -1,7 +1,8 @@
 import { useState } from 'react';
 // @mui
 import Masonry from '@mui/lab/Masonry';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 // components

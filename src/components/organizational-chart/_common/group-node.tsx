@@ -1,10 +1,11 @@
 // @mui
 import { alpha, Theme, useTheme, SxProps } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // theme
 import { ColorSchema } from 'src/theme/palette';
 //

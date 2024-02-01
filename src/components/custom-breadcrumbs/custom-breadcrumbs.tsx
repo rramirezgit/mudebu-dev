@@ -1,9 +1,10 @@
 // @mui
-import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 //
 import { CustomBreadcrumbsProps } from './types';
 import LinkItem from './link-item';

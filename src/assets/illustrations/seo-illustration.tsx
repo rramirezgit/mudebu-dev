@@ -1,8 +1,9 @@
 import { memo } from 'react';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
 //
+import { Svg } from 'src/components/Box/box-component';
 import BackgroundShape from './background-shape';
 
 // ----------------------------------------------------------------------
@@ -15,8 +16,7 @@ function SeoIllustration({ ...other }: BoxProps) {
   const PRIMARY_DARK = theme.palette.primary.dark;
 
   return (
-    <Box
-      component="svg"
+    <Svg
       width="100%"
       height="100%"
       viewBox="0 0 480 360"
@@ -227,7 +227,7 @@ function SeoIllustration({ ...other }: BoxProps) {
       </defs>
 
       <image href="/assets/illustrations/characters/character_3.png" height="300" x="312" y="30" />
-    </Box>
+    </Svg>
   );
 }
 

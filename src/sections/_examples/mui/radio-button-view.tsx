@@ -3,7 +3,8 @@
 import { useState } from 'react';
 // @mui
 import Masonry from '@mui/lab/Masonry';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Radio from '@mui/material/Radio';
 import Container from '@mui/material/Container';
 import RadioGroup from '@mui/material/RadioGroup';

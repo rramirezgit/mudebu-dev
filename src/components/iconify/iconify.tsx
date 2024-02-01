@@ -2,7 +2,9 @@ import { forwardRef } from 'react';
 // icons
 import { Icon } from '@iconify/react';
 // @mui
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 //
 import { IconifyProps } from './types';
 

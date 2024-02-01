@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 // @mui
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Stack from '@mui/material/Stack';
 import Switch from '@mui/material/Switch';
 import Divider from '@mui/material/Divider';

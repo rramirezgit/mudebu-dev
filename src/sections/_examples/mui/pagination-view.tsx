@@ -3,7 +3,8 @@
 import { useState, useCallback } from 'react';
 // @mui
 import Masonry from '@mui/lab/Masonry';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Container from '@mui/material/Container';
 import Pagination from '@mui/material/Pagination';
 import TablePagination from '@mui/material/TablePagination';

@@ -1,6 +1,7 @@
 import { memo, forwardRef } from 'react';
 // @mui
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 //
 import { StyledRootScrollbar, StyledScrollbar } from './styles';
 import { ScrollbarProps } from './types';

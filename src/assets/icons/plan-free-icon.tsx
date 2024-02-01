@@ -1,7 +1,8 @@
 import { memo } from 'react';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
+import { Svg } from 'src/components/Box/box-component';
 
 // ----------------------------------------------------------------------
 
@@ -15,7 +16,7 @@ function PlanFreeIcon({ ...other }: BoxProps) {
   const PRIMARY_DARKER = theme.palette.primary.darker;
 
   return (
-    <Box
+    <Svg
       component="svg"
       width="100%"
       height="100%"
@@ -42,7 +43,7 @@ function PlanFreeIcon({ ...other }: BoxProps) {
           d="M.935 12.989L25.963.529a5.044 5.044 0 014.52.012L60.74 15.807a1.69 1.69 0 01.015 3.007l-25.338 13.12a5.044 5.044 0 01-4.694-.028L.893 15.99a1.69 1.69 0 01.042-3.001z"
         />
       </g>
-    </Box>
+    </Svg>
   );
 }
 

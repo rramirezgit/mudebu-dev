@@ -3,7 +3,8 @@
 import { m } from 'framer-motion';
 // @mui
 import Masonry from '@mui/lab/Masonry';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Fab from '@mui/material/Fab';
 import Zoom from '@mui/material/Zoom';
 import Fade from '@mui/material/Fade';

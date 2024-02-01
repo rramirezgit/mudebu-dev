@@ -5,7 +5,8 @@ import { useState, useCallback } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
 // routes

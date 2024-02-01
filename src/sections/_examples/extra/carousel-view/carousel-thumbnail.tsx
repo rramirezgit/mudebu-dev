@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 // @mui
 import { styled, alpha } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Avatar from '@mui/material/Avatar';
 // theme
 import { bgGradient } from 'src/theme/css';

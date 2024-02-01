@@ -4,7 +4,8 @@
 import TreeView from '@mui/lab/TreeView';
 import TreeItem, { TreeItemProps, treeItemClasses } from '@mui/lab/TreeItem';
 import { alpha, styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Container from '@mui/material/Container';
 // routes
 import { paths } from 'src/routes/paths';

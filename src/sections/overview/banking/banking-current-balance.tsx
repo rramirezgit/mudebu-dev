@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
 // @mui
 import { Theme, useTheme, alpha, SxProps } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Stack from '@mui/material/Stack';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';

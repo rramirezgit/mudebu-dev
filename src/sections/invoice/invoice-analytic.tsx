@@ -1,9 +1,10 @@
 // @mui
 import { alpha } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // utils
 import { fShortenNumber, fCurrency } from 'src/utils/format-number';
 // components

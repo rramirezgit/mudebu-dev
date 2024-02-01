@@ -1,6 +1,7 @@
 // @mui
 import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // components
 import Image from 'src/components/image';
 import Carousel, { CarouselDots, CarouselArrows, useCarousel } from 'src/components/carousel';

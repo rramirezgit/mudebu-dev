@@ -4,7 +4,8 @@ import { useCallback, useState } from 'react';
 // @mui
 import { alpha } from '@mui/material/styles';
 import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Tabs from '@mui/material/Tabs';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';

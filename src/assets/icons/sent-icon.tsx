@@ -1,7 +1,8 @@
 import { memo } from 'react';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
+import { Svg } from 'src/components/Box/box-component';
 
 // ----------------------------------------------------------------------
 
@@ -13,8 +14,7 @@ function SentIcon({ ...other }: BoxProps) {
   const PRIMARY_DARK = theme.palette.primary.dark;
 
   return (
-    <Box
-      component="svg"
+    <Svg
       width="100%"
       height="100%"
       fill="none"
@@ -66,7 +66,7 @@ function SentIcon({ ...other }: BoxProps) {
           <feBlend in2="shape" result="effect1_innerShadow_1870_134242" />
         </filter>
       </defs>
-    </Box>
+    </Svg>
   );
 }
 

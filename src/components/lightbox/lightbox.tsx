@@ -6,7 +6,8 @@ import Slideshow from 'yet-another-react-lightbox/plugins/slideshow';
 import Fullscreen from 'yet-another-react-lightbox/plugins/fullscreen';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 // @mui
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 //
 import Iconify from '../iconify';
 //

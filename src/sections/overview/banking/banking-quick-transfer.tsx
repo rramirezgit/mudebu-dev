@@ -7,7 +7,8 @@ import Avatar from '@mui/material/Avatar';
 import Slider from '@mui/material/Slider';
 import Tooltip from '@mui/material/Tooltip';
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import CardHeader from '@mui/material/CardHeader';
 import Typography from '@mui/material/Typography';
 import DialogTitle from '@mui/material/DialogTitle';

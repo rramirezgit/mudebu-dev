@@ -1,7 +1,8 @@
 // @mui
 import { alpha } from '@mui/material/styles';
 import { m } from 'framer-motion';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // components
 import { Typography } from '@mui/material';
 import { MotionViewport, varFade } from 'src/components/animate';

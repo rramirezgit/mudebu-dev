@@ -1,5 +1,6 @@
 // @mui
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Table from '@mui/material/Table';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';

@@ -1,9 +1,11 @@
 import { m, MotionProps } from 'framer-motion';
 // @mui
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
 // hooks
 import { useResponsive } from 'src/hooks/use-responsive';
 //
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import { varContainer } from './variants';
 
 // ----------------------------------------------------------------------

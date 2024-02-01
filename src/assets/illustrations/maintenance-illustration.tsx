@@ -1,8 +1,9 @@
 import { memo } from 'react';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
 //
+import { Svg } from 'src/components/Box/box-component';
 import BackgroundShape from './background-shape';
 
 // ----------------------------------------------------------------------
@@ -19,7 +20,7 @@ function MaintenanceIllustration({ ...other }: BoxProps) {
   const PRIMARY_DARKER = theme.palette.primary.darker;
 
   return (
-    <Box
+    <Svg
       component="svg"
       width="100%"
       height="100%"
@@ -208,7 +209,7 @@ function MaintenanceIllustration({ ...other }: BoxProps) {
       </defs>
 
       <image href="/assets/illustrations/characters/character_5.png" height="300" x="245" y="30" />
-    </Box>
+    </Svg>
   );
 }
 

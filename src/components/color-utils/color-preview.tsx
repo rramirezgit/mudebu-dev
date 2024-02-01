@@ -1,7 +1,8 @@
 // @mui
 import { alpha } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 //
 import { ColorPreviewProps } from './types';
 

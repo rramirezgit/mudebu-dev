@@ -2,7 +2,8 @@ import { memo } from 'react';
 // @mui
 import Slider from '@mui/material/Slider';
 import Switch from '@mui/material/Switch';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Typography from '@mui/material/Typography';
 // utils
 import { fDate } from 'src/utils/format-time';

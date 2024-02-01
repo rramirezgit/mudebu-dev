@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 // @mui
 import { alpha, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+import { Box, Span } from 'src/components/Box/box-component';
 //
 import { getRatio } from './utils';
 import { ImageProps } from './types';
@@ -85,9 +85,8 @@ const Image = forwardRef<HTMLSpanElement, ImageProps>(
     );
 
     return (
-      <Box
+      <Span
         ref={ref}
-        component="span"
         className="component-image"
         sx={{
           overflow: 'hidden',
@@ -112,7 +111,7 @@ const Image = forwardRef<HTMLSpanElement, ImageProps>(
         {...other}
       >
         {content}
-      </Box>
+      </Span>
     );
   }
 );

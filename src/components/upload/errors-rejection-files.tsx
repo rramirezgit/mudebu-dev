@@ -1,8 +1,9 @@
 import { FileRejection } from 'react-dropzone';
 // @mui
 import { alpha } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Typography from '@mui/material/Typography';
 // utils
 import { fData } from 'src/utils/format-number';

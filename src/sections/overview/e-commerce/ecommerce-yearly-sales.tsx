@@ -4,7 +4,8 @@ import { ApexOptions } from 'apexcharts';
 import { useState, useCallback } from 'react';
 // @mui
 import MenuItem from '@mui/material/MenuItem';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import ButtonBase from '@mui/material/ButtonBase';
 import CardHeader from '@mui/material/CardHeader';
 import Card, { CardProps } from '@mui/material/Card';

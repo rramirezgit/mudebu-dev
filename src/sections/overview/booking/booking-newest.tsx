@@ -3,9 +3,11 @@ import { useTheme } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
 import CardHeader from '@mui/material/CardHeader';
 import ListItemText from '@mui/material/ListItemText';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // utils
 import { fDateTime } from 'src/utils/format-time';
 // components

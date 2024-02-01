@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+/* eslint-disable react/no-unknown-property */
 import { useTheme } from '@mui/material/styles';
 import { ContactShadows, Environment, OrbitControls } from '@react-three/drei';
 import { Suspense, use, useState } from 'react';
@@ -6,6 +6,8 @@ import { Canvas } from 'react-three-fiber';
 import { m } from 'framer-motion';
 import { Model } from 'src/components/SceneCo';
 import { varFade } from 'src/components/animate';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // components
 
 // ----------------------------------------------------------------------

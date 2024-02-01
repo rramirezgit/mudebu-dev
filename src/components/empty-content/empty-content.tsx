@@ -1,8 +1,9 @@
 // @mui
 import { alpha } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack, { StackProps } from '@mui/material/Stack';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 
 // ----------------------------------------------------------------------
 

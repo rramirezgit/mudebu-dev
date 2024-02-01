@@ -1,7 +1,8 @@
 import { m } from 'framer-motion';
 import { forwardRef } from 'react';
 // @mui
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Link, { LinkProps } from '@mui/material/Link';
 import CardActionArea from '@mui/material/CardActionArea';
 // routes

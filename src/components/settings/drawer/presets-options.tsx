@@ -1,7 +1,8 @@
 // @mui
 import { alpha } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // theme
 import { primaryPresets } from 'src/theme/options/presets';
 

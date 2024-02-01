@@ -1,7 +1,8 @@
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 // @mui
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Autocomplete from '@mui/material/Autocomplete';

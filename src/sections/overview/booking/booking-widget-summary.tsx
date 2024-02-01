@@ -1,5 +1,6 @@
 // @mui
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Card, { CardProps } from '@mui/material/Card';
 // utils
 import { fShortenNumber } from 'src/utils/format-number';

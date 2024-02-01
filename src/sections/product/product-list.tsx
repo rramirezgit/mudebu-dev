@@ -1,6 +1,8 @@
 // @mui
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
 import Pagination, { paginationClasses } from '@mui/material/Pagination';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // types
 import { IProductItem } from 'src/types/product';
 //

@@ -2,7 +2,8 @@
 
 import { useState, useCallback, useEffect } from 'react';
 // @mui
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Card from '@mui/material/Card';
 import Radio from '@mui/material/Radio';
 import Stack from '@mui/material/Stack';

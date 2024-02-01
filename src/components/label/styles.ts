@@ -1,6 +1,7 @@
 // @mui
 import { alpha, Theme, styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 //
 import { LabelColor, LabelVariant } from './types';
 

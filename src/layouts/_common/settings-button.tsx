@@ -1,7 +1,8 @@
 import { m } from 'framer-motion';
 // @mui
 import { Theme, SxProps } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import IconButton from '@mui/material/IconButton';
 import Badge, { badgeClasses } from '@mui/material/Badge';
 // components

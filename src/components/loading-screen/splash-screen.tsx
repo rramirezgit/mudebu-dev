@@ -2,7 +2,9 @@ import { m } from 'framer-motion';
 import { useState, useEffect } from 'react';
 // @mui
 import { alpha } from '@mui/material/styles';
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 //
 import Logo from '../logo';
 

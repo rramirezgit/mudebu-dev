@@ -1,7 +1,8 @@
 import { memo } from 'react';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
+import { Svg } from 'src/components/Box/box-component';
 
 // ----------------------------------------------------------------------
 
@@ -15,7 +16,7 @@ function PlanPremiumIcon({ ...other }: BoxProps) {
   const PRIMARY_DARKER = theme.palette.primary.darker;
 
   return (
-    <Box
+    <Svg
       component="svg"
       width="100%"
       height="100%"
@@ -79,7 +80,7 @@ function PlanPremiumIcon({ ...other }: BoxProps) {
           />
         </g>
       </g>
-    </Box>
+    </Svg>
   );
 }
 

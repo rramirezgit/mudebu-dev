@@ -3,7 +3,8 @@
 import { useRef } from 'react';
 import { useScroll } from 'framer-motion';
 // @mui
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Card from '@mui/material/Card';
 import Container from '@mui/material/Container';
 import CardHeader from '@mui/material/CardHeader';

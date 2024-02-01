@@ -1,7 +1,8 @@
 // @mui
 import Masonry from '@mui/lab/Masonry';
 import LoadingButton from '@mui/lab/LoadingButton';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Button, { buttonClasses } from '@mui/material/Button';
 // components
 import Iconify from 'src/components/iconify';

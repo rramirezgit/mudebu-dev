@@ -1,7 +1,8 @@
 import { ApexOptions } from 'apexcharts';
 // @mui
 import { alpha, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Card, { CardProps } from '@mui/material/Card';

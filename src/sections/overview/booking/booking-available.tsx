@@ -2,7 +2,8 @@ import { ApexOptions } from 'apexcharts';
 import sumBy from 'lodash/sumBy';
 // @mui
 import { alpha, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Stack from '@mui/material/Stack';
 import CardHeader from '@mui/material/CardHeader';
 import Card, { CardProps } from '@mui/material/Card';

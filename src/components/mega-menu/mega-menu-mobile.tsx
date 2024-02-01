@@ -1,6 +1,5 @@
 import { useState, useEffect, forwardRef, useCallback } from 'react';
 // @mui
-import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -12,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // routes
 import { usePathname } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';

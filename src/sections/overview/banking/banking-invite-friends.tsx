@@ -3,7 +3,9 @@ import { useTheme } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import InputBase from '@mui/material/InputBase';
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // theme
 import { bgGradient } from 'src/theme/css';
 

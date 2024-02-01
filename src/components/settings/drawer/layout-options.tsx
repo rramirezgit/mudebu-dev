@@ -1,8 +1,9 @@
 // @mui
 import { alpha, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import ButtonBase from '@mui/material/ButtonBase';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 
 // ----------------------------------------------------------------------
 

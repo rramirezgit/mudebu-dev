@@ -1,7 +1,8 @@
 import { memo } from 'react';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
+import { Svg } from 'src/components/Box/box-component';
 
 // ----------------------------------------------------------------------
 
@@ -13,8 +14,7 @@ function PasswordIcon({ ...other }: BoxProps) {
   const WARNING_LIGHT = theme.palette.warning.light;
 
   return (
-    <Box
-      component="svg"
+    <Svg
       width="100%"
       height="100%"
       fill="none"
@@ -100,7 +100,7 @@ function PasswordIcon({ ...other }: BoxProps) {
           <feBlend in2="shape" result="effect1_innerShadow_1870_135517" />
         </filter>
       </defs>
-    </Box>
+    </Svg>
   );
 }
 

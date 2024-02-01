@@ -1,7 +1,8 @@
 import { m } from 'framer-motion';
 // @mui
 import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // _mock
 import { _mock } from 'src/_mock';
 //

@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { Slide, SlideImage } from 'yet-another-react-lightbox';
 // @mui
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Card from '@mui/material/Card';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';

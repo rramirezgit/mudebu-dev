@@ -1,8 +1,9 @@
 // @mui
 import { useTheme, styled, Theme, SxProps } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // theme
 import { bgBlur } from 'src/theme/css';
 //

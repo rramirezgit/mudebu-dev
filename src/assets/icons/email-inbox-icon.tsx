@@ -1,7 +1,8 @@
 import { memo } from 'react';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
+import { Svg } from 'src/components/Box/box-component';
 
 // ----------------------------------------------------------------------
 
@@ -15,7 +16,7 @@ function EmailInboxIcon({ ...other }: BoxProps) {
   const WARNING_DARK = theme.palette.warning.dark;
 
   return (
-    <Box
+    <Svg
       component="svg"
       width="100%"
       height="100%"
@@ -133,7 +134,7 @@ function EmailInboxIcon({ ...other }: BoxProps) {
           <feBlend in2="shape" result="effect1_innerShadow_1870_133886" />
         </filter>
       </defs>
-    </Box>
+    </Svg>
   );
 }
 

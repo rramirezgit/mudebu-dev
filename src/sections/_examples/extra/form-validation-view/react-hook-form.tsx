@@ -4,7 +4,8 @@ import { useForm, Controller } from 'react-hook-form';
 // @mui
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import LoadingButton from '@mui/lab/LoadingButton';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Divider from '@mui/material/Divider';
 import MenuItem from '@mui/material/MenuItem';
 import Backdrop from '@mui/material/Backdrop';

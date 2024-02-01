@@ -1,7 +1,8 @@
 import { m } from 'framer-motion';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // components
 import { varPath } from 'src/components/animate';
 

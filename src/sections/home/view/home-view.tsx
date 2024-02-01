@@ -2,7 +2,8 @@
 
 import { useScroll } from 'framer-motion';
 // @mui
-import { Box } from '@mui/material';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // layouts
 import MainLayout from 'src/layouts/main';
 // components

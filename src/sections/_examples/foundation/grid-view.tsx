@@ -3,7 +3,8 @@
 import { useState } from 'react';
 // @mui
 import { useTheme, styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Radio from '@mui/material/Radio';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';

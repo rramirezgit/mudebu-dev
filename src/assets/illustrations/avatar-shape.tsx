@@ -1,13 +1,13 @@
 import { memo } from 'react';
 // @mui
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
+import { Svg } from 'src/components/Box/box-component';
 
 // ----------------------------------------------------------------------
 
 function AvatarShape({ sx, ...other }: BoxProps) {
   return (
-    <Box
-      component="svg"
+    <Svg
       width={144}
       height={62}
       fill="none"
@@ -24,7 +24,7 @@ function AvatarShape({ sx, ...other }: BoxProps) {
         fill="currentColor"
         fillRule="evenodd"
       />
-    </Box>
+    </Svg>
   );
 }
 

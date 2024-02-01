@@ -1,9 +1,10 @@
 import { forwardRef } from 'react';
 // @mui
-import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Tooltip from '@mui/material/Tooltip';
 import ListItemText from '@mui/material/ListItemText';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // routes
 import { RouterLink } from 'src/routes/components';
 //

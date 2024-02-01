@@ -1,7 +1,8 @@
 // @mui
 import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 // routes
 import { RouterLink } from 'src/routes/components';
 //

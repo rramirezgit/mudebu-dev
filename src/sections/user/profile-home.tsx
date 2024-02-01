@@ -4,7 +4,8 @@ import { useRef } from 'react';
 // @mui
 import { alpha } from '@mui/material/styles';
 import Fab from '@mui/material/Fab';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';

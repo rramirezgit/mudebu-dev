@@ -1,7 +1,8 @@
 // @mui
 import { alpha } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import CardHeader from '@mui/material/CardHeader';
 import Card, { CardProps } from '@mui/material/Card';
 import LinearProgress from '@mui/material/LinearProgress';

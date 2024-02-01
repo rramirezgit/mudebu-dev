@@ -1,6 +1,7 @@
 // @mui
 import { alpha, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import CardContent from '@mui/material/CardContent';

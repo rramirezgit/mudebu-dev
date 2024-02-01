@@ -1,5 +1,6 @@
 // @mui
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Pagination, { paginationClasses } from '@mui/material/Pagination';
 // types
 import { IPostItem } from 'src/types/blog';

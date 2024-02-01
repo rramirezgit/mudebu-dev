@@ -1,6 +1,7 @@
 // @mui
 import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Table from '@mui/material/Table';
 import Tooltip from '@mui/material/Tooltip';
 import TableBody from '@mui/material/TableBody';

@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 // @mui
-import Box from '@mui/material/Box';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
 import Avatar from '@mui/material/Avatar';

@@ -1,6 +1,8 @@
 // @mui
-import Box, { BoxProps } from '@mui/material/Box';
+import { BoxProps } from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
 
 // ----------------------------------------------------------------------
 
