@@ -31,7 +31,7 @@ export default function HomeView() {
         }}
       >
         <HomeServices />
-        {/* <HomeModel /> */}
+        <HomeModel />
         <HomeGallery />
         <HomeContactUs />
       </Box>
