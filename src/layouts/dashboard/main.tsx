@@ -1,7 +1,7 @@
 // @mui
 import { BoxProps } from '@mui/material/Box';
 /* eslint-disable import/order */
-import { Box } from 'src/components/Box/box-component';
+import { Main as MainMui, Box } from 'src/components/Box/box-component';
 // hooks
 import { useResponsive } from 'src/hooks/use-responsive';
 // components
@@ -24,8 +24,7 @@ export default function Main({ children, sx, ...other }: BoxProps) {
 
   if (isNavHorizontal) {
     return (
-      <Box
-        component="main"
+      <MainMui
         sx={{
           minHeight: 1,
           display: 'flex',
@@ -39,13 +38,12 @@ export default function Main({ children, sx, ...other }: BoxProps) {
         }}
       >
         {children}
-      </Box>
+      </MainMui>
     );
   }
 
   return (
-    <Box
-      component="main"
+    <MainMui
       sx={{
         flexGrow: 1,
         minHeight: 1,
@@ -65,6 +63,6 @@ export default function Main({ children, sx, ...other }: BoxProps) {
       {...other}
     >
       {children}
-    </Box>
+    </MainMui>
   );
 }

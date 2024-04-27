@@ -8,8 +8,8 @@ import Typography from '@mui/material/Typography';
 //
 import FaqsHero from '../faqs-hero';
 import FaqsList from '../faqs-list';
-import FaqsForm from '../faqs-form';
 import FaqsCategory from '../faqs-category';
+import HomeContactUsForm from 'src/sections/home/home-contact-us-form';
 
 // ----------------------------------------------------------------------
 
@@ -30,10 +30,24 @@ export default function FaqsView() {
         <Typography
           variant="h3"
           sx={{
-            my: { xs: 5, md: 10 },
+            mt: {
+              xs: 5,
+              md: 10,
+            },
           }}
         >
-          Frequently asked questions
+          Preguntas Frecuentes
+        </Typography>
+        <Typography
+          sx={{
+            mb: {
+              xs: 5,
+              md: 10,
+            },
+            fontSize: '30px',
+          }}
+        >
+          Financiamiento, Logística y Proyectos Internacionales
         </Typography>
 
         <Box
@@ -46,7 +60,7 @@ export default function FaqsView() {
         >
           <FaqsList />
 
-          <FaqsForm />
+          <HomeContactUsForm color="secondary" />
         </Box>
       </Container>
     </>

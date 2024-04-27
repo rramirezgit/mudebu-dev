@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 // @mui
 import { alpha } from '@mui/material/styles';
@@ -12,13 +14,13 @@ import Typography from '@mui/material/Typography';
 
 // ----------------------------------------------------------------------
 
-const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+const steps = ['Benchmarking', 'Inteligencia Artificial', 'Edición IA'];
 
 export default function LinearAlternativeLabel() {
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set<number>());
 
-  const isStepOptional = (step: number) => step === 1;
+  const isStepOptional = (step: number) => step === 0;
 
   const isStepSkipped = (step: number) => skipped.has(step);
 

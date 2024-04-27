@@ -26,6 +26,7 @@ import NavMobile from './nav/mobile';
 import NavDesktop from './nav/desktop';
 //
 import { SettingsButton, HeaderShadow, LoginButton } from '../_common';
+import { RouterLink } from 'src/routes/components';
 
 // ----------------------------------------------------------------------
 
@@ -67,7 +68,9 @@ export default function Header() {
           <Stack alignItems="center" direction={{ xs: 'row', md: 'row-reverse' }}>
             {mdUp && (
               <Stack alignItems="center" direction={{ xs: 'row', md: 'row' }} gap={1}>
-                <Button variant="contained">Cotizar</Button>
+                <Button component={RouterLink} href={paths.onboarding} variant="contained">
+                  Cotizar
+                </Button>
                 <Button variant="contained" color="secondary">
                   Dashboard
                 </Button>

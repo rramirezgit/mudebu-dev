@@ -29,9 +29,9 @@ import CustomPopover, { usePopover } from 'src/components/custom-popover';
 
 type Props = {
   row: IOrderItem;
-  selected: boolean;
+  selected?: boolean;
   onViewRow: VoidFunction;
-  onSelectRow: VoidFunction;
+  onSelectRow?: VoidFunction;
   onDeleteRow: VoidFunction;
 };
 
@@ -52,9 +52,11 @@ export default function OrderTableRow({
 
   const renderPrimary = (
     <TableRow hover selected={selected}>
-      <TableCell padding="checkbox">
-        <Checkbox checked={selected} onClick={onSelectRow} />
-      </TableCell>
+      {onSelectRow && (
+        <TableCell padding="checkbox">
+          <Checkbox checked={selected} onClick={onSelectRow} />
+        </TableCell>
+      )}
 
       <TableCell>
         <Box

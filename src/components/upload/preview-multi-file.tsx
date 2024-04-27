@@ -34,8 +34,8 @@ export default function MultiFilePreview({ thumbnail, files, onRemove, sx }: Upl
               justifyContent="center"
               sx={{
                 m: 0.5,
-                width: 80,
-                height: 80,
+                width: 230,
+                height: 180,
                 borderRadius: 1.25,
                 overflow: 'hidden',
                 position: 'relative',
@@ -54,7 +54,10 @@ export default function MultiFilePreview({ thumbnail, files, onRemove, sx }: Upl
               {onRemove && (
                 <IconButton
                   size="small"
-                  onClick={() => onRemove(file)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onRemove(file);
+                  }}
                   sx={{
                     p: 0.5,
                     top: 4,

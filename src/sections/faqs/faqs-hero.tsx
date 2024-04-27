@@ -24,8 +24,8 @@ export default function FaqsHero() {
     <Box
       sx={{
         ...bgGradient({
-          color: alpha(theme.palette.grey[900], 0.8),
-          imgUrl: '/assets/images/faqs/hero.jpg',
+          color: alpha(theme.palette.grey[400], 0.5),
+          imgUrl: '/assets/images/Services/Inovacion/main.webp',
         }),
         height: { md: 560 },
         py: { xs: 10, md: 0 },
@@ -42,40 +42,15 @@ export default function FaqsHero() {
           }}
         >
           <div>
-            <TextAnimate text="How" sx={{ color: 'primary.main' }} variants={varFade().inRight} />
+            <TextAnimate text="Como" sx={{ color: 'primary.main' }} variants={varFade().inRight} />
             <br />
 
             <Stack spacing={2} display="inline-flex" direction="row" sx={{ color: 'common.white' }}>
-              <TextAnimate text="can" />
-              <TextAnimate text="we" />
-              <TextAnimate text="help" />
-              <TextAnimate text="you?" />
+              <TextAnimate text="Te" />
+              <TextAnimate text="Podemoss" />
+              <TextAnimate text="Ayudar?" />
             </Stack>
           </div>
-
-          <m.div variants={varFade().in}>
-            <TextField
-              fullWidth
-              placeholder="Search support..."
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled' }} />
-                  </InputAdornment>
-                ),
-              }}
-              sx={{
-                mt: 5,
-                maxWidth: 360,
-                [`& .${outlinedInputClasses.root}`]: {
-                  bgcolor: 'common.white',
-                },
-                [`& .${outlinedInputClasses.input}`]: {
-                  typography: 'subtitle1',
-                },
-              }}
-            />
-          </m.div>
         </Box>
       </Container>
     </Box>

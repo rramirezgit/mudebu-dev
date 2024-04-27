@@ -1,6 +1,6 @@
 import { useDropzone } from 'react-dropzone';
 // @mui
-import { alpha } from '@mui/material/styles';
+import { alpha, useTheme } from '@mui/material/styles';
 /* eslint-disable import/order */
 import { Box } from 'src/components/Box/box-component';
 //
@@ -13,8 +13,13 @@ import { UploadProps } from './types';
 export default function UploadBox({ placeholder, error, disabled, sx, ...other }: UploadProps) {
   const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({
     disabled,
+    accept: {
+      'image/*': [],
+    },
     ...other,
   });
+
+  const Theme = useTheme();
 
   const hasError = isDragReject || error;
 
@@ -54,7 +59,13 @@ export default function UploadBox({ placeholder, error, disabled, sx, ...other }
     >
       <input {...getInputProps()} />
 
-      {placeholder || <Iconify icon="eva:cloud-upload-fill" width={28} />}
+      {placeholder || (
+        <Iconify
+          icon="eva:cloud-upload-fill"
+          width={28}
+          color={alpha(Theme.palette.primary.main, 0.9)}
+        />
+      )}
     </Box>
   );
 }

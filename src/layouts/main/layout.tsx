@@ -2,7 +2,7 @@
 
 // @mui
 /* eslint-disable import/order */
-import { Box } from 'src/components/Box/box-component';
+import { Box, Main } from 'src/components/Box/box-component';
 // routes
 import { usePathname } from 'src/routes/hooks';
 //
@@ -24,8 +24,7 @@ export default function MainLayout({ children }: Props) {
     <Box sx={{ display: 'flex', flexDirection: 'column', height: 1 }}>
       <Header />
 
-      <Box
-        component="main"
+      <Main
         sx={{
           flexGrow: 1,
           ...(!isHome && {
@@ -34,7 +33,7 @@ export default function MainLayout({ children }: Props) {
         }}
       >
         {children}
-      </Box>
+      </Main>
 
       <Footer />
     </Box>

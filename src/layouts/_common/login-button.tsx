@@ -2,9 +2,9 @@
 import { Theme, SxProps } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 // routes
-import { RouterLink } from 'src/routes/components';
-// config
-import { PATH_AFTER_LOGIN } from 'src/config-global';
+import { useAuth0 } from '@auth0/auth0-react';
+
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -13,9 +13,23 @@ type Props = {
 };
 
 export default function LoginButton({ sx }: Props) {
+  const { t } = useLocales();
+
+  const { loginWithRedirect } = useAuth0();
   return (
-    <Button component={RouterLink} href={PATH_AFTER_LOGIN} variant="outlined" sx={{ mr: 1, ...sx }}>
-      Login
+    <Button
+      onClick={() =>
+        loginWithRedirect({
+          authorizationParams: {
+            redirect_uri: `${window.location.origin}/dashboard`,
+          },
+        })
+      }
+      variant="outlined"
+      color="primary"
+      sx={{ mr: 1, ...sx }}
+    >
+      {t('Login')}
     </Button>
   );
 }

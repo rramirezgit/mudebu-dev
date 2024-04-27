@@ -1,6 +1,6 @@
 // @mui
 /* eslint-disable import/order */
-import { Box } from 'src/components/Box/box-component';
+import { Main } from 'src/components/Box/box-component';
 import Card from '@mui/material/Card';
 //
 import { HeaderSimple as Header } from '../_common';
@@ -16,8 +16,7 @@ export default function AuthModernCompactLayout({ children }: Props) {
     <>
       <Header />
 
-      <Box
-        component="main"
+      <Main
         sx={{
           py: 12,
           display: 'flex',
@@ -50,7 +49,7 @@ export default function AuthModernCompactLayout({ children }: Props) {
         >
           {children}
         </Card>
-      </Box>
+      </Main>
     </>
   );
 }

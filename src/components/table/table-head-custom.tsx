@@ -7,6 +7,7 @@ import TableCell from '@mui/material/TableCell';
 import TableSortLabel from '@mui/material/TableSortLabel';
 /* eslint-disable import/order */
 import { Box } from 'src/components/Box/box-component';
+import { ba } from '@fullcalendar/core/internal-common';
 
 // ----------------------------------------------------------------------
 
@@ -65,7 +66,12 @@ export default function TableHeadCustom({
             key={headCell.id}
             align={headCell.align || 'left'}
             sortDirection={orderBy === headCell.id ? order : false}
-            sx={{ width: headCell.width, minWidth: headCell.minWidth }}
+            sx={(theme) => ({
+              width: headCell.width,
+              minWidth: headCell.minWidth,
+              color: theme.palette.primary.contrastText,
+              backgroundColor: theme.palette.primary.main,
+            })}
           >
             {onSort ? (
               <TableSortLabel
@@ -73,11 +79,19 @@ export default function TableHeadCustom({
                 active={orderBy === headCell.id}
                 direction={orderBy === headCell.id ? order : 'asc'}
                 onClick={() => onSort(headCell.id)}
+                sx={{
+                  color: 'white !important',
+                }}
               >
                 {headCell.label}
 
                 {orderBy === headCell.id ? (
-                  <Box sx={{ ...visuallyHidden }}>
+                  <Box
+                    sx={(theme) => ({
+                      ...visuallyHidden,
+                      color: theme.palette.primary.contrastText,
+                    })}
+                  >
                     {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                   </Box>
                 ) : null}

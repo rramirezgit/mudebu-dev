@@ -1,7 +1,7 @@
 // @mui
 import { alpha } from '@mui/material/styles';
 /* eslint-disable import/order */
-import { Box } from 'src/components/Box/box-component';
+import { Footer as FooterMui } from 'src/components/Box/box-component';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
@@ -51,7 +51,7 @@ export default function Footer() {
   const isHome = pathname === '/';
 
   const simpleFooter = (
-    <Box
+    <FooterMui
       component="footer"
       sx={{
         py: 5,
@@ -69,11 +69,11 @@ export default function Footer() {
           <Link href="https://minimals.cc/"> minimals.cc </Link>
         </Typography>
       </Container>
-    </Box>
+    </FooterMui>
   );
 
   const mainFooter = (
-    <Box
+    <FooterMui
       component="footer"
       sx={{
         position: 'relative',
@@ -168,7 +168,7 @@ export default function Footer() {
           © 2021. All rights reserved
         </Typography>
       </Container>
-    </Box>
+    </FooterMui>
   );
 
   // return isHome ? simpleFooter : mainFooter;

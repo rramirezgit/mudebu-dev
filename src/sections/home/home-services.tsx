@@ -4,23 +4,17 @@ import { m } from 'framer-motion';
 /* eslint-disable import/order */
 import { Box } from 'src/components/Box/box-component';
 // components
-import { Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { MotionViewport, varFade } from 'src/components/animate';
-import { _mock } from 'src/_mock';
 import CarouselCenterMode from '../_examples/extra/carousel-view/carousel-center-mode';
-
-// ----------------------------------------------------------------------
-
-const _carouselsExample = [...Array(20)].map((_, index) => ({
-  id: _mock.id(index),
-  title: _mock.postTitle(index),
-  coverUrl: _mock.image.cover(index),
-  description: _mock.description(index),
-}));
+import { useState } from 'react';
+import { homeServicesProductsData } from './home-service-producst';
 
 // ----------------------------------------------------------------------
 
 export default function HomeServices() {
+  const [categorie, setCategorie] = useState('services');
+
   return (
     <Box
       component={MotionViewport}
@@ -30,12 +24,41 @@ export default function HomeServices() {
       }}
     >
       <m.div variants={varFade().in}>
-        <Typography variant="h3" align="center" sx={{ mb: 5 }}>
-          Servicios
-        </Typography>
+        <Stack
+          direction="row"
+          justifyContent="center"
+          spacing={3}
+          sx={{ mb: 5 }}
+          divider={<Box sx={{ width: '1px', height: 56, bgcolor: 'grey.500' }} />}
+        >
+          <Typography
+            variant="h3"
+            align="center"
+            sx={{
+              mb: 5,
+              color: categorie === 'services' ? 'primary.main' : 'text.secondary',
+              cursor: 'pointer',
+            }}
+            onClick={() => setCategorie('services')}
+          >
+            Servicios
+          </Typography>
+          <Typography
+            variant="h3"
+            align="center"
+            onClick={() => setCategorie('products')}
+            sx={{
+              mb: 5,
+              color: categorie === 'products' ? 'primary.main' : 'text.secondary',
+              cursor: 'pointer',
+            }}
+          >
+            Productos
+          </Typography>
+        </Stack>
       </m.div>
       <m.div variants={varFade().inRight}>
-        <CarouselCenterMode data={_carouselsExample.slice(8, 16)} />
+        <CarouselCenterMode data={homeServicesProductsData[categorie]} />
       </m.div>
     </Box>
   );

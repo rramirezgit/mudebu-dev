@@ -103,7 +103,15 @@ export default function AccountGeneral() {
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Grid container spacing={3}>
         <Grid xs={12} md={4}>
-          <Card sx={{ pt: 10, pb: 5, px: 3, textAlign: 'center' }}>
+          <Card
+            sx={{
+              pt: 10,
+              pb: 5,
+              px: 3,
+              textAlign: 'center',
+              backgroundColor: 'background.neutral',
+            }}
+          >
             <RHFUploadAvatar
               name="photoURL"
               maxSize={3145728}
@@ -139,7 +147,7 @@ export default function AccountGeneral() {
         </Grid>
 
         <Grid xs={12} md={8}>
-          <Card sx={{ p: 3 }}>
+          <Card sx={{ p: 3, backgroundColor: 'background.neutral' }}>
             <Box
               rowGap={3}
               columnGap={2}

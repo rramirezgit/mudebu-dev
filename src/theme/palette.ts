@@ -121,8 +121,8 @@ export function palette(mode: 'light' | 'dark') {
       disabled: GREY[500],
     },
     background: {
-      paper: '#FFFFFF',
-      default: '#FFFFFF',
+      paper: '#F0F2EE',
+      default: '#F0F2EE',
       neutral: GREY[200],
     },
     action: {

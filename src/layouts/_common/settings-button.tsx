@@ -8,7 +8,8 @@ import Badge, { badgeClasses } from '@mui/material/Badge';
 // components
 import Iconify from 'src/components/iconify';
 import { varHover } from 'src/components/animate';
-import { useSettingsContext } from 'src/components/settings';
+import { RouterLink } from 'src/routes/components';
+import { paths } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -17,47 +18,35 @@ type Props = {
 };
 
 export default function SettingsButton({ sx }: Props) {
-  const settings = useSettingsContext();
+  // const settings = useSettingsContext();
 
   return (
-    <Badge
-      color="error"
-      variant="dot"
-      invisible={!settings.canReset}
+    <Box
+      component={m.div}
+      animate={{
+        rotate: [0, 360],
+      }}
+      transition={{
+        duration: 12,
+        ease: 'linear',
+        repeat: Infinity,
+      }}
       sx={{
-        [`& .${badgeClasses.badge}`]: {
-          top: 8,
-          right: 8,
-        },
-        ...sx,
+        marginRight: 1.5,
       }}
     >
-      <Box
-        component={m.div}
-        animate={{
-          rotate: [0, settings.open ? 0 : 360],
-        }}
-        transition={{
-          duration: 12,
-          ease: 'linear',
-          repeat: Infinity,
+      <IconButton
+        component={RouterLink}
+        href={paths.settings}
+        aria-label="settings"
+        onClick={() => {}}
+        sx={{
+          width: 40,
+          height: 40,
         }}
       >
-        <IconButton
-          component={m.button}
-          whileTap="tap"
-          whileHover="hover"
-          variants={varHover(1.05)}
-          aria-label="settings"
-          onClick={settings.onToggle}
-          sx={{
-            width: 40,
-            height: 40,
-          }}
-        >
-          <Iconify icon="solar:settings-bold-duotone" width={24} />
-        </IconButton>
-      </Box>
-    </Badge>
+        <Iconify icon="solar:settings-bold-duotone" width={24} />
+      </IconButton>
+    </Box>
   );
 }
