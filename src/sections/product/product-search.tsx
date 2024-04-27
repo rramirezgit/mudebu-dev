@@ -94,39 +94,7 @@ export default function ProductSearch({ query, results, onSearch, hrefItem, load
         const matches = match(product.name, inputValue);
         const parts = parse(product.name, matches);
 
-        return (
-          <Box component="li" {...props} onClick={() => handleClick(product.id)} key={product.id}>
-            <Avatar
-              key={product.id}
-              alt={product.name}
-              src={product.coverUrl}
-              variant="rounded"
-              sx={{
-                width: 48,
-                height: 48,
-                flexShrink: 0,
-                mr: 1.5,
-                borderRadius: 1,
-              }}
-            />
-
-            <div key={inputValue}>
-              {parts.map((part, index) => (
-                <Typography
-                  key={index}
-                  component="span"
-                  color={part.highlight ? 'primary' : 'textPrimary'}
-                  sx={{
-                    typography: 'body2',
-                    fontWeight: part.highlight ? 'fontWeightSemiBold' : 'fontWeightMedium',
-                  }}
-                >
-                  {part.text}
-                </Typography>
-              ))}
-            </div>
-          </Box>
-        );
+        return <></>;
       }}
     />
   );

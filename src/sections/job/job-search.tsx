@@ -69,25 +69,7 @@ export default function JobSearch({ query, results, onSearch, hrefItem }: Props)
         const matches = match(job.title, inputValue);
         const parts = parse(job.title, matches);
 
-        return (
-          <Box component="li" {...props} onClick={() => handleClick(job.id)} key={job.id}>
-            <div>
-              {parts.map((part, index) => (
-                <Typography
-                  key={index}
-                  component="span"
-                  color={part.highlight ? 'primary' : 'textPrimary'}
-                  sx={{
-                    typography: 'body2',
-                    fontWeight: part.highlight ? 'fontWeightSemiBold' : 'fontWeightMedium',
-                  }}
-                >
-                  {part.text}
-                </Typography>
-              ))}
-            </div>
-          </Box>
-        );
+        return <></>;
       }}
     />
   );

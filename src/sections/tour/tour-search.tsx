@@ -86,39 +86,7 @@ export default function TourSearch({ query, results, onSearch, hrefItem }: Props
         const matches = match(tour.name, inputValue);
         const parts = parse(tour.name, matches);
 
-        return (
-          <Box component="li" {...props} onClick={() => handleClick(tour.id)} key={tour.id}>
-            <Avatar
-              key={tour.id}
-              alt={tour.name}
-              src={tour.images[0]}
-              variant="rounded"
-              sx={{
-                width: 48,
-                height: 48,
-                flexShrink: 0,
-                mr: 1.5,
-                borderRadius: 1,
-              }}
-            />
-
-            <div key={inputValue}>
-              {parts.map((part, index) => (
-                <Typography
-                  key={index}
-                  component="span"
-                  color={part.highlight ? 'primary' : 'textPrimary'}
-                  sx={{
-                    typography: 'body2',
-                    fontWeight: part.highlight ? 'fontWeightSemiBold' : 'fontWeightMedium',
-                  }}
-                >
-                  {part.text}
-                </Typography>
-              ))}
-            </div>
-          </Box>
-        );
+        return <></>;
       }}
     />
   );

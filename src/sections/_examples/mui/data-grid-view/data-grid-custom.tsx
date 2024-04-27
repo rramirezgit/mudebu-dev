@@ -235,17 +235,5 @@ export default function DataGridCustom({ data }: Props) {
 // ----------------------------------------------------------------------
 
 function RatingInputValue({ item, applyValue }: GridFilterInputValueProps) {
-  return (
-    <Box sx={{ p: 1, height: 1, alignItems: 'flex-end', display: 'flex' }}>
-      <Rating
-        size="small"
-        precision={0.5}
-        placeholder="Filter value"
-        value={Number(item.value)}
-        onChange={(event, newValue) => {
-          applyValue({ ...item, value: newValue });
-        }}
-      />
-    </Box>
-  );
+  return <Box sx={{ p: 1, height: 1, alignItems: 'flex-end', display: 'flex' }} />;
 }
