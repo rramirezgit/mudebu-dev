@@ -4,10 +4,8 @@ import { Theme, SxProps } from '@mui/material/styles';
 /* eslint-disable import/order */
 import { Box } from 'src/components/Box/box-component';
 import IconButton from '@mui/material/IconButton';
-import Badge, { badgeClasses } from '@mui/material/Badge';
 // components
 import Iconify from 'src/components/iconify';
-import { varHover } from 'src/components/animate';
 import { RouterLink } from 'src/routes/components';
 import { paths } from 'src/routes/paths';
 

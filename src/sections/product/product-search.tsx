@@ -2,10 +2,7 @@ import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 // @mui
 /* eslint-disable import/order */
-import { Box } from 'src/components/Box/box-component';
-import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete';
 // routes

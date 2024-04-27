@@ -7,7 +7,6 @@ import TableCell from '@mui/material/TableCell';
 import TableSortLabel from '@mui/material/TableSortLabel';
 /* eslint-disable import/order */
 import { Box } from 'src/components/Box/box-component';
-import { ba } from '@fullcalendar/core/internal-common';
 
 // ----------------------------------------------------------------------
 

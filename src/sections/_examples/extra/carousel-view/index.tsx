@@ -21,7 +21,6 @@ import CarouselBasic3 from './carousel-basic-3';
 import CarouselBasic4 from './carousel-basic-4';
 import CarouselAnimation from './carousel-animation';
 import CarouselThumbnail from './carousel-thumbnail';
-import CarouselCenterMode from './carousel-center-mode';
 
 // ----------------------------------------------------------------------
 

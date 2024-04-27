@@ -2,9 +2,7 @@ import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 // @mui
 /* eslint-disable import/order */
-import { Box } from 'src/components/Box/box-component';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import Autocomplete from '@mui/material/Autocomplete';
 import InputAdornment from '@mui/material/InputAdornment';
 // types
@@ -65,12 +63,7 @@ export default function JobSearch({ query, results, onSearch, hrefItem }: Props)
           }}
         />
       )}
-      renderOption={(props, job, { inputValue }) => {
-        const matches = match(job.title, inputValue);
-        const parts = parse(job.title, matches);
-
-        return <></>;
-      }}
+      renderOption={(props, job, { inputValue }) => <></>}
     />
   );
 }

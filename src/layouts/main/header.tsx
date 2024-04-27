@@ -2,23 +2,19 @@
 import { alpha, useTheme } from '@mui/material/styles';
 /* eslint-disable import/order */
 import { Box } from 'src/components/Box/box-component';
-import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
-import Badge, { badgeClasses } from '@mui/material/Badge';
 // hooks
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
 import { useResponsive } from 'src/hooks/use-responsive';
 // theme
-import { bgBlur } from 'src/theme/css';
 // routes
 import { paths } from 'src/routes/paths';
 // components
 import Logo from 'src/components/logo';
-import Label from 'src/components/label';
 //
 import { HEADER } from '../config-layout';
 import { navConfig } from './config-navigation';

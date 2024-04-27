@@ -2,10 +2,7 @@
 
 import { Container, Tab, Tabs, Typography } from '@mui/material';
 import { useCallback, useState } from 'react';
-import { _userAddressBook, _userInvoices, _userPayment, _userPlans } from 'src/_mock';
-import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/custom-breadcrumbs';
 import Iconify from 'src/components/iconify/iconify';
-import { paths } from 'src/routes/paths';
 import AccountGeneral from 'src/sections/account/account-general';
 import SettingsQuote from './settings-quote';
 

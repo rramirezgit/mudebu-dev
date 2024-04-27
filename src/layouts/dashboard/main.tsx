@@ -1,7 +1,7 @@
 // @mui
 import { BoxProps } from '@mui/material/Box';
 /* eslint-disable import/order */
-import { Main as MainMui, Box } from 'src/components/Box/box-component';
+import { Main as MainMui } from 'src/components/Box/box-component';
 // hooks
 import { useResponsive } from 'src/hooks/use-responsive';
 // components

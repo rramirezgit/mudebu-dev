@@ -11,16 +11,13 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 // routes
 // theme
-import SearchField from 'src/components/search-field/search-field';
 import { primaryFont } from 'src/theme/typography';
 import { textGradient, bgGradient } from 'src/theme/css';
 // layouts
 import { HEADER } from 'src/layouts/config-layout';
 // components
 import { MotionContainer, varFade } from 'src/components/animate';
-import { homeServicesProductsData } from 'src/sections/home/home-service-producst';
 import { Paper } from '@mui/material';
-import Fullscreen from 'yet-another-react-lightbox/plugins/fullscreen';
 
 // ----------------------------------------------------------------------
 

@@ -3,16 +3,12 @@ import { m, MotionProps } from 'framer-motion';
 import { alpha, useTheme } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
-import TextField from '@mui/material/TextField';
 import { BoxProps } from '@mui/material/Box';
-import InputAdornment from '@mui/material/InputAdornment';
-import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 /* eslint-disable import/order */
 import { Box } from 'src/components/Box/box-component';
 // theme
 import { bgGradient } from 'src/theme/css';
 // components
-import Iconify from 'src/components/iconify';
 import { MotionContainer, varFade } from 'src/components/animate';
 
 // ----------------------------------------------------------------------

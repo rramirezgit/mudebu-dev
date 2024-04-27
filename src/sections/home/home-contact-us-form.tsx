@@ -1,14 +1,11 @@
-import Container from '@mui/material/Container';
-import { Button, Card, CardContent, Grid, Stack, TextField, Typography } from '@mui/material';
+import { Button, Card, CardContent, Stack, TextField, Typography } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { m } from 'framer-motion';
-import { Box } from 'src/components/Box/box-component';
 import { useResponsive } from 'src/hooks/use-responsive';
-import { MotionViewport, varFade } from 'src/components/animate';
+import { varFade } from 'src/components/animate';
 import { bgBlur } from '../../theme/css';
-import { palette } from '../../theme/palette';
 
 // ----------------------------------------------------------------------
 

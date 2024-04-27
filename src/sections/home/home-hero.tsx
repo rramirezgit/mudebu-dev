@@ -49,24 +49,6 @@ const StyledWrapper = styled('div')(({ theme }) => ({
   },
 }));
 
-const StyledTextGradient = styled(m.h1)(({ theme }) => ({
-  ...textGradient(
-    `300deg, ${theme.palette.primary.main} 0%, ${theme.palette.warning.main} 25%, ${theme.palette.primary.main} 50%, ${theme.palette.warning.main} 75%, ${theme.palette.primary.main} 100%`
-  ),
-  padding: 0,
-  marginTop: 8,
-  lineHeight: 1.1,
-  marginBottom: 24,
-  letterSpacing: 0,
-  textAlign: 'center',
-  backgroundSize: '400%',
-  fontSize: `${48 / 16}rem`,
-  fontFamily: primaryFont.style.fontFamily,
-  [theme.breakpoints.up('md')]: {
-    fontSize: `${48 / 16}rem`,
-  },
-}));
-
 // ----------------------------------------------------------------------
 
 export default function HomeHero() {
