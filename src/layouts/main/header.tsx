@@ -20,21 +20,31 @@ import { HEADER } from '../config-layout';
 import { navConfig } from './config-navigation';
 import NavMobile from './nav/mobile';
 import NavDesktop from './nav/desktop';
+import { useRouter } from 'src/routes/hooks';
 //
-import { SettingsButton, HeaderShadow, LoginButton } from '../_common';
+import { SettingsButton, HeaderShadow, LoginButton, AccountPopover } from '../_common';
 import { RouterLink } from 'src/routes/components';
+import { useAuthContext } from 'src/auth/hooks';
 
 // ----------------------------------------------------------------------
 
 export default function Header() {
   const theme = useTheme();
 
+  const { authenticated } = useAuthContext();
+
   const mdUp = useResponsive('up', 'md');
 
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
 
+  const router = useRouter();
+
   return (
-    <AppBar>
+    <AppBar
+      sx={{
+        padding: '0px !important',
+      }}
+    >
       <Toolbar
         disableGutters
         sx={{
@@ -62,18 +72,32 @@ export default function Header() {
           {mdUp && <NavDesktop offsetTop={offsetTop} data={navConfig} />}
 
           <Stack alignItems="center" direction={{ xs: 'row', md: 'row-reverse' }}>
+            {authenticated && (
+              <Box
+                sx={{
+                  ml: 1,
+                }}
+              >
+                <AccountPopover />
+              </Box>
+            )}
+
             {mdUp && (
               <Stack alignItems="center" direction={{ xs: 'row', md: 'row' }} gap={1}>
                 <Button component={RouterLink} href={paths.onboarding} variant="contained">
                   Cotizar
                 </Button>
-                <Button variant="contained" color="secondary">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => router.push(paths.dashboard.root)}
+                >
                   Dashboard
                 </Button>
               </Stack>
             )}
 
-            {mdUp && <LoginButton />}
+            {!authenticated && <LoginButton />}
 
             <SettingsButton
               sx={{

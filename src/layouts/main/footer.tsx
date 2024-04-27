@@ -23,23 +23,27 @@ import Iconify from 'src/components/iconify';
 
 const LINKS = [
   {
-    headline: 'Minimal',
+    headline: 'Mudebu',
     children: [
-      { name: 'About us', href: paths.about },
-      { name: 'Contact us', href: paths.contact },
-      { name: 'FAQs', href: paths.faqs },
-    ],
-  },
-  {
-    headline: 'Legal',
-    children: [
-      { name: 'Terms and Condition', href: '#' },
-      { name: 'Privacy Policy', href: '#' },
+      { name: 'Home', href: '/' },
+      { name: 'Contacto', href: paths.contact },
+      { name: 'Cotizar', href: paths.onboarding },
+      { name: 'Catalogo', href: paths.catalogo },
     ],
   },
   {
     headline: 'Contact',
-    children: [{ name: 'support@minimals.cc', href: '#' }],
+    children: [
+      { name: 'support@minimals.cc', href: '#' },
+      { name: '55 5168 3871', href: '#' },
+      {
+        name: `Camino Santa Teresa 1313
+              Jardines del pedregal
+              CP 01900
+              CDMX`,
+        href: '#',
+      },
+    ],
   },
 ];
 
@@ -81,8 +85,8 @@ export default function Footer() {
                 mx: { xs: 'auto', md: 'unset' },
               }}
             >
-              The starting point for your next project with Minimal UI Kit, built on the newest
-              version of Material-UI ©, ready to be customized to your style.
+              Especialistas en Mobiliario. De mobiliario a remodelaciones, y desde diseño hasta
+              fabricación: Mudebu, tu solución integral para cada espacio.
             </Typography>
 
             <Stack
@@ -139,7 +143,7 @@ export default function Footer() {
         </Grid>
 
         <Typography variant="body2" sx={{ mt: 10 }}>
-          © 2021. All rights reserved
+          valeriadlv4@gmail.com
         </Typography>
       </Container>
     </FooterMui>

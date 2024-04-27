@@ -46,9 +46,9 @@ import { AuthProvider, AuthConsumer } from 'src/auth/context/auth0';
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'Minimal UI Kit',
+  title: 'Mudebu',
   description:
-    'The starting point for your next project with Minimal UI Kit, built on the newest version of Material-UI ©, ready to be customized to your style',
+    'Especialistas en Mobiliario. De mobiliario a remodelaciones, y desde diseño hasta fabricación: Mudebu, tu solución integral para cada espacio.',
   keywords: 'react,material,kit,application,dashboard,admin,template',
   themeColor: '#000000',
   manifest: '/manifest.json',

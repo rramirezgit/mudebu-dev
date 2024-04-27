@@ -18,13 +18,7 @@ export default function LoginButton({ sx }: Props) {
   const { loginWithRedirect } = useAuth0();
   return (
     <Button
-      onClick={() =>
-        loginWithRedirect({
-          authorizationParams: {
-            redirect_uri: `${window.location.origin}/dashboard`,
-          },
-        })
-      }
+      onClick={() => loginWithRedirect()}
       variant="outlined"
       color="primary"
       sx={{ mr: 1, ...sx }}

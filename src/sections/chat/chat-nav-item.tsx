@@ -14,7 +14,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
 // hooks
-import { useMockedUser } from 'src/hooks/use-mocked-user';
+import { useAuthContext } from 'src/auth/hooks';
 import { useResponsive } from 'src/hooks/use-responsive';
 // api
 import { clickConversation } from 'src/api/chat';
@@ -33,7 +33,7 @@ type Props = {
 };
 
 export default function ChatNavItem({ selected, collapse, conversation, onCloseMobile }: Props) {
-  const { user } = useMockedUser();
+  const { user } = useAuthContext();
 
   const mdUp = useResponsive('up', 'md');
 

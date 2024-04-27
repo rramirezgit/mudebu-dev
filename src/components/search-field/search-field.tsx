@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useRouter } from 'src/routes/hooks';
 
 const Container = styled('div')(({ theme }) => ({
   width: '100%',
@@ -28,14 +29,10 @@ const StyledInput = styled('input')(({ theme }) => ({
 }));
 
 const SearchField = () => {
-  const { loginWithRedirect } = useAuth0();
+  const router = useRouter();
 
   const handleclickSearch = () => {
-    loginWithRedirect({
-      authorizationParams: {
-        redirect_uri: `${window.location.origin}/onboarding`,
-      },
-    });
+    router.push('/onboarding');
   };
 
   return (

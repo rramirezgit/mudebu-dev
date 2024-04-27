@@ -11,7 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Badge, { badgeClasses } from '@mui/material/Badge';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 // hooks
-import { useMockedUser } from 'src/hooks/use-mocked-user';
+import { useAuthContext } from 'src/auth/hooks';
 // components
 import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
@@ -19,7 +19,7 @@ import CustomPopover, { usePopover } from 'src/components/custom-popover';
 // ----------------------------------------------------------------------
 
 export default function ChatNavAccount() {
-  const { user } = useMockedUser();
+  const { user } = useAuthContext();
 
   const popover = usePopover();
 

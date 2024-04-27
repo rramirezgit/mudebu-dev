@@ -1,5 +1,6 @@
 'use client';
 
+import { AuthGuard } from 'src/auth/guard';
 // components
 import MainLayout from 'src/layouts/main/layout';
 
@@ -10,5 +11,9 @@ type Props = {
 };
 
 export default function Layout({ children }: Props) {
-  return <MainLayout>{children}</MainLayout>;
+  return (
+    <AuthGuard>
+      <MainLayout>{children}</MainLayout>
+    </AuthGuard>
+  );
 }
