@@ -162,7 +162,6 @@ const FormDataSteps: IFormDataOnboarding[] = [
       },
     ],
   },
-
   /// Seccion: Especificación
   {
     id: uuidv4(),
@@ -409,7 +408,6 @@ const FormDataSteps: IFormDataOnboarding[] = [
       },
     ],
   },
-
   /// Mobilidario y Decoración
   {
     id: uuidv4(),
@@ -441,7 +439,6 @@ const FormDataSteps: IFormDataOnboarding[] = [
       },
     ],
   },
-
   /// Estilos
   {
     id: uuidv4(),
@@ -597,6 +594,51 @@ const FormDataSteps: IFormDataOnboarding[] = [
       },
     ],
   },
+  /// Colores
+  {
+    id: uuidv4(),
+    title: TSeccionForm.Colores,
+    content: [
+      {
+        name: 'colores',
+        texts: [
+          {
+            id: uuidv4(),
+            type: textTypeOnboarding.title,
+            value: 'Cuéntanos sobre tus preferencias de color. ',
+          },
+          {
+            id: uuidv4(),
+            type: textTypeOnboarding.text,
+            value: '¿Hay colores que te gustaría ver en el diseño?',
+          },
+        ],
+        nextCondition: 'nextStep',
+        fields: [
+          {
+            id: uuidv4(),
+            nameFORMIK: 'colores',
+            type: inputsOnboarding.multiButtons,
+            options: [
+              'Rojos',
+              'Azules',
+              'Verdes',
+              'Amarillos',
+              'Rosas',
+              'Morados',
+              'Naranjas',
+              'Dorados',
+              'Plateados',
+              'Turquesas',
+              'Grises',
+              'Blancos',
+            ],
+            placeholder: 'Mobiliario',
+          },
+        ],
+      },
+    ],
+  },
   /// Tonos
   {
     id: uuidv4(),
@@ -608,7 +650,7 @@ const FormDataSteps: IFormDataOnboarding[] = [
           {
             id: uuidv4(),
             type: textTypeOnboarding.title,
-            value: '¿Qué colores y tones se adecuan mejor a lo que estas buscando?',
+            value: '¿Qué tonos se adecuan mejor a lo que estas buscando?',
           },
           {
             id: uuidv4(),

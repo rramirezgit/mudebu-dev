@@ -7,6 +7,18 @@ import { OnboardingState } from './types';
 const initialState: OnboardingState = {
   step: 0,
   contentStep: 0,
+  isvalidDataform: false,
+  onoardingInfo: {
+    business_orientation: '',
+    colors_ai: '',
+    specific_functionality: '',
+    preferred_material: '',
+    styles_ai: '',
+    types_of_furniture: '',
+    dimensions: '',
+    prompt_images: '',
+    project_location: '',
+  },
 };
 
 export const onBoardingSlice = createSlice({
@@ -26,10 +38,23 @@ export const onBoardingSlice = createSlice({
     setContentStep: (state, action: PayloadAction<number>) => {
       state.contentStep = action.payload;
     },
+    setIsValidDataForm: (state, action: PayloadAction<boolean>) => {
+      state.isvalidDataform = action.payload;
+    },
+    setOnboardingInfo: (state, action: PayloadAction<any>) => {
+      state = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { nextStep, prevStep, setStep, setContentStep } = onBoardingSlice.actions;
+export const {
+  nextStep,
+  prevStep,
+  setStep,
+  setContentStep,
+  setIsValidDataForm,
+  setOnboardingInfo,
+} = onBoardingSlice.actions;
 
 export default onBoardingSlice.reducer;

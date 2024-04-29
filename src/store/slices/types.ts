@@ -1,6 +1,8 @@
 export interface OnboardingState {
   step: number;
   contentStep: number;
+  isvalidDataform: boolean;
+  onoardingInfo: any;
 }
 
 export interface mudebuAIState {

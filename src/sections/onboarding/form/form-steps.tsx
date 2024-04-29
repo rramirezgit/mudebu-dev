@@ -9,16 +9,15 @@ export default function FormSteps() {
   const contentStep = useSelector((state: RootState) => state.OnBoarding.contentStep);
 
   const currentStep = FormDataSteps[step];
-
   return (
     <>
       {currentStep?.content &&
-        currentStep.content[contentStep].texts.map((text) => (
+        currentStep.content[contentStep]?.texts.map((text) => (
           <OnboardingTextView key={text.id} text={text} />
         ))}
 
       {currentStep?.content &&
-        currentStep.content[contentStep].fields.map((field) => (
+        currentStep.content[contentStep]?.fields.map((field) => (
           <InputsView key={field.id} field={field} />
         ))}
     </>

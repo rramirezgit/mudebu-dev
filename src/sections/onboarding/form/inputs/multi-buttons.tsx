@@ -31,7 +31,9 @@ export default function OnBoardingMultiButtons({ options, nameFORMIK }: Props) {
       setOptionsSelected(optionsSelected.replace(`;${nameItem}`, ''));
       return;
     }
-    setOptionsSelected(`${optionsSelected};${nameItem}`);
+
+    const newValue = optionsSelected ? `${optionsSelected};${nameItem}` : nameItem;
+    setOptionsSelected(newValue);
   };
 
   const isOptionActive = (nameItem: string) => optionsSelected.includes(nameItem);

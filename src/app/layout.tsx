@@ -43,6 +43,7 @@ import { AuthProvider, AuthConsumer } from 'src/auth/context/auth0';
 import { AxiosProvider } from 'src/axios/axios-provider';
 // import { AuthProvider, AuthConsumer } from 'src/auth/context/amplify';
 // import { AuthProvider, AuthConsumer } from 'src/auth/context/firebase';
+import 'src/theme/global.css';
 
 // ----------------------------------------------------------------------
 

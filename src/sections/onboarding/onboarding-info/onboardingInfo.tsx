@@ -16,55 +16,27 @@ import { Container } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { Box } from 'src/components/Box/box-component';
 import Iconify from 'src/components/iconify/iconify';
+import { getStorage } from 'src/hooks/use-local-storage';
+import { storageKeys } from '../form/form-layaout';
 
-export const onBoardingInfo = [
-  {
-    id: 1,
-    title: 'Giro de la Empresa:',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  },
-  {
-    id: 2,
-    title: 'Estilos:',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  },
-  {
-    id: 3,
-    title: 'Colores:',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  },
-  {
-    id: 4,
-    title: 'Tipos De Muebles:',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  },
-  {
-    id: 5,
-    title: 'Funcionalidad Específica:',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  },
-  {
-    id: 6,
-    title: 'Dimensiones:',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  },
-  {
-    id: 7,
-    title: 'Material Preferido:',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  },
-  {
-    id: 8,
-    title: 'Ubicación del Proyecto:',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  },
-];
+const l: any = {
+  business_orientation: 'Giro de la Empresa:',
+  colors_ai: 'Colores:',
+  specific_functionality: 'Funcionalidad Específica:',
+  preferred_material: 'Material Preferido:',
+  styles_ai: 'Estilos:',
+  types_of_furniture: 'Tipos De Muebles:',
+  dimensions: 'Dimensiones:',
+  prompt_images: 'Imágenes:',
+  project_location: 'Ubicación del Proyecto:',
+};
 
 export default function OnboardingInfo() {
   const [open, setOpen] = useState(false);
   const [idItemSelected, setIdItemSelected] = useState<any>(null);
   const [dataOnBoarding, setDataOnboardng] = useState<any>([]);
   const [newData, setNewData] = useState<any>('');
+
   const onClose = () => {
     setOpen(false);
   };
@@ -77,7 +49,15 @@ export default function OnboardingInfo() {
   };
 
   useEffect(() => {
-    setDataOnboardng(onBoardingInfo);
+    const onboardingResult = getStorage(storageKeys.onboardingResult);
+    if (onboardingResult) {
+      const data = Object.entries(onboardingResult).map(([key, value]) => ({
+        id: key,
+        title: l[key],
+        text: value,
+      }));
+      setDataOnboardng(data);
+    }
   }, []);
 
   const handleClickEditData = () => {

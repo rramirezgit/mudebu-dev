@@ -6,6 +6,7 @@ export enum TSeccionForm {
   Texturas = 'Texturas',
   Materiales = ' Materiales',
   Tonos = 'Tonos',
+  Colores = 'Colores',
   Benchmarks = 'Benchmarks',
   DetallesAdicionalesDeDiseño = 'Detalles Adicionales de Diseño',
 }

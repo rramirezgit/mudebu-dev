@@ -9,7 +9,6 @@ import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import { useField, useFormikContext } from 'formik';
 import { useSelector } from 'react-redux';
-import { s } from '@fullcalendar/core/internal-common';
 import { Box } from 'src/components/Box/box-component';
 // components
 import Image from 'src/components/image';
@@ -36,7 +35,7 @@ export default function OnBoardingButtons({ options, nameFORMIK }: Props) {
   const contentStep = useSelector((state: RootState) => state.OnBoarding.contentStep);
 
   const handleClickOption = (nameItem: string) => {
-    if (contentStep === 0 || contentStep === 1) {
+    if (contentStep === 0) {
       const currentStep = FormDataSteps[step];
       const listValues = currentStep.content.map((c) => c.name);
 
