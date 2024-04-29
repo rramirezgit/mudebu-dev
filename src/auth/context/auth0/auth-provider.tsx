@@ -94,6 +94,7 @@ export const AuthProvider = ({ children }: Props) => {
       clientId={clientId}
       authorizationParams={{
         redirect_uri: redirectUri,
+        audience: AUTH0_API.audience,
       }}
       onRedirectCallback={onRedirectCallback}
       cacheLocation="localstorage"

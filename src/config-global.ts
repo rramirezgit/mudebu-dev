@@ -27,6 +27,7 @@ export const AUTH0_API = {
   clientId: process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID,
   domain: process.env.NEXT_PUBLIC_AUTH0_DOMAIN,
   callbackUrl: process.env.NEXT_PUBLIC_AUTH0_CALLBACK_URL,
+  audience: process.env.NEXT_PUBLIC_AUTH0_AUDIENCE,
 };
 
 export const MAPBOX_API = process.env.NEXT_PUBLIC_MAPBOX_API;

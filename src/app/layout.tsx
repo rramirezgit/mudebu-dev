@@ -40,6 +40,7 @@ import { CheckoutProvider } from 'src/sections/checkout/context';
 // import { AuthProvider, AuthConsumer } from 'src/auth/context/jwt';
 import { ReduxProvider } from 'src/store/Provider';
 import { AuthProvider, AuthConsumer } from 'src/auth/context/auth0';
+import { AxiosProvider } from 'src/axios/axios-provider';
 // import { AuthProvider, AuthConsumer } from 'src/auth/context/amplify';
 // import { AuthProvider, AuthConsumer } from 'src/auth/context/firebase';
 
@@ -109,7 +110,9 @@ export default function RootLayout({ children }: Props) {
                       <CheckoutProvider>
                         <SettingsDrawer />
                         <ProgressBar />
-                        <AuthConsumer>{children}</AuthConsumer>
+                        <AuthConsumer>
+                          <AxiosProvider>{children}</AxiosProvider>
+                        </AuthConsumer>
                       </CheckoutProvider>
                     </SnackbarProvider>
                   </MotionLazy>
