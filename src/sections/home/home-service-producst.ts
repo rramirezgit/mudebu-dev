@@ -4,12 +4,7 @@ export const homeServicesProductsData: any = {
       id: '1',
       title: 'Consultoría y Realización Profesionales',
       to: 'services/consultoria-y-realizacion-profesionales',
-      description: `Nuestro equipo ofrece una consultoría especializada para transformar visiones en
-        realidades tangibles. A través de un diseño arquitectónico innovador y
-        asesoramiento experto, garantizamos que cada proyecto refleje la esencia y las
-        aspiraciones de nuestros clientes. Además, nos dedicamos a proporcionar
-        materiales de la más alta calidad y un trabajo de albañilería meticuloso,
-        asegurando acabados de primera que sobrepasan las expectativas.`,
+      description: `Convertimos ideas en proyectos reales con diseño moderno y construcción de calidad.`,
       image: '/assets/images/Services/Consultoria_y_Real/main.webp',
       imageList: [
         { id: '1', image: '/assets/images/Services/Consultoria_y_Real/1.webp' },
@@ -25,13 +20,7 @@ export const homeServicesProductsData: any = {
       id: '2',
       title: 'Colocación y Acabados Impecables',
       to: 'services/colocacion-y-acabados-impecables',
-      description: `Nos enorgullecemos de nuestra habilidad para ejecutar colocaciones y acabados
-        con una precisión impecable. Nos especializamos en la integración de elementos
-        estructurales y decorativos, desde una cancelería precisa hasta una amplia
-        selección de pisos, adaptándonos a las necesidades y preferencias de cada
-        espacio. Además, ofrecemos soluciones a medida para instalaciones especiales
-        como sistemas de aire acondicionado y redes de voz y datos, enfocándonos en la
-        funcionalidad y la estética.`,
+      description: `Instalamos y acabamos con precisión, personalizando cada espacio para que sea funcional y atractivo.`,
       image: '/assets/images/Services/Colocacion_y_Acabados_Impecables/main.webp',
       imageList: [
         { id: '1', image: '/assets/images/Services/Colocacion_y_Acabados_Impecables/1.webp' },
@@ -48,12 +37,7 @@ export const homeServicesProductsData: any = {
       id: '3',
       title: 'Innovación en Diseño y Funcionalidad',
       to: 'services/innovacion-en-diseno-y-funcionalidad',
-      description: `Impulsamos la eficiencia operativa mediante el factoraje flexible, permitiendo a
-        nuestros clientes mejorar su flujo de caja con pagos anticipados a proveedores.
-        Ofrecemos financiamiento inteligente para que puedan disfrutar inmediatamente
-        de mobiliario y espacios diseñados a medida, con la comodidad de pagar
-        posteriormente. Nuestro servicio de instalaciones expertas garantiza conexiones
-        de agua y electricidad no solo funcionales sino también estéticamente perfectas.`,
+      description: `Ofrecemos financiamiento y diseño a medida para que disfrutes de tus espacios ahora y pagues después.`,
       image: '/assets/images/Services/Inovacion/main.webp',
       imageList: [
         { id: '1', image: '/assets/images/Services/Inovacion/1.webp' },
@@ -70,11 +54,7 @@ export const homeServicesProductsData: any = {
       id: '4',
       title: 'Tecnología Avanzada en Diseño',
       to: 'services/tecnologia-avanzada-en-diseno',
-      description: `Adoptamos la vanguardia tecnológica en diseño, utilizando inteligencia artificial
-        para visualizar y personalizar espacios a través de nuestra plataforma inteligente.
-        Creamos mobiliario único, fabricado a la medida con maderas selectas, metales y
-        acrílicos de la más alta calidad, garantizando piezas que destacan por su diseño y
-        durabilidad.`,
+      description: `Usamos tecnología de punta para crear muebles y espacios personalizados y duraderos.`,
       image: '/assets/images/Services/Tecnología_Avanzada/main.webp',
       imageList: [
         { id: '1', image: '/assets/images/Services/Tecnología_Avanzada/1.webp' },
@@ -88,11 +68,7 @@ export const homeServicesProductsData: any = {
       id: '5',
       title: 'Planificación y Mantenimiento Expertos',
       to: 'services/planificacion-y-mantenimiento-expertos',
-      description: `Proporcionamos servicios de planificación meticulosa apoyados por estudios
-        topográficos detallados, asegurando una ejecución precisa de cada proyecto.
-        Nuestros servicios de mantenimiento integral incluyen medidas preventivas y
-        correctivas, diseñadas para prolongar la vida útil de los espacios, manteniéndolos
-        en óptimas condiciones a lo largo del tiempo.`,
+      description: `Planificamos y mantenemos tus espacios cuidadosamente para asegurar su durabilidad y buena condición.`,
       image: '/assets/images/Services/Planificación_Mantenimiento/main.webp',
       imageList: [
         { id: '1', image: '/assets/images/Services/Planificación_Mantenimiento/1.webp' },
@@ -109,12 +85,7 @@ export const homeServicesProductsData: any = {
       id: '1',
       title: 'Mobiliario con Superficies Sólidas',
       to: 'products/mobiliario-con-superficies-solidas',
-      description: `Madera: Mobiliario de diseño atemporal elaborado con una selección de
-        maderas finas y acabados de primera calidad.
-        Metal: Piezas de mobiliario contemporáneo con un distintivo estilo industrial,
-        utilizando metales duraderos como el acero, aluminio y hierro.
-        Acrílicos: Mobiliario moderno y versátil, ideal para espacios con un concepto
-        de vanguardia.`,
+      description: `Fabricamos muebles de madera fina, metal resistente y acrílicos versátiles, cada uno diseñado para estilos desde clásicos hasta vanguardistas.`,
       image: '/assets/images/Products/Superficies_solidas/main.webp',
       imageList: [
         { id: '1', image: '/assets/images/Products/Superficies_solidas/1.webp' },
@@ -130,11 +101,7 @@ export const homeServicesProductsData: any = {
       id: '2',
       title: 'Mobiliario PoP (Point of Purchase)',
       to: 'products/mobiliario-pop',
-      description: `El Mobiliario PoP está diseñado para captar la atención en el punto de venta,
-        aumentando la visibilidad de los productos y mejorando la experiencia de compra.
-        Nuestros exhibidores y stands son soluciones ideales para tiendas y espacios
-        comerciales que buscan resaltar sus productos y capturar el interés de los
-        clientes mediante diseños atractivos y funcionales.`,
+      description: `Diseñamos mobiliario para puntos de venta que mejora la visibilidad y la experiencia de compra con exhibidores y stands atractivos.`,
       image: '/assets/images/Products/POP/main.webp',
       imageList: [
         { id: '1', image: '/assets/images/Products/POP/1.webp' },
@@ -150,11 +117,7 @@ export const homeServicesProductsData: any = {
       id: '3',
       title: 'Anuncios Luminosos',
       to: 'products/anuncios-luminosos',
-      description: `Nuestra línea de anuncios luminosos está diseñada para maximizar la visibilidad
-        de su marca. Con soluciones de señalización brillante adecuadas para interiores y
-        exteriores, estos anuncios son perfectos para destacarse en el mercado. Ofrecen
-        una excelente visibilidad nocturna y en condiciones de poca luz, asegurando que
-        su mensaje publicitario capte la atención en todo momento.`,
+      description: `Creemos anuncios luminosos que aseguran que tu marca se vea bien tanto de día como de noche, perfectos para cualquier ambiente.`,
       image: '/assets/images/Products/Anuncios/anuncios-luminosos-acrilico-002.jpg',
       imageList: [
         { id: '1', image: '/assets/images/Products/Anuncios/1.webp' },
@@ -168,10 +131,7 @@ export const homeServicesProductsData: any = {
       id: '4',
       title: 'Señalización',
       to: 'products/senalizacion',
-      description: `Ofrecemos una amplia variedad de soluciones de señalización para orientación,
-        seguridad y branding en entornos comerciales y corporativos. Nuestras señales
-        están diseñadas para integrarse de manera coherente con la estética de su
-        espacio, proporcionando información clara y accesible para todos los usuarios.`,
+      description: `Proveemos señalización para guiar, informar y reforzar tu marca en entornos comerciales y corporativos, combinando estilo y funcionalidad.`,
       image: '/assets/images/Products/senalizacion/main.webp',
       imageList: [
         { id: '1', image: '/assets/images/Products/senalizacion/1.webp' },
@@ -189,12 +149,7 @@ export const homeServicesProductsData: any = {
       id: '5',
       title: 'Impresión Digital',
       to: 'products/impresion-digital',
-      description: `En la impresión digital, nos especializamos en vinilos autoadhesivos de alta
-        calidad para la personalización y decoración de espacios. Estos vinilos son
-        Paginas de Productos 2
-        ideales para aplicar en una variedad de superficies, ofreciendo una forma eficaz y
-        versátil de actualizar la apariencia de cualquier ambiente con gráficos
-        personalizados y de gran impacto visual.`,
+      description: `Especialistas en vinilos autoadhesivos para decorar y personalizar espacios con gráficos de alto impacto visual.`,
       image: '/assets/images/Products/impresion/main.webp',
       imageList: [
         { id: '1', image: '/assets/images/Products/impresion/1.webp' },
@@ -212,11 +167,7 @@ export const homeServicesProductsData: any = {
       id: '6',
       title: 'Carpintería',
       to: 'products/carpinteria',
-      description: `La carpintería es un arte que requiere precisión y personalización. Ofrecemos
-        servicios de carpintería en sitio adaptados a cualquier espacio y diseño,
-        asegurando que cada pieza se ajuste perfectamente y cumpla con las
-        expectativas de nuestros clientes. Nuestros carpinteros son maestros en su oficio,
-        garantizando acabados de alta calidad y una atención al detalle inigualable.`,
+      description: `Ofrecemos carpintería personalizada en sitio, asegurando ajuste perfecto y acabados de calidad con un enfoque en los detalles.`,
       image: '/assets/images/Products/carpinteria/main.webp',
       imageList: [
         { id: '1', image: '/assets/images/Products/carpinteria/1.webp' },
@@ -233,12 +184,7 @@ export const homeServicesProductsData: any = {
       id: '4',
       title: 'Techos, Pisos y Paredes',
       to: 'products/techos-pisos-y-paredes',
-      description: `Proporcionamos soluciones completas para techos, pisos y paredes, ofreciendo
-        una gama de materiales y acabados para todo tipo de espacios. Desde techos
-        suspendidos hasta pisos de distintos materiales, nuestro objetivo es brindar
-        opciones que no solo sean estéticamente agradables sino también funcionales y
-        de larga duración. Nos especializamos en crear ambientes únicos que resalten la
-        personalidad de cada espacio`,
+      description: `Brindamos soluciones completas para techos, pisos y paredes, con materiales y acabados que combinan estética, funcionalidad y durabilidad.`,
       image: '/assets/images/Products/techos/main.webp',
       imageList: [
         { id: '1', image: '/assets/images/Products/techos/1.webp' },

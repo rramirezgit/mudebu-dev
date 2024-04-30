@@ -27,7 +27,7 @@ type Props = {
 
 export default function CarouselCenterMode({ data }: Props) {
   const carousel = useCarousel({
-    slidesToShow: 3,
+    slidesToShow: 1,
     className: 'slider variable-width',
     swipeToSlide: true,
     variableWidth: true,
@@ -36,11 +36,11 @@ export default function CarouselCenterMode({ data }: Props) {
     responsive: [
       {
         breakpoint: 1024,
-        settings: { slidesToShow: 2 },
+        settings: { slidesToShow: 1 },
       },
       {
         breakpoint: 600,
-        settings: { slidesToShow: 2 },
+        settings: { slidesToShow: 1 },
       },
       {
         breakpoint: 480,
@@ -96,16 +96,23 @@ function CarouselItem({ item, isActive }: CarouselItemProps) {
 
   const { image, title, to, description } = item;
 
+  const onlyimage = !title && !description && !to;
+
   return (
     <Paper
       sx={{
-        borderRadius: 300,
+        borderRadius: onlyimage ? 10 : 300,
         overflow: 'hidden',
         position: 'relative',
-        width: {
-          xs: '287px',
-          sm: '310px',
-        },
+        width: onlyimage
+          ? {
+              xs: '287px',
+              sm: '510px',
+            }
+          : {
+              xs: '287px',
+              sm: '310px',
+            },
         height: {
           xs: '500px',
           sm: '539px',
@@ -133,7 +140,7 @@ function CarouselItem({ item, isActive }: CarouselItemProps) {
             ...bgGradient({
               direction: 'to top',
               startColor: `${theme.palette.grey[900]} 0%`,
-              endColor: `${alpha(theme.palette.grey[900], 0)} 100%`,
+              endColor: `${alpha(theme.palette.grey[900], 0.3)} 100%`,
             }),
           }}
         >
