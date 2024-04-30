@@ -25,6 +25,7 @@ import { useRouter } from 'src/routes/hooks';
 import { SettingsButton, HeaderShadow, LoginButton, AccountPopover } from '../_common';
 import { RouterLink } from 'src/routes/components';
 import { useAuthContext } from 'src/auth/hooks';
+import { bgBlur } from 'src/theme/css';
 
 // ----------------------------------------------------------------------
 
@@ -56,8 +57,10 @@ export default function Header() {
             easing: theme.transitions.easing.easeInOut,
             duration: theme.transitions.duration.shorter,
           }),
-          backgroundColor: alpha(theme.palette.background.paper, 0.99),
           ...(offsetTop && {
+            ...bgBlur({
+              color: theme.palette.background.default,
+            }),
             height: {
               md: HEADER.H_DESKTOP_OFFSET,
             },
@@ -97,14 +100,25 @@ export default function Header() {
               </Stack>
             )}
 
-            {!authenticated && <LoginButton />}
+            {mdUp && !authenticated && (
+              <LoginButton
+                sx={{
+                  mr: {
+                    xs: 0,
+                    md: 1,
+                  },
+                }}
+              />
+            )}
 
-            <SettingsButton
-              sx={{
-                ml: { xs: 1, md: 0 },
-                mr: { md: 2 },
-              }}
-            />
+            {mdUp && (
+              <SettingsButton
+                sx={{
+                  ml: { xs: 1, md: 0 },
+                  mr: { md: 2 },
+                }}
+              />
+            )}
 
             {!mdUp && <NavMobile offsetTop={offsetTop} data={navConfig} />}
           </Stack>

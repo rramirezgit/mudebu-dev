@@ -27,7 +27,7 @@ export default function SettingsView() {
   }, []);
 
   return (
-    <Container sx={{ pt: 10, pb: 15 }}>
+    <Container sx={{ pt: 5, pb: 10 }}>
       <Typography variant="h4" sx={{ mb: 5 }}>
         Cuenta
       </Typography>

@@ -30,7 +30,7 @@ export default function SettingsButton({ sx }: Props) {
         repeat: Infinity,
       }}
       sx={{
-        marginRight: 1.5,
+        marginRight: { xs: 0, md: 1.5 },
       }}
     >
       <IconButton

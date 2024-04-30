@@ -6,10 +6,62 @@ import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 // hooks
-import { Box, Dialog } from '@mui/material';
+import { Box, Dialog, SxProps } from '@mui/material';
+import { Theme } from '@mui/system';
 import { MotionViewport, varFade } from 'src/components/animate';
 import { useResponsive } from 'src/hooks/use-responsive';
 /* eslint-disable import/order */
+
+const images = [
+  {
+    id: 1,
+    url: 'assets/images/Products/carpinteria/1.webp',
+  },
+  {
+    id: 2,
+    url: 'assets/images/Products/POP/1.webp',
+  },
+  {
+    id: 3,
+    url: 'assets/images/Products/techos/4.webp',
+  },
+  {
+    id: 4,
+    url: 'assets/images/Products/Superficies_solidas/3.webp',
+  },
+  {
+    id: 5,
+    url: 'assets/images/Products/POP/5.webp',
+  },
+  {
+    id: 6,
+    url: 'assets/images/Products/impresion/9.webp',
+  },
+  {
+    id: 7,
+    url: 'assets/images/Products/Anuncios/1.webp',
+  },
+  {
+    id: 8,
+    url: 'assets/images/Products/techos/3.webp',
+  },
+  {
+    id: 10,
+    url: 'assets/images/Services/Planificación_Mantenimiento/3.webp',
+  },
+  {
+    id: 11,
+    url: 'assets/images/Services/Inovacion/2.webp',
+  },
+  {
+    id: 12,
+    url: 'assets/images/Services/Tecnología_Avanzada/1.webp',
+  },
+  {
+    id: 13,
+    url: 'assets/images/Services/Consultoria_y_Real/3.png',
+  },
+];
 
 interface BoxProps {
   handleMouseEnter: (back: boolean) => void;
@@ -18,6 +70,7 @@ interface BoxProps {
   item: any;
   back?: boolean;
   zIndexColums: number;
+  sx?: SxProps<Theme> | undefined;
 }
 const heightImage = 466;
 
@@ -28,6 +81,7 @@ const BoxComponent = ({
   item,
   back = false,
   zIndexColums,
+  sx,
 }: BoxProps) => {
   const smDown = useResponsive('down', 'md');
 
@@ -36,7 +90,7 @@ const BoxComponent = ({
       component={m.div}
       sx={{
         marginTop: 2,
-        backgroundImage: `url(https://assets.codepen.io/721952/${item}.jpg)`,
+        backgroundImage: `url(${item.url})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         position: 'relative',
@@ -53,6 +107,7 @@ const BoxComponent = ({
             opacity: 1,
           },
         },
+        ...sx,
       }}
       onMouseEnter={() => handleMouseEnter(back)}
       onMouseLeave={() => handleMouseLeave(back)}
@@ -81,7 +136,7 @@ const BoxComponent = ({
   );
 };
 
-const BoxAnimate = ({ animationY, duration, zIndexColums }: any) => {
+const BoxAnimate = ({ animationY, duration, zIndexColums, sx }: any) => {
   const [animation1, setAnimation1] = useState<any>(null);
   const [scope1, animate1] = useAnimate();
   const [zIndex1, setZIndex1] = useState<number>(0);
@@ -91,7 +146,7 @@ const BoxAnimate = ({ animationY, duration, zIndexColums }: any) => {
   const [zIndex2, setZIndex2] = useState<number>(0);
 
   const [open, setOpen] = useState<boolean>(false);
-  const [indexSelected, setindexSelected] = useState<number>(0);
+  const [indexSelected, setindexSelected] = useState<any>(0);
 
   const handleClose = () => {
     setOpen(false);
@@ -154,7 +209,7 @@ const BoxAnimate = ({ animationY, duration, zIndexColums }: any) => {
         }}
       >
         <Box component="div" ref={scope1} sx={{ position: 'absolute', mt: -0.2, zIndex: zIndex1 }}>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
+          {images.map((item, index) => (
             <BoxComponent
               key={index}
               item={item}
@@ -162,11 +217,12 @@ const BoxAnimate = ({ animationY, duration, zIndexColums }: any) => {
               handleMouseLeave={handleMouseLeave}
               hanldeClick={handleClick}
               zIndexColums={zIndexColums}
+              sx={sx}
             />
           ))}
         </Box>
         <Box component="div" ref={scope2} sx={{ position: 'absolute', zIndex: zIndex2 }}>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
+          {images.map((item, index) => (
             <BoxComponent
               key={index}
               item={item}
@@ -175,6 +231,7 @@ const BoxAnimate = ({ animationY, duration, zIndexColums }: any) => {
               hanldeClick={handleClick}
               zIndexColums={zIndexColums}
               back
+              sx={sx}
             />
           ))}
         </Box>
@@ -188,7 +245,7 @@ const BoxAnimate = ({ animationY, duration, zIndexColums }: any) => {
         }}
       >
         <img
-          src={`https://assets.codepen.io/721952/${indexSelected}.jpg`}
+          src={`${indexSelected?.url}`}
           alt=""
           style={{ width: '100%', height: '100%', objectFit: 'contain' }}
         />
@@ -233,9 +290,19 @@ export default function HomeHero() {
         width: '100%',
       }}
     >
-      <BoxAnimate animationY={arriba} duration={80} zIndexColums={0} />
+      <BoxAnimate
+        animationY={arriba}
+        duration={80}
+        zIndexColums={0}
+        sx={{ opacity: { xs: 0.3, md: 1 } }}
+      />
       <BoxAnimate animationY={abajo} duration={100} zIndexColums={1} />
-      <BoxAnimate animationY={arriba} duration={50} zIndexColums={0} />
+      <BoxAnimate
+        animationY={arriba}
+        duration={50}
+        zIndexColums={0}
+        sx={{ opacity: { xs: 0.3, md: 1 } }}
+      />
     </Stack>
   );
 

@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 // routes
 // theme
 import { primaryFont } from 'src/theme/typography';
-import { textGradient, bgGradient } from 'src/theme/css';
+import { textGradient, bgGradient, bgBlur } from 'src/theme/css';
 // layouts
 import { HEADER } from 'src/layouts/config-layout';
 // components
@@ -48,9 +48,9 @@ const StyledWrapper = styled('div')(({ theme }) => ({
       ? 'linear-gradient(180deg, #222 0.05%, rgba(34, 34, 34, 0.14) 51.16%, rgba(34, 34, 34, 0.00) 82.49%)'
       : 'linear-gradient(180deg, #fff 0.05%, rgba(255, 255, 255, 0.14) 51.16%, rgba(255, 255, 255, 0.00) 82.49%)',
   position: 'relative',
-  [theme.breakpoints.up('md')]: {
-    marginTop: HEADER.H_DESKTOP_OFFSET,
-  },
+  // [theme.breakpoints.up('md')]: {
+  //   marginTop: HEADER.H_DESKTOP_OFFSET,
+  // },
 }));
 
 const StyledTextGradient = styled(m.h1)(({ theme }) => ({
@@ -134,7 +134,20 @@ export default function ServicesHome({ currentData }: ServicesViewProps) {
       </m.div>
 
       <m.div variants={varFade().in}>
-        <Paper sx={{ p: 3, borderRadius: 2, width: 1 }} elevation={6}>
+        <Paper
+          sx={{
+            p: 3,
+            borderRadius: 2,
+            width: 1,
+            backgroundColor: (theme) => ({
+              ...bgBlur({
+                color: theme.palette.background.default,
+                blur: 1,
+              }),
+            }),
+          }}
+          elevation={6}
+        >
           <Typography
             sx={{
               textAlign: 'center',

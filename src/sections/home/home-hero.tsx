@@ -18,6 +18,8 @@ import { textGradient, bgGradient } from 'src/theme/css';
 import { HEADER } from 'src/layouts/config-layout';
 // components
 import { MotionContainer, varFade } from 'src/components/animate';
+import { useResponsive } from 'src/hooks/use-responsive';
+import { display } from '@mui/system';
 
 // ----------------------------------------------------------------------
 
@@ -44,9 +46,9 @@ const StyledWrapper = styled('div')(({ theme }) => ({
       ? 'linear-gradient(180deg, #222 0.05%, rgba(34, 34, 34, 0.14) 51.16%, rgba(34, 34, 34, 0.00) 82.49%)'
       : 'linear-gradient(180deg, #fff 0.05%, rgba(255, 255, 255, 0.14) 51.16%, rgba(255, 255, 255, 0.00) 82.49%)',
   position: 'relative',
-  [theme.breakpoints.up('md')]: {
-    marginTop: HEADER.H_DESKTOP_OFFSET,
-  },
+  // [theme.breakpoints.up('md')]: {
+  //   marginTop: HEADER.H_DESKTOP_OFFSET,
+  // },
 }));
 
 // ----------------------------------------------------------------------
@@ -57,6 +59,8 @@ export default function HomeHero() {
   const { scrollY } = useScroll();
 
   const [percent, setPercent] = useState(0);
+
+  const mdUp = useResponsive('up', 'md');
 
   const getScroll = useCallback(() => {
     let heroHeight = 0;
@@ -94,44 +98,70 @@ export default function HomeHero() {
         },
       }}
     >
-      <m.div variants={varFade().in}>
-        <Typography
-          variant="h2"
-          sx={{
-            textAlign: 'center',
-            fontWeight: 600,
-            lineHeight: '77.141px',
-          }}
-        >
-          Especialistas en Mobiliario
-        </Typography>
-      </m.div>
-
-      <Stack alignItems="center" justifyContent="center" gap={2}>
+      <Box
+        sx={
+          !mdUp
+            ? {
+                backgroundColor: (theme) => alpha(theme.palette.common.white, 0.6),
+                borderRadius: 4,
+                padding: '10px',
+                mt: {
+                  md: `-${HEADER.H_DESKTOP + percent * 2.5}px`,
+                },
+              }
+            : {}
+        }
+      >
         <m.div variants={varFade().in}>
-          <Typography variant="body1" sx={{ textAlign: 'center' }}>
-            Anuncios luminosos, sucursales y Mucho Más: Soluciones Innovadoras para tus Necesidades
+          <Typography
+            sx={{
+              fontSize: { xs: 47, md: 67 },
+              textAlign: 'center',
+              fontWeight: 600,
+              mb: 1,
+              lineHeight: { xs: '55px', md: '77.141px' },
+            }}
+          >
+            Especialistas en Mobiliario
           </Typography>
         </m.div>
 
-        <m.div
-          variants={varFade().inUp}
-          style={{
-            width: '100%',
-            padding: '8px',
-            borderRadius: '4px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '8px',
-          }}
-        >
-          <Typography sx={{ textAlign: 'center', fontWeight: 500 }}>
-            Con IA te ayudamos a elegir la mejor opción para tu espacio.
-          </Typography>
-          <SearchField />
-        </m.div>
-      </Stack>
+        <Stack alignItems="center" justifyContent="center" gap={2}>
+          <m.div variants={varFade().in}>
+            <Typography
+              variant="body1"
+              sx={{
+                textAlign: 'center',
+                fontWeight: {
+                  xs: 500,
+                  md: 500,
+                },
+              }}
+            >
+              Anuncios luminosos, sucursales y Mucho Más: Soluciones Innovadoras para tus
+              Necesidades
+            </Typography>
+          </m.div>
+
+          <m.div
+            variants={varFade().inUp}
+            style={{
+              width: '100%',
+              padding: '8px',
+              borderRadius: '4px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '8px',
+            }}
+          >
+            <Typography sx={{ textAlign: 'center', fontWeight: 500 }}>
+              Con IA te ayudamos a elegir la mejor opción para tu espacio.
+            </Typography>
+            <SearchField />
+          </m.div>
+        </Stack>
+      </Box>
     </Stack>
   );
 

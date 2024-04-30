@@ -31,6 +31,7 @@ export default function CarouselCenterMode({ data }: Props) {
     className: 'slider variable-width',
     swipeToSlide: true,
     variableWidth: true,
+    centerMode: true,
     infinite: true,
     responsive: [
       {
@@ -47,6 +48,14 @@ export default function CarouselCenterMode({ data }: Props) {
       },
     ],
   });
+
+  const handleNext = () => {
+    carousel.onNext();
+  };
+
+  const handlePrev = () => {
+    carousel.onPrev();
+  };
   return (
     <Box
       sx={{
@@ -54,16 +63,11 @@ export default function CarouselCenterMode({ data }: Props) {
         position: 'relative',
       }}
     >
-      <CarouselArrows
-        filled
-        icon="mingcute:right-line"
-        onNext={carousel.onNext}
-        onPrev={carousel.onPrev}
-      >
+      <CarouselArrows filled icon="mingcute:right-line" onNext={handleNext} onPrev={handlePrev}>
         <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
-          {data.map((item) => (
+          {data.map((item, index) => (
             <Box key={item.id} sx={{ px: 1 }}>
-              <CarouselItem item={item} />
+              <CarouselItem item={item} isActive={index === carousel.currentIndex} />
             </Box>
           ))}
         </Carousel>
@@ -76,21 +80,21 @@ export default function CarouselCenterMode({ data }: Props) {
 
 type CarouselItemProps = {
   item: {
+    id: any;
     title?: string;
     to?: string;
     description?: string;
     image: string;
   };
+  isActive: boolean;
 };
 
-function CarouselItem({ item }: CarouselItemProps) {
+function CarouselItem({ item, isActive }: CarouselItemProps) {
   const theme = useTheme();
 
   const router = useRouter();
 
   const { image, title, to, description } = item;
-
-  console.log(image);
 
   return (
     <Paper
@@ -112,16 +116,11 @@ function CarouselItem({ item }: CarouselItemProps) {
     >
       {title && description && to && (
         <CardContent
-          onMouseEnter={(e) => {
-            e.currentTarget.style.opacity = '1';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = '0';
-          }}
+          id={`item-carrusel-${item.id}`}
           sx={{
             zIndex: 9,
             width: '100%',
-            opacity: 0,
+            opacity: isActive ? 1 : 0,
             height: '100%',
             textAlign: 'left',
             transition: 'all 0.5s ease-in-out',

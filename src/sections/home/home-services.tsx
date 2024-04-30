@@ -28,8 +28,25 @@ export default function HomeServices() {
           direction="row"
           justifyContent="center"
           spacing={3}
-          sx={{ mb: 5 }}
-          divider={<Box sx={{ width: '1px', height: 56, bgcolor: 'grey.500' }} />}
+          sx={{
+            width: '100%',
+            mb: {
+              xs: 0,
+              md: 5,
+            },
+          }}
+          divider={
+            <Box
+              sx={{
+                width: '1px',
+                height: {
+                  xs: 40,
+                  md: 56,
+                },
+                bgcolor: 'grey.500',
+              }}
+            />
+          }
         >
           <Typography
             variant="h3"

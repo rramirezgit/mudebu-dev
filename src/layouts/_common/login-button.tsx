@@ -21,7 +21,9 @@ export default function LoginButton({ sx }: Props) {
       onClick={() => loginWithRedirect()}
       variant="outlined"
       color="primary"
-      sx={{ mr: 1, ...sx }}
+      sx={{
+        ...sx,
+      }}
     >
       {t('Login')}
     </Button>

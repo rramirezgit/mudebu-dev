@@ -6,6 +6,7 @@ export type NavItemProps = {
   title: string;
   path: string;
   icon?: React.ReactElement;
+  mobile?: boolean;
   children?: {
     subheader: string;
     items: {

@@ -14,14 +14,19 @@ import Logo from 'src/components/logo';
 import SvgColor from 'src/components/svg-color';
 import Scrollbar from 'src/components/scrollbar';
 //
-import { NavProps } from '../types';
+import { LoginButton } from 'src/layouts/_common';
+import { useResponsive } from 'src/hooks/use-responsive';
+import { useAuthContext } from 'src/auth/hooks';
 import NavList from './nav-list';
+import { NavProps } from '../types';
 
 // ----------------------------------------------------------------------
 
 export default function NavMobile({ offsetTop, data }: NavProps) {
   const pathname = usePathname();
+  const { authenticated } = useAuthContext();
 
+  const mdUp = useResponsive('up', 'md');
   const nav = useBoolean();
 
   useEffect(() => {
@@ -36,7 +41,7 @@ export default function NavMobile({ offsetTop, data }: NavProps) {
       <IconButton
         onClick={nav.onTrue}
         sx={{
-          ml: 1,
+          ml: 0,
           ...(offsetTop && {
             color: 'text.primary',
           }),
@@ -52,10 +57,15 @@ export default function NavMobile({ offsetTop, data }: NavProps) {
           sx: {
             pb: 5,
             width: 260,
+            display: 'flex',
           },
         }}
       >
-        <Scrollbar>
+        <Scrollbar
+          sx={{
+            flexGrow: 1,
+          }}
+        >
           <Logo sx={{ mx: 2.5, my: 3 }} />
 
           <List component="nav" disablePadding>
@@ -64,6 +74,15 @@ export default function NavMobile({ offsetTop, data }: NavProps) {
             ))}
           </List>
         </Scrollbar>
+
+        {!mdUp && !authenticated && (
+          <LoginButton
+            sx={{
+              mt: 2,
+              mx: 2,
+            }}
+          />
+        )}
       </Drawer>
     </>
   );
