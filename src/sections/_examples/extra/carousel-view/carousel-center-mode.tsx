@@ -32,6 +32,9 @@ export default function CarouselCenterMode({ data }: Props) {
     swipeToSlide: true,
     variableWidth: true,
     centerMode: true,
+    autoplay: true,
+    pauseOnHover: true,
+    autoplaySpeed: 2000,
     infinite: true,
     responsive: [
       {
