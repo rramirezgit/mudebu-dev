@@ -16,6 +16,7 @@ import { Container } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { Box } from 'src/components/Box/box-component';
 import Iconify from 'src/components/iconify/iconify';
+import { useRouter } from 'src/routes/hooks';
 import { getStorage } from 'src/hooks/use-local-storage';
 import { storageKeys } from '../form/form-layaout';
 
@@ -90,6 +91,7 @@ export default function OnboardingInfo() {
     setIdItemSelected(item.id);
     setOpen(true);
   };
+  const router = useRouter();
 
   useEffect(() => {
     const onboardingResult = getStorage(storageKeys.onboardingResult);
@@ -197,7 +199,9 @@ export default function OnboardingInfo() {
             mt: 4,
           }}
         >
-          <Button variant="contained">Continuar</Button>
+          <Button onClick={() => router.push('/mudebu-ai/')} variant="contained">
+            Continuar
+          </Button>
         </Box>
       </Container>
       <Dialog fullWidth maxWidth="xs" open={open} onClose={onClose}>

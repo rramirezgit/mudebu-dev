@@ -15,51 +15,51 @@ import { useResponsive } from 'src/hooks/use-responsive';
 const images = [
   {
     id: 1,
-    url: 'assets/images/Products/carpinteria/1.webp',
+    url: '/assets/images/Products/carpinteria/1.webp',
   },
   {
     id: 2,
-    url: 'assets/images/Products/POP/1.webp',
+    url: '/assets/images/Products/POP/1.webp',
   },
   {
     id: 3,
-    url: 'assets/images/Products/techos/4.webp',
+    url: '/assets/images/Products/techos/4.webp',
   },
   {
     id: 4,
-    url: 'assets/images/Products/Superficies_solidas/3.webp',
+    url: '/assets/images/Products/Superficies_solidas/3.webp',
   },
   {
     id: 5,
-    url: 'assets/images/Products/POP/5.webp',
+    url: '/assets/images/Products/POP/5.webp',
   },
   {
     id: 6,
-    url: 'assets/images/Products/impresion/9.webp',
+    url: '/assets/images/Products/impresion/9.webp',
   },
   {
     id: 7,
-    url: 'assets/images/Products/Anuncios/1.webp',
+    url: '/assets/images/Products/Anuncios/1.webp',
   },
   {
     id: 8,
-    url: 'assets/images/Products/techos/3.webp',
+    url: '/assets/images/Products/techos/3.webp',
   },
   {
     id: 10,
-    url: 'assets/images/Services/Planificación_Mantenimiento/3.webp',
+    url: '/assets/images/Services/Planificación_Mantenimiento/3.webp',
   },
   {
     id: 11,
-    url: 'assets/images/Services/Inovacion/2.webp',
+    url: '/assets/images/Services/Inovacion/2.webp',
   },
   {
     id: 12,
-    url: 'assets/images/Services/Tecnología_Avanzada/1.webp',
+    url: '/assets/images/Services/Tecnología_Avanzada/1.webp',
   },
   {
     id: 13,
-    url: 'assets/images/Services/Consultoria_y_Real/3.png',
+    url: '/assets/images/Services/Consultoria_y_Real/3.png',
   },
 ];
 

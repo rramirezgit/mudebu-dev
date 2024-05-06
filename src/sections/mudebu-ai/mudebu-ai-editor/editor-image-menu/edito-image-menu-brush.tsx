@@ -2,6 +2,7 @@ import { ArrowRotateRight, Brush2 } from 'iconsax-react';
 import { alpha, useTheme } from '@mui/material/styles';
 import { Button, IconButton, Slider, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { RootState } from 'src/store';
 import { Box } from 'src/components/Box/box-component';
 import { setBrushRadius, setBrushRadiusEditor, setReloadEditor } from 'src/store/slices/mudebu-ai';
