@@ -6,9 +6,9 @@ import ImageEraser from './editor';
 import ImageEraserMenu from './editor-image-menu/edito-image-menu-brush';
 
 export default function MudebuAiEditor() {
-  const image = {
-    url: 'https://source.unsplash.com/random/1',
-  };
+  const imageSelectedFinishing = useSelector(
+    (state: RootState) => state.mudebuAi.imageSelectedFinishing
+  );
 
   const reloadEditor = useSelector((state: RootState) => state.mudebuAi.reloadEditor);
 
@@ -50,7 +50,7 @@ export default function MudebuAiEditor() {
           <ImageEraserMenu />
         </Grid>
         <Grid item xs={12} sm={9}>
-          <ImageEraser imageUrl={image.url} reload={reloadEditor} />
+          <ImageEraser imageUrl={imageSelectedFinishing.image} reload={reloadEditor} />
         </Grid>
       </Grid>
     </Box>

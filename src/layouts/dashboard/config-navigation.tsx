@@ -7,6 +7,7 @@ import { useLocales } from 'src/locales';
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 import SvgColor from 'src/components/svg-color';
+import { list } from '../../theme/overrides/components/list';
 
 // ----------------------------------------------------------------------
 
@@ -68,9 +69,9 @@ export function useNavData() {
           //   icon: ICONS.ecommerce,
           // },
           {
-            title: t('analytics'),
-            path: paths.dashboard.general.analytics,
-            icon: ICONS.analytics,
+            title: 'Home',
+            path: paths.dashboard.general.list,
+            icon: ICONS.dashboard,
           },
           // {
           //   title: t('banking'),
@@ -82,11 +83,6 @@ export function useNavData() {
           //   path: paths.dashboard.general.booking,
           //   icon: ICONS.booking,
           // },
-          {
-            title: t('file'),
-            path: paths.dashboard.general.file,
-            icon: ICONS.file,
-          },
         ],
       },
 
@@ -317,7 +313,7 @@ export function useNavData() {
       //   ],
       // },
     ],
-    [t]
+    []
   );
 
   return data;

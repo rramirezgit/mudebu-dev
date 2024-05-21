@@ -16,28 +16,29 @@ import { Magicpen } from 'iconsax-react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store';
-import { setBlendList } from 'src/store/slices/mudebu-ai';
+import { setBlendList, setimageSelectedFinishing } from 'src/store/slices/mudebu-ai';
 import { useResponsive } from 'src/hooks/use-responsive';
 import Image from 'src/components/image/image';
+import { endpoints_api } from 'src/axios/endpoints';
+import { useAxios } from 'src/axios/axios-provider';
 
 // ----------------------------------------------------------------------
 
 export default function Carouseldoble() {
-  const [counter, setcounter] = useState(0);
+  const blendList = useSelector((state: RootState) => state.mudebuAi.blendList);
+  const benchmarkList = useSelector((state: RootState) => state.mudebuAi.benchmarkList);
+  const imageSelectedFinishing = useSelector(
+    (state: RootState) => state.mudebuAi.imageSelectedFinishing
+  );
+  const [counter, setcounter] = useState(1);
   const [loading, setLoading] = useState(false);
   const [dataBlend, setDataBlend] = useState<any>([]);
 
-  const blendList = useSelector((state: RootState) => state.mudebuAi.blendList);
   const dispatch = useDispatch();
 
-  const upSm = useResponsive('up', 'sm');
+  const axiosInstace = useAxios();
 
-  const data: any = [
-    { image: 'https://source.unsplash.com/random/1', id: '1' },
-    { image: 'https://source.unsplash.com/random/2', id: '2' },
-    { image: 'https://source.unsplash.com/random/3', id: '3' },
-    { image: 'https://source.unsplash.com/random/4', id: '4' },
-  ];
+  const upSm = useResponsive('up', 'sm');
 
   const settings = {
     ...CarouselDots({
@@ -56,11 +57,11 @@ export default function Carouseldoble() {
   const carousel = useCarousel(settings);
 
   const handleSelectImage = (image: any) => {
-    if (blendList.includes(image)) {
-      dispatch(setBlendList(blendList.filter((selected: any) => selected.id !== image.id)));
-    } else {
-      dispatch(setBlendList([...blendList, image]));
-    }
+    dispatch(
+      setimageSelectedFinishing({
+        ...image,
+      })
+    );
   };
 
   const handleClickMoreImages = () => {
@@ -68,22 +69,20 @@ export default function Carouseldoble() {
       setcounter(counter + 1);
       setLoading(true);
 
-      setTimeout(() => {
+      const prompt = benchmarkList.map((image: any) => image.s3Url).join(' ');
+      axiosInstace.post(endpoints_api.mudebuAi.blend, { prompt }).then((response) => {
         setLoading(false);
-
+        dispatch(setBlendList(response.data.upscaled_urls));
         setDataBlend([
-          { image: 'https://source.unsplash.com/random/5', id: '5' },
-          { image: 'https://source.unsplash.com/random/6', id: '6' },
-          { image: 'https://source.unsplash.com/random/7', id: '7' },
-          { image: 'https://source.unsplash.com/random/8', id: '8' },
+          ...response.data.upscaled_urls.map((image: any, index: number) => ({ image, id: index })),
           ...dataBlend,
         ]);
-      }, 3000);
+      });
     }
   };
 
   useEffect(() => {
-    setDataBlend(data);
+    setDataBlend(blendList.map((image: any, index) => ({ image, id: index })));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -116,8 +115,8 @@ export default function Carouseldoble() {
               <CarouselItem
                 item={item}
                 onClickImage={handleSelectImage}
-                selected={blendList.includes(item)}
-                loading={loading && !blendList.includes(item)}
+                selected={imageSelectedFinishing?.id === item.id}
+                loading={loading && !imageSelectedFinishing?.id === item.id}
               />
             )}
           </Box>

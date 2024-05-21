@@ -100,9 +100,9 @@ export default function RootLayout({ children }: Props) {
                   themeMode: 'light', // 'light' | 'dark'
                   themeDirection: 'ltr', //  'rtl' | 'ltr'
                   themeContrast: 'default', // 'default' | 'bold'
-                  themeLayout: 'vertical', // 'vertical' | 'horizontal' | 'mini'
+                  themeLayout: 'horizontal', // 'vertical' | 'horizontal' | 'mini'
                   themeColorPresets: 'default', // 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red'
-                  themeStretch: false,
+                  themeStretch: true,
                 }}
               >
                 <ThemeProvider>

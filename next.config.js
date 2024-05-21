@@ -15,4 +15,16 @@ module.exports = {
     });
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/proxy/:path*',
+        destination: 'https://cl.imagineapi.dev/assets/:path*',
+      },
+      {
+        source: '/api/proxy/newImage/:path*',
+        destination: 'https://oaidalleapiprodscus.blob.core.windows.net/private/:path*',
+      },
+    ];
+  },
 };

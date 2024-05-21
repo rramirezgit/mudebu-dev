@@ -35,7 +35,7 @@ export default function Header({ onOpenNav }: Props) {
 
   const settings = useSettingsContext();
 
-  const isNavHorizontal = settings.themeLayout === 'horizontal';
+  const isNavHorizontal = true;
 
   const isNavMini = settings.themeLayout === 'mini';
 
@@ -89,11 +89,11 @@ export default function Header({ onOpenNav }: Props) {
           duration: theme.transitions.duration.shorter,
         }),
         ...(lgUp && {
-          width: `calc(100% - ${NAV.W_VERTICAL + 1}px)`,
-          height: HEADER.H_DESKTOP,
-          ...(offsetTop && {
-            height: HEADER.H_DESKTOP_OFFSET,
-          }),
+          // width: `calc(100% - ${NAV.W_VERTICAL + 1}px)`,
+          // height: HEADER.H_DESKTOP,
+          // ...(offsetTop && {
+          //   height: HEADER.H_DESKTOP_OFFSET,
+          // }),
           ...(isNavHorizontal && {
             width: 1,
             bgcolor: 'background.default',

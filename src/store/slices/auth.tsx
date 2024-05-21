@@ -5,7 +5,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { AuthSliceState } from './types';
 
 const initialState: AuthSliceState = {
-  redirect: '/dashboard',
+  redirect: '/dashboard/list',
 };
 
 export const AuthSlice = createSlice({

@@ -19,6 +19,8 @@ const initialState: OnboardingState = {
     prompt_images: '',
     project_location: '',
   },
+  loadingForm: false,
+  imagesData: null,
 };
 
 export const onBoardingSlice = createSlice({
@@ -42,7 +44,13 @@ export const onBoardingSlice = createSlice({
       state.isvalidDataform = action.payload;
     },
     setOnboardingInfo: (state, action: PayloadAction<any>) => {
-      state = action.payload;
+      state.onoardingInfo = action.payload;
+    },
+    setloadingForm: (state, action: PayloadAction<boolean>) => {
+      state.loadingForm = action.payload;
+    },
+    setImagesData: (state, action: PayloadAction<any>) => {
+      state.imagesData = action.payload;
     },
   },
 });
@@ -55,6 +63,8 @@ export const {
   setContentStep,
   setIsValidDataForm,
   setOnboardingInfo,
+  setloadingForm,
+  setImagesData,
 } = onBoardingSlice.actions;
 
 export default onBoardingSlice.reducer;

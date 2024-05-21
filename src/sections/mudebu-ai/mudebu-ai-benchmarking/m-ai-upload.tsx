@@ -6,51 +6,75 @@ import { Upload } from 'src/components/upload';
 import { setBenchmarkList } from 'src/store/slices/mudebu-ai';
 import uuidv4 from 'src/utils/uuidv4';
 import { RootState } from 'src/store';
+import { useAxios } from 'src/axios/axios-provider';
+import { endpoints_api } from 'src/axios/endpoints';
 
 export default function MudebuAiUpload() {
+  const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState<(File | string)[]>([]);
 
   const benchmarkList = useSelector((state: RootState) => state.mudebuAi.benchmarkList);
 
   const dispatch = useDispatch();
 
-  const handleDropMultiFile = useCallback(
-    (acceptedFiles: File[]) => {
-      setFiles([
-        ...files,
-        ...acceptedFiles.map((newFile) =>
-          Object.assign(newFile, {
-            preview: URL.createObjectURL(newFile),
-          })
-        ),
-      ]);
-    },
-    [files]
-  );
+  const axiosInstance = useAxios();
+
+  const handleDropMultiFile = async (acceptedFiles: File[]) => {
+    // Indicador de carga activado
+
+    setLoading(true);
+
+    const newFiles = [
+      ...files,
+      ...acceptedFiles.map((newFile) =>
+        Object.assign(newFile, {
+          preview: URL.createObjectURL(newFile),
+        })
+      ),
+    ];
+    setFiles(newFiles);
+
+    // Array de promesas para cargar cada archivo
+    const uploadPromises = acceptedFiles.map(async (file) => {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const response = await axiosInstance.post(endpoints_api.mudebuAi.media, formData);
+        return response.data;
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        return null;
+      }
+    });
+
+    // Espera que todas las cargas se completen
+    const uploadedFiles = await Promise.all(uploadPromises);
+
+    // Filtra los resultados nulos en caso de errores en alguna carga
+    const successfulUploads = uploadedFiles.filter((file) => file !== null);
+    // Actualizar el estado con los nuevos archivos cargados
+    dispatch(setBenchmarkList([...benchmarkList, ...successfulUploads]));
+
+    // Indicador de carga desactivado
+    setLoading(false);
+  };
 
   const handleRemoveFile = (inputFile: File | string) => {
     const filesFiltered = files.filter((fileFiltered) => fileFiltered !== inputFile);
     setFiles(filesFiltered);
   };
 
-  const handleRemoveAllFiles = () => {
+  const handleRemoveAllFiles = (e: any) => {
+    e.preventDefault();
     setFiles([]);
+    dispatch(setBenchmarkList([]));
   };
 
   useEffect(() => {
     if (files.length === 0) {
       dispatch(setBenchmarkList([]));
-      return;
     }
-    dispatch(
-      setBenchmarkList([
-        ...benchmarkList,
-        files.map((file: File | string) => ({
-          url: typeof file === 'string' ? file : URL.createObjectURL(file),
-          id: uuidv4(),
-        })),
-      ])
-    );
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [files]);
@@ -75,12 +99,19 @@ export default function MudebuAiUpload() {
       </Typography>
       <Upload
         multiple
+        loading={loading}
         thumbnail
         files={files}
-        onDrop={handleDropMultiFile}
+        onDrop={(acceptedFiles: File[]) => {
+          setLoading(true);
+          handleDropMultiFile(acceptedFiles);
+        }}
         onRemove={handleRemoveFile}
         onRemoveAll={handleRemoveAllFiles}
-        onUpload={() => console.info('ON UPLOAD')}
+        setLoading={setLoading}
+        onUpload={(e: any) => {
+          setLoading(true);
+        }}
       />
     </Box>
   );

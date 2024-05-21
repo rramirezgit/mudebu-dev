@@ -1,11 +1,13 @@
 import { Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { Box } from 'src/components/Box/box-component';
 import Image from 'src/components/image/image';
+import { RootState } from 'src/store';
 
 export default function MudebuAiPreview() {
-  const image = {
-    url: 'https://source.unsplash.com/random/1',
-  };
+  const imageSelectedFinishing = useSelector(
+    (state: RootState) => state.mudebuAi.imageSelectedFinishing
+  );
 
   return (
     <Box sx={{ width: 1, textAlign: 'center' }}>
@@ -26,7 +28,7 @@ export default function MudebuAiPreview() {
         Esta será la imagen base para su cotización ¿Quiere hacer alguna edición con IA?
       </Typography>
       <Image
-        src={image.url}
+        src={imageSelectedFinishing.image}
         sx={{
           width: {
             xs: '70%',

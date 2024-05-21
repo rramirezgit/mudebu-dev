@@ -11,6 +11,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 // types
+import { DateCalendar, DatePicker } from '@mui/x-date-pickers';
+import { Controller } from 'react-hook-form';
 import { IUserTableFilters, IUserTableFilterValue } from 'src/types/user';
 // components
 import Iconify from 'src/components/iconify';
@@ -70,9 +72,7 @@ export default function UserTableToolbar({
             width: { xs: 1, md: 200 },
           }}
         >
-          <InputLabel>Role</InputLabel>
-
-          <Select
+          {/* <Select
             multiple
             value={filters.role}
             onChange={handleFilterRole}
@@ -90,14 +90,25 @@ export default function UserTableToolbar({
                 {option}
               </MenuItem>
             ))}
-          </Select>
+          </Select> */}
+          <DatePicker
+            label="Date"
+            format="dd/MM/yyyy"
+            // slotProps={{
+            //   textField: {
+            //     fullWidth: true,
+            //     error: !!error,
+            //     helperText: error?.message,
+            //   },
+            // }}
+          />
         </FormControl>
 
         <Stack direction="row" alignItems="center" spacing={2} flexGrow={1} sx={{ width: 1 }}>
           <TextField
             fullWidth
             value={filters.name}
-            onChange={handleFilterName}
+            // onChange={handleFilterName}
             placeholder="Search..."
             InputProps={{
               startAdornment: (

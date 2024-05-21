@@ -6,63 +6,94 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Box } from 'src/components/Box/box-component';
 import Image from 'src/components/image/image';
 import { RootState } from 'src/store';
-import { setBenchmarkList } from 'src/store/slices/mudebu-ai';
-import uuidv4 from '../../../utils/uuidv4';
+import { setBenchmarkList, setHaveBenchmarks } from 'src/store/slices/mudebu-ai';
+// import uuidv4 from '../../../utils/uuidv4';
+import { useAxios } from 'src/axios/axios-provider';
+import { endpoints_api } from 'src/axios/endpoints';
+import { getStorage } from 'src/hooks/use-local-storage';
+import { setImagesData } from 'src/store/slices/onBoarding';
+import { storageKeys } from 'src/sections/onboarding/form/form-layaout';
 
-const imagesData = {
-  imagesGoogle: Array.from({ length: 5 }, () => ({
-    url: `https://source.unsplash.com/featured/?real-estate&t=${Date.now() + Math.random()}`,
-    id: uuidv4(),
-  })),
-  imagesOpenAi: Array.from({ length: 3 }, () => ({
-    url: `https://source.unsplash.com/featured/?real-estate&t=${Date.now() + Math.random()}`,
-    id: uuidv4(),
-  })),
-  imagesPrintest: Array.from({ length: 3 }, () => ({
-    url: `https://source.unsplash.com/featured/?real-estate&t=${Date.now() + Math.random()}`,
-    id: uuidv4(),
-  })),
-};
+// const imagesData = {
+//   imagesGoogle: Array.from({ length: 5 }, () => ({
+//     url: `https://source.unsplash.com/featured/?real-estate&t=${Date.now() + Math.random()}`,
+//     id: uuidv4(),
+//   })),
+//   imagesOpenAi: Array.from({ length: 3 }, () => ({
+//     url: `https://source.unsplash.com/featured/?real-estate&t=${Date.now() + Math.random()}`,
+//     id: uuidv4(),
+//   })),
+//   imagesPrintest: Array.from({ length: 3 }, () => ({
+//     url: `https://source.unsplash.com/featured/?real-estate&t=${Date.now() + Math.random()}`,
+//     id: uuidv4(),
+//   })),
+// };
 
 export default function MudebuAiGetAi() {
-  const [counter, setcounter] = useState(0);
+  const [counter, setcounter] = useState(1);
   const [images, setImages] = useState<any>([]);
   const [loading, setLoading] = useState(false);
 
   const benchmarksList = useSelector((state: RootState) => state.mudebuAi.benchmarkList);
+  const imagesData = useSelector((state: RootState) => state.OnBoarding.imagesData);
+  const info = useSelector((state: RootState) => state.OnBoarding.onoardingInfo);
   const dispatch = useDispatch();
+
+  const axiosInstance = useAxios();
 
   const handleClickMoreImages = () => {
     if (counter < 5) {
-      setcounter(counter + 1);
       setLoading(true);
 
-      setTimeout(() => {
-        setLoading(false);
-      }, 3000);
+      let prompt = info?.prompt_images;
+      if (prompt === '' || prompt === undefined || prompt === ' ' || prompt === null) {
+        prompt = getStorage(storageKeys.onboardingResult)?.prompt_images.split(',')[counter];
+      } else {
+        prompt = info?.prompt_images.split(',')[counter];
+      }
+
+      axiosInstance
+        .post(endpoints_api.mudebuAi.generations, { prompt })
+        .then((response) => {
+          setLoading(false);
+          if (response.status === 200 || response.status === 201) {
+            if (response.data) {
+              dispatch(setImagesData(response.data));
+            }
+          }
+        })
+        .finally(() => {
+          setcounter(counter + 1);
+          setLoading(false);
+        });
     }
   };
 
   useEffect(() => {
-    // const fetchImages = async () => {
-    //   const images = await getImages();
-    //   setImages(images);
-    // };
-
-    // fetchImages();
-
     const data: any = [];
 
-    if (imagesData?.imagesPrintest?.length > 0) {
-      imagesData.imagesPrintest.forEach((image: any) => {
-        data.push(image);
-      });
+    if (imagesData?.imagesDallE?.length > 0) {
+      if (imagesData.imagesDallE.length > 3 && imagesData?.imagesGoogle.length === 0) {
+        imagesData.imagesDallE.forEach((image: any) => {
+          data.push(image);
+        });
+      } else {
+        imagesData.imagesDallE.slice(0, 3).forEach((image: any) => {
+          data.push(image);
+        });
+      }
     }
 
-    if (imagesData?.imagesOpenAi?.length > 0) {
-      imagesData.imagesOpenAi.forEach((image: any) => {
-        data.push(image);
-      });
+    if (imagesData?.imagesPinterest?.length > 0) {
+      if (imagesData.imagesPinterest.length > 3 && imagesData?.imagesGoogle.length === 0) {
+        imagesData.imagesPinterest.forEach((image: any) => {
+          data.push(image);
+        });
+      } else {
+        imagesData.imagesPinterest.slice(0, 3).forEach((image: any) => {
+          data.push(image);
+        });
+      }
     }
 
     if (imagesData?.imagesGoogle?.length > 0) {
@@ -72,7 +103,7 @@ export default function MudebuAiGetAi() {
     }
 
     setImages(data.slice(0, 9));
-  }, []);
+  }, [imagesData]);
 
   const handleSelectImage = (image: any) => {
     if (benchmarksList.includes(image)) {
@@ -131,6 +162,7 @@ export default function MudebuAiGetAi() {
       </Box>
       <Button
         variant="contained"
+        disabled={loading}
         sx={{ mt: 3 }}
         startIcon={<Magicpen size="24" color="white" />}
         onClick={handleClickMoreImages}
@@ -142,10 +174,10 @@ export default function MudebuAiGetAi() {
 }
 
 interface ItemImageProps {
-  image: { url: string; id: string };
+  image: any;
   loading?: boolean;
   selected?: boolean;
-  onClickImage: (image: { url: string; id: string }) => void;
+  onClickImage: (image: any) => void;
 }
 
 const ItemImage = ({ selected, image, loading, onClickImage }: ItemImageProps) => {
@@ -170,7 +202,7 @@ const ItemImage = ({ selected, image, loading, onClickImage }: ItemImageProps) =
   return (
     <Image
       id={image.id}
-      src={image.url}
+      src={image.s3Url}
       onClick={() => onClickImage(image)}
       sx={{
         cursor: 'pointer',

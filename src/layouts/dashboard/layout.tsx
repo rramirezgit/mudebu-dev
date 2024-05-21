@@ -26,7 +26,7 @@ export default function DashboardLayout({ children }: Props) {
 
   const nav = useBoolean();
 
-  const isHorizontal = settings.themeLayout === 'horizontal';
+  const isHorizontal = true;
 
   const isMini = settings.themeLayout === 'mini';
 

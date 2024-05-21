@@ -14,11 +14,16 @@ import {
 import { useTheme } from '@mui/material/styles';
 import { Container } from '@mui/system';
 import { useEffect, useState } from 'react';
+import { LoadingButton } from '@mui/lab';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box } from 'src/components/Box/box-component';
 import Iconify from 'src/components/iconify/iconify';
 import { useRouter } from 'src/routes/hooks';
 import { getStorage } from 'src/hooks/use-local-storage';
+import { RootState } from 'src/store';
+import { setloadingForm } from 'src/store/slices/onBoarding';
 import { storageKeys } from '../form/form-layaout';
+import { handleLoop } from '../../../layouts/_common/searchbar/utils';
 
 export const onBoardingInfo = [
   {
@@ -81,6 +86,12 @@ export default function OnboardingInfo() {
   const [dataOnBoarding, setDataOnboardng] = useState<any>([]);
   const [newData, setNewData] = useState<any>('');
 
+  const loadingForm = useSelector((state: RootState) => state.OnBoarding.loadingForm);
+
+  const info = useSelector((state: RootState) => state.OnBoarding.onoardingInfo);
+
+  const dispatch = useDispatch();
+
   const onClose = () => {
     setOpen(false);
   };
@@ -115,6 +126,11 @@ export default function OnboardingInfo() {
 
     setDataOnboardng(newDataOnBoarding);
     setOpen(false);
+  };
+
+  const handleClickContinue = () => {
+    dispatch(setloadingForm(true));
+    router.push('/mudebu-ai/');
   };
 
   return (
@@ -199,9 +215,18 @@ export default function OnboardingInfo() {
             mt: 4,
           }}
         >
-          <Button onClick={() => router.push('/mudebu-ai/')} variant="contained">
+          <LoadingButton
+            onClick={handleClickContinue}
+            type="submit"
+            variant="contained"
+            sx={{
+              width: '156px',
+              height: '48px',
+            }}
+            loading={loadingForm}
+          >
             Continuar
-          </Button>
+          </LoadingButton>
         </Box>
       </Container>
       <Dialog fullWidth maxWidth="xs" open={open} onClose={onClose}>

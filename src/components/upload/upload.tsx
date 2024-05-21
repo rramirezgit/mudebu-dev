@@ -16,6 +16,8 @@ import { UploadProps } from './types';
 import RejectionFiles from './errors-rejection-files';
 import MultiFilePreview from './preview-multi-file';
 import SingleFilePreview from './preview-single-file';
+import { CircularProgress } from '@mui/material';
+import { useEffect } from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -24,6 +26,8 @@ export default function Upload({
   multiple = false,
   error,
   helperText,
+  loading = false,
+  setLoading,
   //
   file,
   onDelete,
@@ -58,7 +62,15 @@ export default function Upload({
 
       <Stack direction="row" justifyContent="center" spacing={1.5}>
         {onRemoveAll && (
-          <Button color="inherit" variant="outlined" size="small" onClick={onRemoveAll}>
+          <Button
+            color="inherit"
+            variant="outlined"
+            size="small"
+            onClick={(e) => {
+              e.stopPropagation();
+              onRemoveAll(e);
+            }}
+          >
             Eliminar todo
           </Button>
         )}
@@ -67,7 +79,12 @@ export default function Upload({
           <Button
             size="small"
             variant="contained"
-            onClick={onUpload}
+            onClick={(e) => {
+              if (setLoading) {
+                setLoading(true);
+              }
+              onUpload(e);
+            }}
             startIcon={<Iconify icon="eva:cloud-upload-fill" />}
           >
             Subir archivos
@@ -86,7 +103,20 @@ export default function Upload({
             zIndex: 1,
           }}
         >
-          {renderMultiPreview}
+          {loading ? (
+            <Box
+              sx={{
+                height: '20vh',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          ) : (
+            renderMultiPreview
+          )}
         </Box>
       ) : (
         <>
@@ -135,23 +165,20 @@ export default function Upload({
             >
               Puede cargar hasta 10 imágnes de benchmark
             </Typography>
-            <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+            <Typography variant="caption" sx={{ color: 'text.secondary', mb: 1 }}>
               JPG, PNG or PDF, file size no more than 10MB
             </Typography>
-            <Box
-              component="span"
-              sx={{
-                fontSize: 10,
-                padding: '12px',
-                color: 'primary.main',
-                borderRadius: 1,
-                maxWidth: '150px',
-                alignSelf: 'center',
-                border: `1px solid ${alpha(theme.palette.primary.main, 0.48)}`,
+            <Button
+              variant="outlined"
+              onClick={(e) => {
+                if (setLoading) {
+                  setLoading(true);
+                }
+                onUpload(e);
               }}
             >
-              SELECCIONAR ARCHIVO
-            </Box>
+              SUBIR ARCHIVOS
+            </Button>
           </Stack>
         </>
       )}

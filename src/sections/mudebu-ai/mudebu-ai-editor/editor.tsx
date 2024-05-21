@@ -2,9 +2,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import React, { useState, useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useAxios } from 'src/axios/axios-provider';
 import { Box } from 'src/components/Box/box-component';
 import { RootState } from 'src/store';
+import { setMask } from 'src/store/slices/mudebu-ai';
 
 interface ImageEraserProps {
   imageUrl: string;
@@ -16,11 +18,24 @@ const ImageEraser: React.FC<ImageEraserProps> = ({ imageUrl, reload }) => {
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
   const [lastPos, setLastPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
+  const axiosInstance = useAxios();
+
+  const distpach = useDispatch();
+
   const brushRadius = useSelector((state: RootState) => state.mudebuAi.brushRadius);
   const brushRadiusEditor = useSelector((state: RootState) => state.mudebuAi.brushRadiusEditor);
+  const imageSelectedFinishing = useSelector(
+    (state: RootState) => state.mudebuAi.imageSelectedFinishing
+  );
 
   useEffect(() => {
+    createCanvasMask(imageSelectedFinishing.b64);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imageSelectedFinishing]);
+
+  const createCanvasMask = async (dataImage: string) => {
     const canvas = canvasRef.current;
+
     if (canvas) {
       const ctx = canvas.getContext('2d');
       if (ctx) {
@@ -32,10 +47,10 @@ const ImageEraser: React.FC<ImageEraserProps> = ({ imageUrl, reload }) => {
           ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
         };
 
-        image.src = imageUrl;
+        image.src = dataImage;
       }
     }
-  }, [imageUrl, reload]);
+  };
 
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const position = { x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY };
@@ -58,6 +73,10 @@ const ImageEraser: React.FC<ImageEraserProps> = ({ imageUrl, reload }) => {
   };
 
   const handleMouseUp = () => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+      distpach(setMask(canvas.toDataURL('image/png')));
+    }
     setIsDrawing(false);
   };
 

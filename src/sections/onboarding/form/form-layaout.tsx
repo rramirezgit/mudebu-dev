@@ -4,13 +4,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { m } from 'framer-motion';
 import { useFormikContext } from 'formik';
 import { useEffect, useState } from 'react';
+import { LoadingButton } from '@mui/lab';
 import { Box } from 'src/components/Box/box-component';
-import { nextStep, setContentStep, setStep } from 'src/store/slices/onBoarding';
+import {
+  nextStep,
+  setContentStep,
+  setOnboardingInfo,
+  setStep,
+  setloadingForm,
+} from 'src/store/slices/onBoarding';
 import { useAxios } from 'src/axios/axios-provider';
 import { RootState } from 'src/store';
 import { useRouter } from 'src/routes/hooks';
 import { MotionViewport, varFade } from 'src/components/animate';
-import { setStorage, useLocalStorage } from 'src/hooks/use-local-storage';
+import { setStorage } from 'src/hooks/use-local-storage';
 import { endpoints_api } from 'src/axios/endpoints';
 import { FormDataSteps } from './form-data';
 import { TSeccionForm } from './types';
@@ -18,6 +25,7 @@ import { TSeccionForm } from './types';
 export const storageKeys = {
   onboardingProgress: 'onboarding-progress',
   onboardingResult: 'onboarding-result',
+  mudebuIaBenchmark: 'mudebu-ia-benchmark',
 };
 
 interface OnboardingFormLayoutProps {
@@ -31,6 +39,7 @@ export default function OnboardingFormLayout({ children }: OnboardingFormLayoutP
   const dispatch = useDispatch();
 
   const isvalidDataform = useSelector((state: RootState) => state.OnBoarding.isvalidDataform);
+  const loadingForm = useSelector((state: RootState) => state.OnBoarding.loadingForm);
 
   const axiosInstance = useAxios();
 
@@ -42,6 +51,8 @@ export default function OnboardingFormLayout({ children }: OnboardingFormLayoutP
 
   useEffect(() => {
     currentStepIsComplete();
+    dispatch(setStep(0));
+    dispatch(setContentStep(0));
   }, []);
 
   useEffect(() => {
@@ -107,8 +118,8 @@ export default function OnboardingFormLayout({ children }: OnboardingFormLayoutP
           return;
         }
         if (nextCondition === 'finish') {
+          dispatch(setloadingForm(true));
           await validateForm().then(async (errors) => {
-            console.log(errors);
             setIsComplete(true);
             if (Object.keys(errors).length > 0) {
               setIsComplete(false);
@@ -128,14 +139,20 @@ export default function OnboardingFormLayout({ children }: OnboardingFormLayoutP
               additional_details: valuesForm.detalles,
             };
 
-            await axiosInstance.post(endpoints_api.onboarding.post_create, postData).then((res) => {
-              if ((res.status === 201 && res.data) || (res.status === 200 && res.data)) {
-                setStorage(storageKeys.onboardingResult, res.data?.analysisResult);
-                router.push('/onboarding-info');
-                dispatch(setStep(0));
-                dispatch(setContentStep(0));
-              }
-            });
+            await axiosInstance
+              .post(endpoints_api.onboarding.post_create, postData)
+              .then((res) => {
+                if ((res.status === 201 && res.data) || (res.status === 200 && res.data)) {
+                  const data = res.data?.analysisResult;
+                  setStorage(storageKeys.onboardingResult, data);
+                  dispatch(setOnboardingInfo(data));
+
+                  router.push('/onboarding-info');
+                }
+              })
+              .finally(() => {
+                dispatch(setloadingForm(false));
+              });
           });
 
           return;
@@ -213,17 +230,21 @@ export default function OnboardingFormLayout({ children }: OnboardingFormLayoutP
             >
               Anterior
             </Button>
-            <Button
-              onClick={handleClickNext}
-              variant="contained"
+            <LoadingButton
               disabled={!isComplete}
+              onClick={handleClickNext}
+              fullWidth
+              size="large"
+              type="submit"
+              variant="contained"
               sx={{
                 width: '156px',
                 height: '48px',
               }}
+              loading={loadingForm}
             >
               Siguiente
-            </Button>
+            </LoadingButton>
           </Box>
         </Box>
       </m.div>

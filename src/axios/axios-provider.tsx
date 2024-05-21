@@ -18,10 +18,6 @@ type Props = {
 function AxiosProviderWrapper({ children }: Props) {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
 
-  getAccessTokenSilently().then((token) => {
-    console.log('token', token);
-  });
-
   const axiosInstance = useMemo(() => {
     const instance = axios.create({
       baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,

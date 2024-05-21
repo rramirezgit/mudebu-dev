@@ -18,7 +18,7 @@ export default function Main({ children, sx, ...other }: BoxProps) {
 
   const lgUp = useResponsive('up', 'lg');
 
-  const isNavHorizontal = settings.themeLayout === 'horizontal';
+  const isNavHorizontal = true;
 
   const isNavMini = settings.themeLayout === 'mini';
 

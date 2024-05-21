@@ -19,11 +19,24 @@ import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector
 import Iconify from 'src/components/iconify/iconify';
 import { RootState } from 'src/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { setEditImage, setHaveBenchmarks } from 'src/store/slices/mudebu-ai';
+import {
+  setBlendList,
+  setEditImage,
+  setHaveBenchmarks,
+  setimageSelectedFinishing,
+} from 'src/store/slices/mudebu-ai';
 import MudebuAiblend from '../mudebu-ai-blend/mudebu-ai-blend';
 import MudebuAiPreview from '../mudebu-ai-editor/mudebu-ai-preview';
 import { Magicpen } from 'iconsax-react';
 import MudebuAiEditor from '../mudebu-ai-editor/mudebu-ai-editor';
+import { useAxios } from 'src/axios/axios-provider';
+import { useRouter } from 'src/routes/hooks';
+import { endpoints_api } from 'src/axios/endpoints';
+import { setImagesData } from 'src/store/slices/onBoarding';
+import { LoadingButton } from '@mui/lab';
+import { getStorage, setStorage } from 'src/hooks/use-local-storage';
+import { storageKeys } from 'src/sections/onboarding/form/form-layaout';
+import { convertImageToBase64 } from './tob64';
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -93,19 +106,28 @@ const steps = ['Benchmarking', 'Inteligencia Artificial', 'Edición IA'];
 export default function MudebuAiStepper() {
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set<number>());
+  const [loading, setLoading] = useState(false);
 
   const haveBenchmarks = useSelector((state: RootState) => state.mudebuAi.haveBenchmarks);
   const blendList = useSelector((state: RootState) => state.mudebuAi.blendList);
   const benchmarkList = useSelector((state: RootState) => state.mudebuAi.benchmarkList);
   const editImage = useSelector((state: RootState) => state.mudebuAi.editImage);
+  const info = useSelector((state: RootState) => state.OnBoarding.onoardingInfo);
+  const imageSelectedFinishing = useSelector(
+    (state: RootState) => state.mudebuAi.imageSelectedFinishing
+  );
 
   const dispatch = useDispatch();
+
+  const router = useRouter();
+
+  const axiosInstace = useAxios();
 
   const isStepOptional = (step: number) => step === 0;
 
   const isStepSkipped = (step: number) => skipped.has(step);
 
-  const handleNext = () => {
+  const nextStep = () => {
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
@@ -116,6 +138,41 @@ export default function MudebuAiStepper() {
     setSkipped(newSkipped);
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNext = () => {
+    if (haveBenchmarks && benchmarkList.length <= 1) {
+      return;
+    }
+
+    if (activeStep === 0) {
+      setLoading(true);
+      const prompt = benchmarkList.map((image: any) => image.s3Url).join(' ');
+      axiosInstace
+        .post(endpoints_api.mudebuAi.blend, { prompt })
+        .then((response) => {
+          dispatch(setBlendList(response.data.upscaled_urls));
+          nextStep();
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+
+    if (activeStep === 1) {
+      setLoading(true);
+      convertImageToBase64({
+        url: imageSelectedFinishing.image,
+      }).then((data) => {
+        dispatch(setimageSelectedFinishing({ ...imageSelectedFinishing, b64: data }));
+        setLoading(false);
+        nextStep();
+      });
+    }
+
+    if (activeStep === 2) {
+      router.push('/onboarding/ended-process/');
+    }
   };
 
   const handleBack = () => {
@@ -129,20 +186,44 @@ export default function MudebuAiStepper() {
   };
 
   const handleSkip = () => {
+    setLoading(true);
     if (!isStepOptional(activeStep)) {
       // You probably want to guard against something like this,
       // it should never occur unless someone's actively trying to break something.
+      setLoading(false);
       throw new Error("You can't skip a step that isn't optional.");
     }
 
-    // setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    // setSkipped((prevSkipped) => {
-    //   const newSkipped = new Set(prevSkipped.values());
-    //   newSkipped.add(activeStep);
-    //   return newSkipped;
-    // });
+    const dataStorage = getStorage(storageKeys.mudebuIaBenchmark);
 
-    dispatch(setHaveBenchmarks(false));
+    if (dataStorage) {
+      dispatch(setImagesData(dataStorage));
+      dispatch(setHaveBenchmarks(false));
+      setLoading(false);
+      return;
+    }
+
+    let prompt = info?.prompt_images;
+    if (prompt === '' || prompt === undefined || prompt === ' ' || prompt === null) {
+      prompt = getStorage(storageKeys.onboardingResult)?.prompt_images.split(',')[0];
+    } else {
+      prompt = info?.prompt_images.split(',')[0];
+    }
+
+    axiosInstace
+      .post(endpoints_api.mudebuAi.generations, { prompt })
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          if (response.data) {
+            setStorage(storageKeys.mudebuIaBenchmark, response.data);
+            dispatch(setImagesData(response.data));
+            dispatch(setHaveBenchmarks(false));
+          }
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const handleReset = () => {
@@ -206,46 +287,52 @@ export default function MudebuAiStepper() {
           </Box>
 
           <Box sx={{ display: 'flex' }}>
-            {!haveBenchmarks && (
-              <Button
-                color="inherit"
-                disabled={activeStep === 0 && haveBenchmarks}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                Atras
-              </Button>
-            )}
+            <Button
+              color="inherit"
+              disabled={activeStep === 0 && haveBenchmarks}
+              onClick={handleBack}
+              sx={{ mr: 1 }}
+            >
+              Atras
+            </Button>
             <Box sx={{ flexGrow: 1 }} />
             {activeStep === steps.length - 1 && !editImage && (
-              <Button
+              <LoadingButton
                 variant="contained"
                 color="secondary"
                 sx={{ mr: 1 }}
+                loading={loading}
                 onClick={handleClickEditImage}
                 startIcon={<Magicpen size="24" color="white" />}
               >
                 Edición IA
-              </Button>
+              </LoadingButton>
             )}
             {benchmarkList.length !== 0 && (
-              <Button
-                variant="contained"
+              <LoadingButton
                 onClick={handleNext}
                 disabled={
-                  (activeStep === 0 && benchmarkList.length === 0) ||
+                  (activeStep === 0 && benchmarkList.length < 2) ||
                   (activeStep === 1 && blendList.length === 0)
                 }
+                variant="contained"
+                loading={loading}
               >
                 {activeStep === steps.length - 1 ? 'Finalizar Cotización' : 'Siguiente'}
-              </Button>
+              </LoadingButton>
             )}
             {haveBenchmarks && benchmarkList.length === 0 && (
               <>
                 {isStepOptional(activeStep) && (
-                  <Button variant="contained" onClick={handleSkip} sx={{ ml: 1 }}>
+                  <LoadingButton
+                    type="submit"
+                    variant="contained"
+                    onClick={handleSkip}
+                    sx={{ ml: 1 }}
+                    loading={loading}
+                  >
                     No tengo benchmarks
-                  </Button>
+                  </LoadingButton>
                 )}
               </>
             )}

@@ -8,6 +8,7 @@ import Checkbox from '@mui/material/Checkbox';
 import TableCell from '@mui/material/TableCell';
 import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
+import { useRouter } from 'src/routes/hooks';
 // hooks
 import { useBoolean } from 'src/hooks/use-boolean';
 // types
@@ -25,7 +26,7 @@ import UserQuickEditForm from './user-quick-edit-form';
 type Props = {
   selected: boolean;
   onEditRow: VoidFunction;
-  row: IUserItem;
+  row: any;
   onSelectRow: VoidFunction;
   onDeleteRow: VoidFunction;
 };
@@ -37,27 +38,27 @@ export default function UserTableRow({
   onSelectRow,
   onDeleteRow,
 }: Props) {
-  const { name, avatarUrl, company, role, status, email, phoneNumber } = row;
+  // const { name, avatarUrl, company, role, status, email, phoneNumber } = row;
+  const { id, authorId, createdAt, status } = row;
 
   const confirm = useBoolean();
 
   const quickEdit = useBoolean();
 
+  const router = useRouter();
+
   const popover = usePopover();
 
   return (
     <>
-      <TableRow hover selected={selected}>
-        <TableCell padding="checkbox">
-          <Checkbox checked={selected} onClick={onSelectRow} />
-        </TableCell>
-
+      <TableRow hover>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{id}</TableCell>
         <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
-          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} />
+          {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} /> */}
 
           <ListItemText
-            primary={name}
-            secondary={email}
+            primary={authorId}
+            // secondary={email}
             primaryTypographyProps={{ typography: 'body2' }}
             secondaryTypographyProps={{
               component: 'span',
@@ -66,17 +67,17 @@ export default function UserTableRow({
           />
         </TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{phoneNumber}</TableCell>
+        {/* <TableCell sx={{ whiteSpace: 'nowrap' }}>{phoneNumber}</TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{company}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{company}</TableCell> */}
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{role}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{createdAt}</TableCell>
 
         <TableCell>
           <Label
             variant="soft"
             color={
-              (status === 'active' && 'success') ||
+              (status === 'NEW' && 'success') ||
               (status === 'pending' && 'warning') ||
               (status === 'banned' && 'error') ||
               'default'
@@ -87,14 +88,18 @@ export default function UserTableRow({
         </TableCell>
 
         <TableCell align="right" sx={{ px: 1, whiteSpace: 'nowrap' }}>
-          <Tooltip title="Quick Edit" placement="top" arrow>
+          {/* <Tooltip title="Quick Edit" placement="top" arrow>
             <IconButton color={quickEdit.value ? 'inherit' : 'default'} onClick={quickEdit.onTrue}>
               <Iconify icon="solar:pen-bold" />
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
 
-          <IconButton color={popover.open ? 'inherit' : 'default'} onClick={popover.onOpen}>
-            <Iconify icon="eva:more-vertical-fill" />
+          <IconButton
+            onClick={() => {
+              router.push(`/dashboard/list/${id}`);
+            }}
+          >
+            <Iconify icon="mingcute:right-line" />
           </IconButton>
         </TableCell>
       </TableRow>

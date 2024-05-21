@@ -12,6 +12,8 @@ const initialState: mudebuAIState = {
   brushRadius: 10,
   brushRadiusEditor: false,
   reloadEditor: false,
+  imageSelectedFinishing: null,
+  mask: null,
 };
 
 export const mudebuAiSlice = createSlice({
@@ -39,6 +41,12 @@ export const mudebuAiSlice = createSlice({
     setReloadEditor: (state, action: PayloadAction<boolean>) => {
       state.reloadEditor = action.payload;
     },
+    setimageSelectedFinishing: (state, action: PayloadAction<any>) => {
+      state.imageSelectedFinishing = action.payload;
+    },
+    setMask: (state, action: PayloadAction<any>) => {
+      state.mask = action.payload;
+    },
   },
 });
 
@@ -51,6 +59,8 @@ export const {
   setBrushRadius,
   setBrushRadiusEditor,
   setReloadEditor,
+  setimageSelectedFinishing,
+  setMask,
 } = mudebuAiSlice.actions;
 
 export default mudebuAiSlice.reducer;

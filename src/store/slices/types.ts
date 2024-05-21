@@ -3,6 +3,8 @@ export interface OnboardingState {
   contentStep: number;
   isvalidDataform: boolean;
   onoardingInfo: any;
+  loadingForm: boolean;
+  imagesData: any;
 }
 
 export interface mudebuAIState {
@@ -13,6 +15,8 @@ export interface mudebuAIState {
   brushRadius: number;
   brushRadiusEditor: boolean;
   reloadEditor: boolean;
+  imageSelectedFinishing: any;
+  mask: any;
 }
 
 export interface AuthSliceState {

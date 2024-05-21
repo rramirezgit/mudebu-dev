@@ -93,7 +93,7 @@ export default function Header() {
                 <Button
                   variant="contained"
                   color="secondary"
-                  onClick={() => router.push(paths.dashboard.root)}
+                  onClick={() => router.push(paths.dashboard.general.list)}
                 >
                   Dashboard
                 </Button>
