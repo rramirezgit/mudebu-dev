@@ -265,8 +265,14 @@ export default function MudebuAiStepper() {
       prompt = info?.prompt_images.split(',')[0];
     }
 
+    let idOnboarding = getStorage(storageKeys.onboardingId);
+
+    if (!storageKeys) {
+      idOnboarding = info?.savedOnboarding?.id;
+    }
+
     axiosInstace
-      .post(endpoints_api.mudebuAi.generations, { prompt })
+      .post(`${endpoints_api.mudebuAi.generations}/${idOnboarding}`, { prompt })
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           if (response.data) {

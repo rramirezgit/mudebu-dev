@@ -52,8 +52,14 @@ export default function MudebuAiGetAi() {
         prompt = info?.prompt_images.split(',')[counter];
       }
 
+      let idOnboarding = getStorage(storageKeys.onboardingId);
+
+      if (!storageKeys) {
+        idOnboarding = info?.savedOnboarding?.id;
+      }
+
       axiosInstance
-        .post(endpoints_api.mudebuAi.generations, { prompt })
+        .post(`${endpoints_api.mudebuAi.generations}/${idOnboarding}`, { prompt })
         .then((response) => {
           setLoading(false);
           if (response.status === 200 || response.status === 201) {
