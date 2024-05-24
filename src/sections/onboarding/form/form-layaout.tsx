@@ -26,6 +26,7 @@ export const storageKeys = {
   onboardingProgress: 'onboarding-progress',
   onboardingResult: 'onboarding-result',
   mudebuIaBenchmark: 'mudebu-ia-benchmark',
+  onboardingId: 'onboarding-id',
 };
 
 interface OnboardingFormLayoutProps {
@@ -145,7 +146,10 @@ export default function OnboardingFormLayout({ children }: OnboardingFormLayoutP
                 if ((res.status === 201 && res.data) || (res.status === 200 && res.data)) {
                   const data = res.data?.analysisResult;
                   setStorage(storageKeys.onboardingResult, data);
-                  dispatch(setOnboardingInfo(data));
+
+                  setStorage(storageKeys.onboardingId, res.data?.savedOnboarding?.id);
+
+                  dispatch(setOnboardingInfo(res.data));
 
                   router.push('/onboarding-info');
                 }

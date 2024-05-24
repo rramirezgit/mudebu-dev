@@ -13,6 +13,7 @@ import { Box } from 'src/components/Box/box-component';
 import {
   setBrushRadius,
   setBrushRadiusEditor,
+  setEditImage,
   setMask,
   setReloadEditor,
   setimageSelectedFinishing,
@@ -201,8 +202,12 @@ export default function ImageEraserMenu() {
                   await convertImageToBase64({
                     base: '/api/proxy/newImage/',
                     url: response.data.data[0].url,
+                    split: '/private/',
                   }).then((data) => {
-                    dispatch(setimageSelectedFinishing({ b64: data }));
+                    dispatch(
+                      setimageSelectedFinishing({ b64: data, image: response.data.data[0].url })
+                    );
+                    dispatch(setEditImage(false));
                     setLoading(false);
                   });
                 }

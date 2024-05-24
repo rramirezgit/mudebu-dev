@@ -1,3 +1,5 @@
+/* eslint-disable no-plusplus */
+
 'use client';
 
 import { useState } from 'react';
@@ -148,21 +150,33 @@ export default function MudebuAiStepper() {
     if (activeStep === 0) {
       setLoading(true);
       const prompt = benchmarkList.map((image: any) => image.s3Url).join(' ');
-      axiosInstace
-        .post(endpoints_api.mudebuAi.blend, { prompt })
-        .then((response) => {
-          dispatch(setBlendList(response.data.upscaled_urls));
-          nextStep();
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      axiosInstace.post(endpoints_api.mudebuAi.blend, { prompt }).then((response) => {
+        // dispatch(setBlendList(response.data.upscaled_urls));
+        // nextStep();
+        const interval = setInterval(() => {
+          axiosInstace
+            .get(`${endpoints_api.mudebuAi.get_blend}/${response.data.id}`)
+            .then((res2) => {
+              if (res2.data?.status === 'completed') {
+                setLoading(false);
+                dispatch(setBlendList(res2.data.upscaled_urls));
+                nextStep();
+                clearInterval(interval);
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+              clearInterval(interval);
+            });
+        }, 5000);
+      });
     }
 
     if (activeStep === 1) {
       setLoading(true);
       convertImageToBase64({
         url: imageSelectedFinishing.image,
+        split: '/assets/',
       }).then((data) => {
         dispatch(setimageSelectedFinishing({ ...imageSelectedFinishing, b64: data }));
         setLoading(false);
@@ -171,7 +185,48 @@ export default function MudebuAiStepper() {
     }
 
     if (activeStep === 2) {
-      router.push('/onboarding/ended-process/');
+      try {
+        setLoading(true);
+        const base64WithoutPrefix = imageSelectedFinishing?.b64.split(',')[1]; // Eliminar el prefijo si existe
+        const binary = atob(base64WithoutPrefix);
+        const array = [];
+        for (let i = 0; i < binary.length; i++) {
+          array.push(binary.charCodeAt(i));
+        }
+        const resultBlob = new Blob([new Uint8Array(array)], { type: 'image/png' });
+
+        const file = new File([resultBlob], 'selected.png', { type: 'image/png' });
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('source', 'USER_UPLOAD');
+
+        let idOnboarding = getStorage(storageKeys.onboardingId);
+
+        if (!storageKeys) {
+          idOnboarding = info?.savedOnboarding?.id;
+        }
+
+        axiosInstace
+          .post(`${endpoints_api.mudebuAi.media}/${idOnboarding}`, formData)
+          .then((response) => {
+            if (response.status === 200 || response.status === 201) {
+              const imgS3 = response.data?.s3Url;
+              axiosInstace
+                .patch(`${endpoints_api.onboarding.update}/${idOnboarding}`, {
+                  imagesResult: imgS3,
+                })
+                .then((response2) => {
+                  if (response2.status === 200 || response2.status === 201) {
+                    setLoading(false);
+                    router.push('/onboarding/ended-process/');
+                  }
+                });
+            }
+          });
+      } catch (error) {
+        console.error('Error uploading file:', error);
+      }
     }
   };
 

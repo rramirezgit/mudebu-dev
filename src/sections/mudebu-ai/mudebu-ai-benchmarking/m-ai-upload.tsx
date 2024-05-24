@@ -8,12 +8,15 @@ import uuidv4 from 'src/utils/uuidv4';
 import { RootState } from 'src/store';
 import { useAxios } from 'src/axios/axios-provider';
 import { endpoints_api } from 'src/axios/endpoints';
+import { getStorage } from 'src/hooks/use-local-storage';
+import { storageKeys } from 'src/sections/onboarding/form/form-layaout';
 
 export default function MudebuAiUpload() {
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState<(File | string)[]>([]);
 
   const benchmarkList = useSelector((state: RootState) => state.mudebuAi.benchmarkList);
+  const onboardingInfo = useSelector((state: RootState) => state.OnBoarding.onoardingInfo);
 
   const dispatch = useDispatch();
 
@@ -38,9 +41,19 @@ export default function MudebuAiUpload() {
     const uploadPromises = acceptedFiles.map(async (file) => {
       const formData = new FormData();
       formData.append('file', file);
+      formData.append('source', 'USER_UPLOAD');
 
+      let idOnboarding = getStorage(storageKeys.onboardingId);
+
+      if (!storageKeys) {
+        idOnboarding = onboardingInfo?.savedOnboarding?.id;
+      }
       try {
-        const response = await axiosInstance.post(endpoints_api.mudebuAi.media, formData);
+        const response = await axiosInstance.post(
+          `${endpoints_api.mudebuAi.media}/${idOnboarding}`,
+          formData
+        );
+
         return response.data;
       } catch (error) {
         console.error('Error uploading file:', error);

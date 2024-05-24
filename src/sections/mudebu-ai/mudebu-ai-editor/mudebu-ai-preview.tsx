@@ -8,7 +8,6 @@ export default function MudebuAiPreview() {
   const imageSelectedFinishing = useSelector(
     (state: RootState) => state.mudebuAi.imageSelectedFinishing
   );
-
   return (
     <Box sx={{ width: 1, textAlign: 'center' }}>
       <Typography
@@ -28,7 +27,7 @@ export default function MudebuAiPreview() {
         Esta será la imagen base para su cotización ¿Quiere hacer alguna edición con IA?
       </Typography>
       <Image
-        src={imageSelectedFinishing.image}
+        src={imageSelectedFinishing?.b64 || imageSelectedFinishing.image}
         sx={{
           width: {
             xs: '70%',
