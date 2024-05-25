@@ -149,7 +149,15 @@ export default function MudebuAiStepper() {
 
     if (activeStep === 0) {
       setLoading(true);
-      const prompt = benchmarkList.map((image: any) => image.s3Url).join(' ');
+
+      // tomar de forma random solo dos imagenes del array de promt
+
+      const prompt = benchmarkList
+        .map((image: any) => image.s3Url)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 2)
+        .join(' ');
+
       axiosInstace.post(endpoints_api.mudebuAi.blend, { prompt }).then((response) => {
         // dispatch(setBlendList(response.data.upscaled_urls));
         // nextStep();
