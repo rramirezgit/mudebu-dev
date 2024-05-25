@@ -200,7 +200,7 @@ export default function ImageEraserMenu() {
               .then(async (response) => {
                 if (response.data?.data?.length > 0) {
                   await convertImageToBase64({
-                    base: '/api/proxy/newImage/',
+                    base: '/api/newImage/',
                     url: response.data.data[0].url,
                     split: '/private/',
                   }).then((data) => {

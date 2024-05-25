@@ -22,7 +22,7 @@ module.exports = {
         destination: 'https://cl.imagineapi.dev/assets/:path*',
       },
       {
-        source: '/api/proxy/newImage/:path*',
+        source: '/api/newImage/:path*',
         destination: 'https://oaidalleapiprodscus.blob.core.windows.net/private/:path*',
       },
     ];
