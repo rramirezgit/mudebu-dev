@@ -89,11 +89,11 @@ export default function ImageEraserMenu() {
             };
             const compressedFile = await imageCompression(file, options);
 
-            /// descargar imagen
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(compressedFile);
-            a.download = 'mask.png';
-            a.click();
+            // /// descargar imagen
+            // const a = document.createElement('a');
+            // a.href = URL.createObjectURL(compressedFile);
+            // a.download = 'mask.png';
+            // a.click();
 
             console.log('Original file size:', file.size);
             console.log('Compressed file size:', compressedFile.size);
@@ -177,11 +177,11 @@ export default function ImageEraserMenu() {
             };
             const compressedFile = await imageCompression(file, options);
 
-            /// descargar imagen
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(compressedFile);
-            a.download = 'mask.png';
-            a.click();
+            // /// descargar imagen
+            // const a = document.createElement('a');
+            // a.href = URL.createObjectURL(compressedFile);
+            // a.download = 'mask.png';
+            // a.click();
 
             console.log('Original file size: 2', file.size);
             console.log('Compressed file size: 2', compressedFile.size);
