@@ -153,6 +153,8 @@ export default function MudebuAiGetAi() {
             setImages(data.slice(0, 9));
           }
         }
+      })
+      .finally(() => {
         setLoadingAll(false);
       });
 
