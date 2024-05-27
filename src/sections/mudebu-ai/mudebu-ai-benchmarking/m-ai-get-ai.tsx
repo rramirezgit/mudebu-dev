@@ -152,6 +152,7 @@ export default function MudebuAiGetAi() {
       .finally(() => {
         setLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSelectImage = (image: any) => {
