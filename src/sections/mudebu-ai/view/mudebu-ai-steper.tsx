@@ -109,6 +109,7 @@ export default function MudebuAiStepper() {
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set<number>());
   const [loading, setLoading] = useState(false);
+  const [showGetAi, setShowGetAi] = useState(false);
 
   const haveBenchmarks = useSelector((state: RootState) => state.mudebuAi.haveBenchmarks);
   const blendList = useSelector((state: RootState) => state.mudebuAi.blendList);
@@ -249,50 +250,13 @@ export default function MudebuAiStepper() {
   };
 
   const handleSkip = () => {
-    setLoading(true);
     if (!isStepOptional(activeStep)) {
       // You probably want to guard against something like this,
       // it should never occur unless someone's actively trying to break something.
-      setLoading(false);
       throw new Error("You can't skip a step that isn't optional.");
     }
 
-    const dataStorage = getStorage(storageKeys.mudebuIaBenchmark);
-
-    if (dataStorage) {
-      dispatch(setImagesData(dataStorage));
-      dispatch(setHaveBenchmarks(false));
-      setLoading(false);
-      return;
-    }
-
-    let prompt = info?.prompt_images;
-    if (prompt === '' || prompt === undefined || prompt === ' ' || prompt === null) {
-      prompt = getStorage(storageKeys.onboardingResult)?.prompt_images.split(',')[0];
-    } else {
-      prompt = info?.prompt_images.split(',')[0];
-    }
-
-    let idOnboarding = getStorage(storageKeys.onboardingId);
-
-    if (!storageKeys) {
-      idOnboarding = info?.savedOnboarding?.id;
-    }
-
-    axiosInstace
-      .post(`${endpoints_api.mudebuAi.generations}/${idOnboarding}`, { prompt })
-      .then((response) => {
-        if (response.status === 200 || response.status === 201) {
-          if (response.data) {
-            setStorage(storageKeys.mudebuIaBenchmark, response.data);
-            dispatch(setImagesData(response.data));
-            dispatch(setHaveBenchmarks(false));
-          }
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    setShowGetAi(true);
   };
 
   const handleReset = () => {
@@ -350,7 +314,7 @@ export default function MudebuAiStepper() {
               minHeight: 120,
             }}
           >
-            {activeStep === 0 && <>{haveBenchmarks ? <MudebuAiUpload /> : <MudebuAiGetAi />}</>}
+            {activeStep === 0 && <>{showGetAi ? <MudebuAiGetAi /> : <MudebuAiUpload />}</>}
             {activeStep === 1 && <MudebuAiblend />}
             {activeStep === 2 && <>{editImage ? <MudebuAiEditor /> : <MudebuAiPreview />}</>}
           </Box>

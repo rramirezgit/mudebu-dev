@@ -10,7 +10,7 @@ import { setBenchmarkList, setHaveBenchmarks } from 'src/store/slices/mudebu-ai'
 // import uuidv4 from '../../../utils/uuidv4';
 import { useAxios } from 'src/axios/axios-provider';
 import { endpoints_api } from 'src/axios/endpoints';
-import { getStorage } from 'src/hooks/use-local-storage';
+import { getStorage, setStorage } from 'src/hooks/use-local-storage';
 import { setImagesData } from 'src/store/slices/onBoarding';
 import { storageKeys } from 'src/sections/onboarding/form/form-layaout';
 
@@ -32,7 +32,7 @@ import { storageKeys } from 'src/sections/onboarding/form/form-layaout';
 export default function MudebuAiGetAi() {
   const [counter, setcounter] = useState(1);
   const [images, setImages] = useState<any>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const benchmarksList = useSelector((state: RootState) => state.mudebuAi.benchmarkList);
   const imagesData = useSelector((state: RootState) => state.OnBoarding.imagesData);
@@ -76,40 +76,83 @@ export default function MudebuAiGetAi() {
   };
 
   useEffect(() => {
-    const data: any = [];
+    const dataStorage = getStorage(storageKeys.mudebuIaBenchmark);
 
-    if (imagesData?.imagesDallE?.length > 0) {
-      if (imagesData.imagesDallE.length > 3 && imagesData?.imagesGoogle.length === 0) {
-        imagesData.imagesDallE.forEach((image: any) => {
-          data.push(image);
-        });
-      } else {
-        imagesData.imagesDallE.slice(0, 3).forEach((image: any) => {
-          data.push(image);
-        });
-      }
+    if (dataStorage) {
+      dispatch(setImagesData(dataStorage));
+      dispatch(setHaveBenchmarks(false));
+      setLoading(false);
+      return;
     }
 
-    if (imagesData?.imagesPinterest?.length > 0) {
-      if (imagesData.imagesPinterest.length > 3 && imagesData?.imagesGoogle.length === 0) {
-        imagesData.imagesPinterest.forEach((image: any) => {
-          data.push(image);
-        });
-      } else {
-        imagesData.imagesPinterest.slice(0, 3).forEach((image: any) => {
-          data.push(image);
-        });
-      }
+    let prompt = info?.prompt_images;
+    if (prompt === '' || prompt === undefined || prompt === ' ' || prompt === null) {
+      prompt = getStorage(storageKeys.onboardingResult)?.prompt_images.split(',')[0];
+    } else {
+      prompt = info?.prompt_images.split(',')[0];
     }
 
-    if (imagesData?.imagesGoogle?.length > 0) {
-      imagesData.imagesGoogle.forEach((image: any) => {
-        data.push(image);
+    let idOnboarding = getStorage(storageKeys.onboardingId);
+
+    if (!storageKeys) {
+      idOnboarding = info?.savedOnboarding?.id;
+    }
+
+    axiosInstance
+      .post(`${endpoints_api.mudebuAi.generations}/${idOnboarding}`, { prompt })
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          if (response.data) {
+            setStorage(storageKeys.mudebuIaBenchmark, response.data);
+            dispatch(setImagesData(response.data));
+            dispatch(setHaveBenchmarks(false));
+
+            const data: any = [];
+
+            if (response.data?.imagesDallE?.length > 0) {
+              if (
+                response.data.imagesDallE.length > 3 &&
+                response.data?.imagesGoogle.length === 0
+              ) {
+                response.data.imagesDallE.forEach((image: any) => {
+                  data.push(image);
+                });
+              } else {
+                response.data.imagesDallE.slice(0, 3).forEach((image: any) => {
+                  data.push(image);
+                });
+              }
+            }
+
+            if (response.data?.imagesPinterest?.length > 0) {
+              if (
+                response.data.imagesPinterest.length > 3 &&
+                response.data?.imagesGoogle.length === 0
+              ) {
+                response.data.imagesPinterest.forEach((image: any) => {
+                  data.push(image);
+                });
+              } else {
+                response.data.imagesPinterest.slice(0, 3).forEach((image: any) => {
+                  data.push(image);
+                });
+              }
+            }
+
+            if (response.data?.imagesGoogle?.length > 0) {
+              response.data.imagesGoogle.forEach((image: any) => {
+                data.push(image);
+              });
+            }
+
+            setImages(data.slice(0, 9));
+          }
+        }
+      })
+      .finally(() => {
+        setLoading(false);
       });
-    }
-
-    setImages(data.slice(0, 9));
-  }, [imagesData]);
+  }, []);
 
   const handleSelectImage = (image: any) => {
     if (benchmarksList.includes(image)) {
