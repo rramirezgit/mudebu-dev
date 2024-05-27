@@ -76,14 +76,14 @@ export default function MudebuAiGetAi() {
   };
 
   useEffect(() => {
-    const dataStorage = getStorage(storageKeys.mudebuIaBenchmark);
+    // const dataStorage = getStorage(storageKeys.mudebuIaBenchmark);
 
-    if (dataStorage) {
-      dispatch(setImagesData(dataStorage));
-      dispatch(setHaveBenchmarks(false));
-      setLoading(false);
-      return;
-    }
+    // if (dataStorage) {
+    //   dispatch(setImagesData(dataStorage));
+    //   dispatch(setHaveBenchmarks(false));
+    //   setLoading(false);
+    //   return;
+    // }
 
     let prompt = info?.prompt_images;
     if (prompt === '' || prompt === undefined || prompt === ' ' || prompt === null) {
