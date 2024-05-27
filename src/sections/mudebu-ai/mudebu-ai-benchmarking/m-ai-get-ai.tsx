@@ -101,7 +101,9 @@ export default function MudebuAiGetAi() {
     }
 
     axiosInstance
-      .post(`${endpoints_api.mudebuAi.generations}/${idOnboarding}`, { prompt })
+      .post(`${endpoints_api.mudebuAi.generations}/${idOnboarding}`, {
+        prompt,
+      })
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           if (response.data) {
@@ -201,16 +203,32 @@ export default function MudebuAiGetAi() {
           justifyItems: 'center',
         }}
       >
-        {images.map((image: any) => (
-          <ItemImage
-            key={image.id}
-            loadingAll={loadingAll}
-            image={image}
-            onClickImage={handleSelectImage}
-            selected={benchmarksList.includes(image)}
-            loading={loading && !benchmarksList.includes(image)}
-          />
-        ))}
+        {!loadingAll &&
+          images.map((image: any) => (
+            <ItemImage
+              key={image.id}
+              image={image}
+              onClickImage={handleSelectImage}
+              selected={benchmarksList.includes(image)}
+              loading={loading && !benchmarksList.includes(image)}
+            />
+          ))}
+        {loadingAll &&
+          [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item: any) => (
+            <Skeleton
+              sx={{
+                width: {
+                  xs: 187,
+                  sm: 293,
+                },
+                height: {
+                  xs: 139,
+                  sm: 224,
+                },
+                borderRadius: 2,
+              }}
+            />
+          ))}
       </Box>
       <Button
         variant="contained"
@@ -229,12 +247,11 @@ interface ItemImageProps {
   image: any;
   loading?: boolean;
   selected?: boolean;
-  loadingAll?: boolean;
   onClickImage: (image: any) => void;
 }
 
-const ItemImage = ({ selected, image, loading, loadingAll, onClickImage }: ItemImageProps) => {
-  if (loadingAll || loading) {
+const ItemImage = ({ selected, image, loading, onClickImage }: ItemImageProps) => {
+  if (loading) {
     return (
       <Skeleton
         sx={{
