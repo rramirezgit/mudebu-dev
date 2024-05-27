@@ -3,6 +3,7 @@ import { Button, Skeleton, Typography } from '@mui/material';
 import { Magicpen } from 'iconsax-react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { LoadingButton } from '@mui/lab';
 import { Box } from 'src/components/Box/box-component';
 import Image from 'src/components/image/image';
 import { RootState } from 'src/store';
@@ -232,7 +233,7 @@ export default function MudebuAiGetAi() {
       </Box>
       <Button
         variant="contained"
-        disabled={loading}
+        disabled={loading || loadingAll}
         sx={{ mt: 3 }}
         startIcon={<Magicpen size="24" color="white" />}
         onClick={handleClickMoreImages}
