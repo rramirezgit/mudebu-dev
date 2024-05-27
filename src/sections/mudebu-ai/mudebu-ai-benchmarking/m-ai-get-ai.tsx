@@ -32,7 +32,8 @@ import { storageKeys } from 'src/sections/onboarding/form/form-layaout';
 export default function MudebuAiGetAi() {
   const [counter, setcounter] = useState(1);
   const [images, setImages] = useState<any>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [loadingAll, setLoadingAll] = useState(true);
 
   const benchmarksList = useSelector((state: RootState) => state.mudebuAi.benchmarkList);
   const imagesData = useSelector((state: RootState) => state.OnBoarding.imagesData);
@@ -84,6 +85,7 @@ export default function MudebuAiGetAi() {
     //   setLoading(false);
     //   return;
     // }
+    setLoadingAll(true);
 
     let prompt = info?.prompt_images;
     if (prompt === '' || prompt === undefined || prompt === ' ' || prompt === null) {
@@ -148,10 +150,9 @@ export default function MudebuAiGetAi() {
             setImages(data.slice(0, 9));
           }
         }
-      })
-      .finally(() => {
-        setLoading(false);
+        setLoadingAll(false);
       });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -203,6 +204,7 @@ export default function MudebuAiGetAi() {
         {images.map((image: any) => (
           <ItemImage
             key={image.id}
+            loadingAll={loadingAll}
             image={image}
             onClickImage={handleSelectImage}
             selected={benchmarksList.includes(image)}
@@ -227,11 +229,12 @@ interface ItemImageProps {
   image: any;
   loading?: boolean;
   selected?: boolean;
+  loadingAll?: boolean;
   onClickImage: (image: any) => void;
 }
 
-const ItemImage = ({ selected, image, loading, onClickImage }: ItemImageProps) => {
-  if (loading) {
+const ItemImage = ({ selected, image, loading, loadingAll, onClickImage }: ItemImageProps) => {
+  if (loadingAll || loading) {
     return (
       <Skeleton
         sx={{
