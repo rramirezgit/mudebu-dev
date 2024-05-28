@@ -8,6 +8,7 @@ import Checkbox from '@mui/material/Checkbox';
 import TableCell from '@mui/material/TableCell';
 import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
+import { format } from 'date-fns';
 import { useRouter } from 'src/routes/hooks';
 // hooks
 import { useBoolean } from 'src/hooks/use-boolean';
@@ -39,7 +40,7 @@ export default function UserTableRow({
   onDeleteRow,
 }: Props) {
   // const { name, avatarUrl, company, role, status, email, phoneNumber } = row;
-  const { id, authorId, createdAt, status } = row;
+  const { id, orderId, authorId, createdAt, status } = row;
 
   const confirm = useBoolean();
 
@@ -52,7 +53,7 @@ export default function UserTableRow({
   return (
     <>
       <TableRow hover>
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{id}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{orderId}</TableCell>
         <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
           {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} /> */}
 
@@ -71,7 +72,9 @@ export default function UserTableRow({
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{company}</TableCell> */}
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{createdAt}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>
+          {format(new Date(createdAt), 'dd/MM/yyyy')}
+        </TableCell>
 
         <TableCell>
           <Label

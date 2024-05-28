@@ -2,7 +2,7 @@ import { Avatar, Card, CardContent, CardHeader, Stack, Typography } from '@mui/m
 import Grid from '@mui/material/Unstable_Grid2';
 import { Box } from 'src/components/Box/box-component';
 
-export default function CarInfoOnboarding() {
+export default function CarInfoOnboarding({ data }: any) {
   return (
     <Card>
       <CardHeader title="Onboarding" />
@@ -20,9 +20,7 @@ export default function CarInfoOnboarding() {
                       color: '#919EAB',
                     }}
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    {data?.business_orientation}
                   </Typography>
                 </Stack>
                 <Stack spacing={2}>
@@ -33,9 +31,7 @@ export default function CarInfoOnboarding() {
                       color: '#919EAB',
                     }}
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    {data?.colors?.join(', ')}
                   </Typography>
                 </Stack>
                 <Stack spacing={2}>
@@ -46,9 +42,7 @@ export default function CarInfoOnboarding() {
                       color: '#919EAB',
                     }}
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    {data?.specification}
                   </Typography>
                 </Stack>
                 <Stack spacing={2}>
@@ -59,9 +53,7 @@ export default function CarInfoOnboarding() {
                       color: '#919EAB',
                     }}
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    {data?.preferred_material}
                   </Typography>
                 </Stack>
               </Stack>
@@ -76,9 +68,7 @@ export default function CarInfoOnboarding() {
                       color: '#919EAB',
                     }}
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    {data?.styles?.join(', ')}
                   </Typography>
                 </Stack>
                 <Stack spacing={2}>
@@ -89,9 +79,7 @@ export default function CarInfoOnboarding() {
                       color: '#919EAB',
                     }}
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    {data?.types_of_furniture?.join(', ')}
                   </Typography>
                 </Stack>
                 <Stack spacing={2}>
@@ -102,9 +90,7 @@ export default function CarInfoOnboarding() {
                       color: '#919EAB',
                     }}
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    {data?.dimensions}
                   </Typography>
                 </Stack>
                 <Stack spacing={2}>
@@ -115,9 +101,7 @@ export default function CarInfoOnboarding() {
                       color: '#919EAB',
                     }}
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    {data?.project_location}
                   </Typography>
                 </Stack>
               </Stack>
@@ -130,9 +114,7 @@ export default function CarInfoOnboarding() {
                   color: '#919EAB',
                 }}
               >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                {data?.additional_details}
               </Typography>
             </Grid>
           </Grid>

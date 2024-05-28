@@ -3,6 +3,7 @@ export const endpoints_api = {
     post_create: 'onboarding',
     getAll: 'onboarding',
     update: 'onboarding',
+    findOne: 'onboarding',
   },
   mudebuAi: {
     media: 'media/upload',

@@ -8,6 +8,8 @@ export const metadata = {
   title: 'Dashboard',
 };
 
-export default function DetailList() {
-  return <ListDetailPage />;
+export default function DetailList({ params }: any) {
+  const { id } = params;
+
+  return <ListDetailPage id={id} />;
 }

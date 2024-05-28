@@ -71,7 +71,7 @@ const STATUS_OPTIONS = [
 ];
 
 const TABLE_HEAD = [
-  { id: 'Order', label: 'id', width: 100 },
+  { id: 'Order', label: 'orderId', width: 100 },
   { id: 'Cutomer', label: 'authorId', width: 100 },
   { id: 'Date', label: 'createdAt', width: 100 },
   { id: 'status', label: 'status', width: 100 },
