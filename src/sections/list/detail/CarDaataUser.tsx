@@ -1,7 +1,7 @@
 import { Avatar, Card, CardContent, CardHeader, Grid, Stack, Typography } from '@mui/material';
 import { Box } from 'src/components/Box/box-component';
 
-export default function CarDataUser() {
+export default function CarDataUser({ user }: any) {
   return (
     <Card>
       <CardHeader title="Datos del cliente" />
@@ -11,31 +11,31 @@ export default function CarDataUser() {
           <Grid container spacing={3}>
             <Grid xs={12} sm={1}>
               <Box>
-                <Avatar sx={{ mr: 2 }} />
+                <Avatar sx={{ mr: 2 }} src={user?.avatar} />
               </Box>
             </Grid>
             <Grid xs={12} sm={4}>
-              <Typography variant="h6">Juan Perez</Typography>
+              <Typography variant="h6">{user?.name}</Typography>
               <Stack spacing={1}>
                 <Stack spacing={1} direction="row">
                   <Typography variant="body2">Correo:</Typography>
-                  <Typography variant="body2"> - </Typography>
+                  <Typography variant="body2"> {user?.email || '-'}</Typography>
                 </Stack>
                 <Stack spacing={1} direction="row">
                   <Typography variant="body2">Celular:</Typography>
-                  <Typography variant="body2"> - </Typography>
+                  <Typography variant="body2"> {user?.cellphone || '-'}</Typography>
                 </Stack>
                 <Stack spacing={1} direction="row">
                   <Typography variant="body2">Empresa:</Typography>
-                  <Typography variant="body2"> - </Typography>
+                  <Typography variant="body2"> {user?.company || '-'}</Typography>
                 </Stack>
                 <Stack spacing={1} direction="row">
                   <Typography variant="body2">Puesto:</Typography>
-                  <Typography variant="body2"> - </Typography>
+                  <Typography variant="body2"> {user?.jobTitle || '-'}</Typography>
                 </Stack>
                 <Stack spacing={1} direction="row">
                   <Typography variant="body2">Acerca de:</Typography>
-                  <Typography variant="body2"> - </Typography>
+                  <Typography variant="body2"> {user?.about || '-'}</Typography>
                 </Stack>
               </Stack>
             </Grid>

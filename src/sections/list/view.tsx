@@ -15,6 +15,7 @@ import TableBody from '@mui/material/TableBody';
 import IconButton from '@mui/material/IconButton';
 import TableContainer from '@mui/material/TableContainer';
 // routes
+import { LinearProgress } from '@mui/material';
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
@@ -40,7 +41,7 @@ import {
   TablePaginationCustom,
 } from 'src/components/table';
 // types
-import { IUserItem, IUserTableFilters, IUserTableFilterValue } from 'src/types/user';
+import { IUserTableFilters, IUserTableFilterValue } from 'src/types/user';
 import { useAxios } from 'src/axios/axios-provider';
 import { endpoints_api } from 'src/axios/endpoints';
 import UserTableToolbar from '../user/user-table-toolbar';
@@ -71,10 +72,10 @@ const STATUS_OPTIONS = [
 ];
 
 const TABLE_HEAD = [
-  { id: 'Order', label: 'orderId', width: 100 },
-  { id: 'Cutomer', label: 'authorId', width: 100 },
-  { id: 'Date', label: 'createdAt', width: 100 },
-  { id: 'status', label: 'status', width: 100 },
+  { id: 'orderId', label: 'Order', width: 100 },
+  { id: 'author', label: 'Customer', width: 100 },
+  { id: 'createdAt', label: 'Date', width: 100 },
+  { id: 'status', label: 'Status', width: 100 },
   { id: '', width: 88 },
 ];
 
@@ -95,6 +96,8 @@ interface ItemTable {
 }
 
 export default function ListView() {
+  const [loading, setLoading] = useState(true);
+
   const table = useTable();
 
   const settings = useSettingsContext();
@@ -131,6 +134,7 @@ export default function ListView() {
       if (response.data?.length > 0) {
         console.log('response.data', response.data);
         setTableData(response.data);
+        setLoading(false);
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -189,6 +193,8 @@ export default function ListView() {
   return (
     <Container maxWidth="xl">
       <Card>
+        {loading && <LinearProgress />}
+
         <Tabs
           value={filters.status}
           onChange={handleFilterStatus}
@@ -301,6 +307,12 @@ export default function ListView() {
                       onDeleteRow={() => handleDeleteRow(row.id)}
                       onEditRow={() => handleEditRow(row.id)}
                     />
+                    // <SettingsTableRow
+                    //   key={row.id}
+                    //   row={row}
+                    //   onDeleteRow={() => {}}
+                    //   onViewRow={() => handleViewRow(row.id)}
+                    // />
                   ))}
 
                 <TableEmptyRows

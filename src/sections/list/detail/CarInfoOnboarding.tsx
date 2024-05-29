@@ -31,11 +31,11 @@ export default function CarInfoOnboarding({ data }: any) {
                       color: '#919EAB',
                     }}
                   >
-                    {data?.colors?.join(', ')}
+                    {data?.colors_ai}
                   </Typography>
                 </Stack>
                 <Stack spacing={2}>
-                  <Typography variant="button">Funcionalidad Específica::</Typography>
+                  <Typography variant="button">Funcionalidad Específica:</Typography>
                   <Typography
                     sx={{
                       fontSize: '12px',
@@ -68,18 +68,18 @@ export default function CarInfoOnboarding({ data }: any) {
                       color: '#919EAB',
                     }}
                   >
-                    {data?.styles?.join(', ')}
+                    {data?.styles_ai}
                   </Typography>
                 </Stack>
                 <Stack spacing={2}>
-                  <Typography variant="button">Tipos De Muebles::</Typography>
+                  <Typography variant="button">Tipos De Muebles:</Typography>
                   <Typography
                     sx={{
                       fontSize: '12px',
                       color: '#919EAB',
                     }}
                   >
-                    {data?.types_of_furniture?.join(', ')}
+                    {data?.types_of_furniture}
                   </Typography>
                 </Stack>
                 <Stack spacing={2}>

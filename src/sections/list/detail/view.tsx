@@ -42,7 +42,7 @@ export default function ListDetailPage({ id }: props) {
 
   const router = useRouter();
 
-  const theme = useTheme();
+  const axiosInstance = useAxios();
 
   useEffect(() => {
     axiosInstace.get(`${endpoints_api.onboarding.findOne}/${id}`).then((response) => {
@@ -56,6 +56,21 @@ export default function ListDetailPage({ id }: props) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleChangeStatus = (event: any) => {
+    axiosInstance
+      .patch(`${endpoints_api.onboarding.update}/${id}/status`, {
+        status: event.target.value,
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          setCardInfo({
+            ...cardInfo,
+            status: event.target.value as string,
+          });
+        }
+      });
+  };
 
   if (loading) {
     return <SplashScreen />;
@@ -112,22 +127,18 @@ export default function ListDetailPage({ id }: props) {
                 variant="outlined"
                 size="small"
                 value={cardInfo?.status}
-                onChange={(e) => {
-                  setCardInfo({
-                    ...cardInfo,
-                    status: e.target.value,
-                  });
-                }}
+                onChange={handleChangeStatus}
               >
                 <MenuItem value="NEW">NEW</MenuItem>
-                <MenuItem value="COMPLETADO">COMPLETADO</MenuItem>
+                <MenuItem value="PENDING">PENDIENTE</MenuItem>
+                <MenuItem value="COMPLETED">COMPLETADO</MenuItem>
                 <MenuItem value="CANCELADO">CANCELADO</MenuItem>
               </Select>
             </Box>
           </Stack>
         </Grid>
         <Grid xs={12}>
-          <CarDataUser />
+          <CarDataUser user={cardInfo.author} />
         </Grid>
         <Grid xs={12} sm={7}>
           <CarInfoOnboarding data={cardInfo} />

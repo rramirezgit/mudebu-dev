@@ -37,7 +37,62 @@ export default function SettingsTableRow({
   onSelectRow,
   onDeleteRow,
 }: Props) {
-  const { items, status, orderNumber, createdAt, customer, totalQuantity, subTotal } = row;
+  // const { items, status, orderNumber, createdAt, customer, totalQuantity, subTotal } = row;
+  const {
+    id,
+    orderId,
+    author,
+    createdAt,
+    status,
+    business_orientation,
+    colors_ai,
+    specific_functionality,
+    preferred_material,
+    styles_ai,
+    types_of_furniture,
+    dimensions,
+    project_location,
+    additional_details,
+  } = row;
+
+  const items = [
+    {
+      title: 'Giro de la Empresa',
+      text: business_orientation,
+    },
+    {
+      title: 'Colores',
+      text: colors_ai,
+    },
+    {
+      title: 'Funcionalidad Específica',
+      text: specific_functionality,
+    },
+    {
+      title: 'Material Preferido',
+      text: preferred_material,
+    },
+    {
+      title: 'Estilos',
+      text: styles_ai,
+    },
+    {
+      title: 'Tipos de Muebles',
+      text: types_of_furniture,
+    },
+    {
+      title: 'Dimensiones',
+      text: dimensions,
+    },
+    {
+      title: 'Ubicación del Proyecto',
+      text: project_location,
+    },
+    {
+      title: 'Detalles Adicionales',
+      text: additional_details,
+    },
+  ];
 
   const confirm = useBoolean();
 
@@ -63,16 +118,16 @@ export default function SettingsTableRow({
             },
           }}
         >
-          {orderNumber}
+          {orderId}
         </Box>
       </TableCell>
 
       <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
-        <Avatar alt={customer.name} src={customer.avatarUrl} sx={{ mr: 2 }} variant="square" />
+        <Avatar alt={author?.name} src={author?.avatar} sx={{ mr: 2 }} variant="circular" />
 
         <ListItemText
-          primary={customer.name}
-          secondary={customer.email}
+          primary={author?.name}
+          secondary={author?.email}
           primaryTypographyProps={{ typography: 'body2' }}
           secondaryTypographyProps={{
             component: 'span',

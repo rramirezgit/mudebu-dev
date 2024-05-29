@@ -40,7 +40,7 @@ export default function UserTableRow({
   onDeleteRow,
 }: Props) {
   // const { name, avatarUrl, company, role, status, email, phoneNumber } = row;
-  const { id, orderId, authorId, createdAt, status } = row;
+  const { id, orderId, author, createdAt, status } = row;
 
   const confirm = useBoolean();
 
@@ -54,12 +54,25 @@ export default function UserTableRow({
     <>
       <TableRow hover>
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{orderId}</TableCell>
-        <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
-          {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} /> */}
+        {/* <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
 
           <ListItemText
             primary={authorId}
             // secondary={email}
+            primaryTypographyProps={{ typography: 'body2' }}
+            secondaryTypographyProps={{
+              component: 'span',
+              color: 'text.disabled',
+            }}
+          />
+        </TableCell> */}
+
+        <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
+          <Avatar alt={author?.name} src={author?.avatar} sx={{ mr: 2 }} variant="circular" />
+
+          <ListItemText
+            primary={author?.name}
+            secondary={author?.email}
             primaryTypographyProps={{ typography: 'body2' }}
             secondaryTypographyProps={{
               component: 'span',

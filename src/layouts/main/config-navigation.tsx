@@ -25,7 +25,7 @@ export const navConfig = [
   {
     title: 'Dashboard',
     icon: <Iconify icon="bxs:dashboard" />,
-    path: paths.dashboard.root,
+    path: paths.dashboard.general.list,
     mobile: true,
   },
   {
