@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 export default function DetailList({ params }: any) {
-  const { id, author } = params;
+  const { id } = params;
 
-  return <ListDetailPage id={id} user={author} />;
+  return <ListDetailPage id={id} />;
 }
