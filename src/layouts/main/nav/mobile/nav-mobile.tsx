@@ -24,7 +24,7 @@ import { NavProps } from '../types';
 
 export default function NavMobile({ offsetTop, data }: NavProps) {
   const pathname = usePathname();
-  const { authenticated } = useAuthContext();
+  const { authenticated, user } = useAuthContext();
 
   const mdUp = useResponsive('up', 'md');
   const nav = useBoolean();
@@ -69,9 +69,12 @@ export default function NavMobile({ offsetTop, data }: NavProps) {
           <Logo sx={{ mx: 2.5, my: 3 }} />
 
           <List component="nav" disablePadding>
-            {data.map((link) => (
-              <NavList key={link.title} item={link} />
-            ))}
+            {data.map((link) => {
+              if (link.title === 'Dashboard' && user?.role === 'admin') {
+                return null;
+              }
+              return <NavList key={link.title} item={link} />;
+            })}
           </List>
         </Scrollbar>
 

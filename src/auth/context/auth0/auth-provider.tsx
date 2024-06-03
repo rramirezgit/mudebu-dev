@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useCallback, useState } from 'react';
+import { useMemo, useCallback, useState, useEffect } from 'react';
 import {
   AppState,
   useAuth0,
@@ -11,6 +11,8 @@ import {
 // config
 import { AUTH0_API } from 'src/config-global';
 //
+import { useAxios } from 'src/axios/axios-provider';
+import { endpoints_api } from 'src/axios/endpoints';
 import { AuthContext } from './auth-context';
 
 // ----------------------------------------------------------------------
@@ -22,7 +24,6 @@ type Props = {
 function AuthProviderWrapper({ children }: Props) {
   const { isAuthenticated, user, isLoading, loginWithRedirect, loginWithPopup, logout } =
     useAuth0();
-
   const [popupClick, setPopupClick] = useState(true);
 
   // LOGIN
@@ -54,7 +55,15 @@ function AuthProviderWrapper({ children }: Props) {
         ...user,
         displayName: user?.name,
         photoURL: user?.picture,
-        role: 'admin',
+        role:
+          user?.email === '97.rramirez@gmail.com' ||
+          user?.email === 'ksayago7@gmail.com' ||
+          user?.email === 'leonchavez30@gmail.com' ||
+          user?.email === 'rafamusi@neodaten.com' ||
+          user?.email === 'leonchavez@neodaten.com' ||
+          user?.email === 'nicolecruz2808@gmail.com'
+            ? 'admin'
+            : 'user',
       },
       method: 'auth0',
       loading: status === 'loading',

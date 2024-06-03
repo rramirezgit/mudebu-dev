@@ -1,14 +1,13 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@mui/material';
 import { Box } from 'src/components/Box/box-component';
 import { Upload } from 'src/components/upload';
 import { setBenchmarkList } from 'src/store/slices/mudebu-ai';
-import uuidv4 from 'src/utils/uuidv4';
 import { RootState } from 'src/store';
 import { useAxios } from 'src/axios/axios-provider';
 import { endpoints_api } from 'src/axios/endpoints';
-import { getStorage } from 'src/hooks/use-local-storage';
+import { getStorage, setStorage } from 'src/hooks/use-local-storage';
 import { storageKeys } from 'src/sections/onboarding/form/form-layaout';
 
 export default function MudebuAiUpload() {
@@ -23,8 +22,6 @@ export default function MudebuAiUpload() {
   const axiosInstance = useAxios();
 
   const handleDropMultiFile = async (acceptedFiles: File[]) => {
-    // Indicador de carga activado
-
     setLoading(true);
 
     const newFiles = [
@@ -71,6 +68,10 @@ export default function MudebuAiUpload() {
 
     // Indicador de carga desactivado
     setLoading(false);
+
+    // Guardar las imágenes en localStorage
+    const storedFiles = getStorage(storageKeys.uploadedImages) || [];
+    setStorage(storageKeys.uploadedImages, [...storedFiles, ...successfulUploads]);
   };
 
   const handleRemoveFile = (inputFile: File | string) => {
@@ -85,7 +86,18 @@ export default function MudebuAiUpload() {
   };
 
   useEffect(() => {
-    if (files.length === 0) {
+    // Cargar las imágenes guardadas desde localStorage
+    const storedFiles = getStorage(storageKeys.uploadedImages) || [];
+    if (storedFiles.length === 0) {
+      dispatch(setBenchmarkList([]));
+    }
+
+    if (files.length === 0 && storedFiles.length > 0) {
+      setFiles(storedFiles.map((file: any) => file.s3Url));
+      dispatch(setBenchmarkList(storedFiles));
+    }
+
+    if (files.length === 0 && benchmarkList.length > 0) {
       dispatch(setBenchmarkList([]));
     }
 

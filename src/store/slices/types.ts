@@ -5,6 +5,7 @@ export interface OnboardingState {
   onoardingInfo: any;
   loadingForm: boolean;
   imagesData: any;
+  initialText: string;
 }
 
 export interface mudebuAIState {
@@ -17,6 +18,7 @@ export interface mudebuAIState {
   reloadEditor: boolean;
   imageSelectedFinishing: any;
   mask: any;
+  activeStep: number;
 }
 
 export interface AuthSliceState {

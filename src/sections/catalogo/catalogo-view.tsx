@@ -11,13 +11,13 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import { bgBlur } from '../../theme/css';
 
 const catalagoData = [
-  {
-    id: 1,
-    img: '/assets/background/catalogo/catalogo1.png',
-    title: 'Mobiliario con Superficies Sólidas',
-    text: 'Madera: Mobiliario elegante y atemporal, disponible en una variedad de maderas nobles y acabados. Imagen recomendada: Fotografías de alta calidad que muestren la textura y el acabado de la madera, posiblemente en ambientes bien iluminados y estilizados. Metal: Piezas contemporáneas con un toque industrial, utilizando metales como acero, aluminio y hierro. Imagen recomendada: Imágenes que destaquen el brillo y la solidez del metal, idealmente en configuraciones modernas o urbanas. Acrílicos: Mobiliario moderno y versátil, perfecto para espacios vanguardistas. ',
-    pdf: '',
-  },
+  // {
+  //   id: 1,
+  //   img: '/assets/background/catalogo/catalogo1.png',
+  //   title: 'Mobiliario con Superficies Sólidas',
+  //   text: 'Madera: Mobiliario elegante y atemporal, disponible en una variedad de maderas nobles y acabados. Imagen recomendada: Fotografías de alta calidad que muestren la textura y el acabado de la madera, posiblemente en ambientes bien iluminados y estilizados. Metal: Piezas contemporáneas con un toque industrial, utilizando metales como acero, aluminio y hierro. Imagen recomendada: Imágenes que destaquen el brillo y la solidez del metal, idealmente en configuraciones modernas o urbanas. Acrílicos: Mobiliario moderno y versátil, perfecto para espacios vanguardistas. ',
+  //   pdf: '',
+  // },
   {
     id: 2,
     img: '/assets/background/catalogo/catalogo2.png',
@@ -53,7 +53,7 @@ export default function CatalogoView() {
     <Box
       sx={{
         display: 'grid',
-        gridTemplateColumns: { xs: '1fr', md: 'repeat(5, 1fr)' },
+        gridTemplateColumns: { xs: '1fr', md: 'repeat(4, 1fr)' },
       }}
     >
       {catalagoData.map((item) => (

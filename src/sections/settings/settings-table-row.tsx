@@ -18,7 +18,12 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import Iconify from 'src/components/iconify';
 import { ConfirmDialog } from 'src/components/custom-dialog';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
-import { Typography } from '@mui/material';
+import { Tooltip, Typography } from '@mui/material';
+import Label from 'src/components/label/label';
+import { useAxios } from 'src/axios/axios-provider';
+import { endpoints_api } from 'src/axios/endpoints';
+import { getStorage, setStorage } from 'src/hooks/use-local-storage';
+import { storageKeys } from '../onboarding/form/form-layaout';
 
 // ----------------------------------------------------------------------
 
@@ -100,6 +105,8 @@ export default function SettingsTableRow({
 
   const popover = usePopover();
 
+  const axiosInstace = useAxios();
+
   const renderPrimary = (
     <TableRow hover selected={selected}>
       {onSelectRow && (
@@ -137,6 +144,20 @@ export default function SettingsTableRow({
       </TableCell>
 
       <TableCell>
+        <Label
+          variant="soft"
+          color={
+            (status === 'NEW' && 'success') ||
+            (status === 'pending' && 'warning') ||
+            (status === 'banned' && 'error') ||
+            'default'
+          }
+        >
+          {status}
+        </Label>
+      </TableCell>
+
+      <TableCell>
         <ListItemText
           primary={format(new Date(createdAt), 'dd MMM yyyy')}
           secondary={format(new Date(createdAt), 'p')}
@@ -148,21 +169,6 @@ export default function SettingsTableRow({
           }}
         />
       </TableCell>
-
-      {/* 
-      <TableCell>
-        <Label
-          variant="soft"
-          color={
-            (status === 'completed' && 'success') ||
-            (status === 'pending' && 'warning') ||
-            (status === 'cancelled' && 'error') ||
-            'default'
-          }
-        >
-          {status}
-        </Label>
-      </TableCell> */}
 
       <TableCell align="right" sx={{ px: 1, whiteSpace: 'nowrap' }}>
         <IconButton
@@ -176,6 +182,63 @@ export default function SettingsTableRow({
         >
           <Iconify icon="eva:arrow-ios-downward-fill" />
         </IconButton>
+
+        {status === 'NEW' && (
+          <Tooltip title="Continuar">
+            <IconButton
+              color={collapse.value ? 'inherit' : 'default'}
+              onClick={() => {
+                axiosInstace.get(`${endpoints_api.onboarding.findOne}/${id}`).then((res) => {
+                  const { data } = res;
+                  console.log({ data });
+
+                  //  const storageKeys = {
+                  //   onboardingProgress: 'onboarding-progress',
+                  //   onboardingResult: 'onboarding-result',
+                  //   mudebuIaBenchmarkAi: 'mudebu-ia-benchmark',
+                  //   onboardingId: 'onboarding-id',
+                  //   uploadedImages: 'uploaded-images',
+                  //   mudebuAiBlend: 'mudebu-ai-blend',
+                  // };
+
+                  setStorage(storageKeys.onboardingProgress, {
+                    specification: data?.specification,
+                    espacio: data?.espacio,
+                    [data.espacio]: data[data?.espacio],
+                    mobiliario: data?.mobiliario,
+                    descripcion: data?.descripcion,
+                    estilos: data?.estilos?.split(';'),
+                    texturas: data?.texturas?.split(';'),
+                    materiales: data?.materiales?.split(';'),
+                    colores: data?.colores?.split(';'),
+                    tonos: data?.tonos?.split(';'),
+                    benchmarks: data?.benchmarks,
+                    detalles: data?.detalles,
+                  });
+
+                  if (data?.colors_ai && data?.dimensions) {
+                    setStorage(storageKeys.onboardingResult, {
+                      colors_ai: data?.colors_ai,
+                      dimensions: data?.dimensions,
+                      preferred_material: data?.preferred_material,
+                      project_location: data?.project_location,
+                      specific_functionality: data?.specific_functionality,
+                      types_of_furniture: data?.types_of_furniture,
+                      additional_details: data?.additional_details,
+                    });
+                  }
+                });
+              }}
+              sx={{
+                ...(collapse.value && {
+                  bgcolor: 'action.hover',
+                }),
+              }}
+            >
+              <Iconify icon="carbon:continue" />
+            </IconButton>
+          </Tooltip>
+        )}
       </TableCell>
     </TableRow>
   );

@@ -5,7 +5,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { mudebuAIState } from './types';
 
 const initialState: mudebuAIState = {
-  haveBenchmarks: true,
+  haveBenchmarks: false,
   benchmarkList: [],
   blendList: [],
   editImage: false,
@@ -14,6 +14,7 @@ const initialState: mudebuAIState = {
   reloadEditor: false,
   imageSelectedFinishing: null,
   mask: null,
+  activeStep: 0,
 };
 
 export const mudebuAiSlice = createSlice({
@@ -47,6 +48,9 @@ export const mudebuAiSlice = createSlice({
     setMask: (state, action: PayloadAction<any>) => {
       state.mask = action.payload;
     },
+    setActiveStep: (state, action: PayloadAction<number>) => {
+      state.activeStep = action.payload;
+    },
   },
 });
 
@@ -61,6 +65,7 @@ export const {
   setReloadEditor,
   setimageSelectedFinishing,
   setMask,
+  setActiveStep,
 } = mudebuAiSlice.actions;
 
 export default mudebuAiSlice.reducer;

@@ -1,4 +1,8 @@
 export const endpoints_api = {
+  user: {
+    get: '/auth/profile',
+    update: 'auth/update',
+  },
   onboarding: {
     post_create: 'onboarding',
     getAll: 'onboarding',

@@ -563,7 +563,7 @@ const FormDataSteps: IFormDataOnboarding[] = [
           {
             id: uuidv4(),
             type: textTypeOnboarding.title,
-            value: '¿Qué texturas te gustarían?',
+            value: '¿Qué materiales te gustarían?',
           },
           {
             id: uuidv4(),

@@ -1,8 +1,9 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useDispatch } from 'react-redux';
 import { useRouter } from 'src/routes/hooks';
+import { setInitialText } from 'src/store/slices/onBoarding';
 
 const Container = styled('div')(({ theme }) => ({
   width: '100%',
@@ -31,13 +32,21 @@ const StyledInput = styled('input')(({ theme }) => ({
 const SearchField = () => {
   const router = useRouter();
 
+  const dispatch = useDispatch();
+
   const handleclickSearch = () => {
     router.push('/onboarding');
   };
 
   return (
     <Container>
-      <StyledInput type="text" placeholder="e.g: Quiero una topografía para mi terreno de 15Ha" />
+      <StyledInput
+        type="text"
+        onChange={(e) => {
+          dispatch(setInitialText(e?.target?.value));
+        }}
+        placeholder="Descríbenos tus necesidades para generar una cotización con Inteligencia Artificial"
+      />
       <Button variant="contained" onClick={handleclickSearch} color="primary">
         Generate
       </Button>

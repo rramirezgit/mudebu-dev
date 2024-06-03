@@ -7,13 +7,11 @@ import Typography from '@mui/material/Typography';
 // layouts
 import { Container } from '@mui/system';
 import { Stack } from '@mui/material';
-import CompactLayout from 'src/layouts/compact';
 // routes
 import { RouterLink } from 'src/routes/components';
 // components
 import { MotionContainer, varBounce } from 'src/components/animate';
 // assets
-import { PageNotFoundIllustration } from 'src/assets/illustrations';
 import SeoIllustration from 'src/assets/illustrations/seo-illustration';
 
 // ----------------------------------------------------------------------

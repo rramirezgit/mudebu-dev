@@ -1,16 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import * as Yup from 'yup';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import LoadingButton from '@mui/lab/LoadingButton';
-/* eslint-disable import/order */
-import { Box } from 'src/components/Box/box-component';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
+import { Box } from 'src/components/Box/box-component';
 // hooks
 import { useAuthContext } from 'src/auth/hooks';
 // utils
@@ -21,46 +20,49 @@ import { countries } from 'src/assets/data';
 import Iconify from 'src/components/iconify';
 import { useSnackbar } from 'src/components/snackbar';
 import FormProvider, {
-  RHFSwitch,
   RHFTextField,
   RHFUploadAvatar,
   RHFAutocomplete,
 } from 'src/components/hook-form';
+import { useAxios } from 'src/axios/axios-provider';
+import { endpoints_api } from 'src/axios/endpoints';
+import { SplashScreen } from 'src/components/loading-screen';
 
 // ----------------------------------------------------------------------
 
 export default function AccountGeneral() {
   const { enqueueSnackbar } = useSnackbar();
+  const [userBack, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   const { user } = useAuthContext();
 
-  const UpdateUserSchema = Yup.object().shape({
-    displayName: Yup.string().required('Name is required'),
+  const axiosInstace = useAxios();
+
+  const UpdateUserSchema: any = Yup.object().shape({
+    name: Yup.string().required('Name is required'),
     email: Yup.string().required('Email is required').email('Email must be a valid email address'),
-    photoURL: Yup.mixed<any>().nullable().required('Avatar is required'),
-    phoneNumber: Yup.string().required('Phone number is required'),
-    country: Yup.string().required('Country is required'),
-    address: Yup.string().required('Address is required'),
-    state: Yup.string().required('State is required'),
-    city: Yup.string().required('City is required'),
-    zipCode: Yup.string().required('Zip code is required'),
-    about: Yup.string().required('About is required'),
-    // not required
-    isPublic: Yup.boolean(),
+    avatar: Yup.mixed().nullable().required('Avatar is required'),
+    cellphone: Yup.string().nullable(),
+    country: Yup.string().nullable(),
+    address: Yup.string().nullable(),
+    state: Yup.string().nullable(),
+    city: Yup.string().nullable(),
+    zipCode: Yup.string().nullable(),
+    about: Yup.string().nullable(),
   });
 
   const defaultValues = {
-    displayName: user?.displayName || '',
+    name: user?.name || '',
     email: user?.email || '',
-    photoURL: user?.photoURL || null,
-    phoneNumber: user?.phoneNumber || '',
-    country: user?.country || '',
-    address: user?.address || '',
-    state: user?.state || '',
-    city: user?.city || '',
-    zipCode: user?.zipCode || '',
-    about: user?.about || '',
-    isPublic: user?.isPublic || false,
+    avatar: user?.photoURL || null,
+    cellphone: '',
+    country: '',
+    address: '',
+    state: '',
+    city: '',
+    zipCode: '',
+    about: '',
   };
 
   const methods = useForm({
@@ -69,15 +71,48 @@ export default function AccountGeneral() {
   });
 
   const {
+    reset,
     setValue,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
 
+  useEffect(() => {
+    axiosInstace
+      .get(endpoints_api.user.get)
+      .then((res) => {
+        if (res.status === 200) {
+          setUser(res.data);
+          reset({
+            ...defaultValues,
+            name: res.data.name,
+            email: res.data.email,
+            avatar: res.data.avatar,
+            cellphone: res.data.cellphone,
+            country: res.data.country,
+            address: res.data.address,
+            state: res.data.state,
+            city: res.data.city,
+            zipCode: res.data.zipCode,
+            about: res.data.about,
+          });
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
   const onSubmit = handleSubmit(async (data) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
+
+      axiosInstace.patch(endpoints_api.user.update, data).then((res) => {
+        console.log(res);
+      });
+
       enqueueSnackbar('Update success!');
+
       console.info('DATA', data);
     } catch (error) {
       console.error(error);
@@ -93,11 +128,13 @@ export default function AccountGeneral() {
       });
 
       if (file) {
-        setValue('photoURL', newFile, { shouldValidate: true });
+        setValue('avatar', newFile, { shouldValidate: true });
       }
     },
     [setValue]
   );
+
+  if (loading) return <SplashScreen />;
 
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
@@ -113,7 +150,8 @@ export default function AccountGeneral() {
             }}
           >
             <RHFUploadAvatar
-              name="photoURL"
+              name="avatar"
+              disabled
               maxSize={3145728}
               onDrop={handleDrop}
               helperText={
@@ -132,10 +170,6 @@ export default function AccountGeneral() {
                 </Typography>
               }
             />
-
-            <Button variant="soft" color="error" sx={{ mt: 3 }}>
-              Delete User
-            </Button>
           </Card>
         </Grid>
 
@@ -150,9 +184,9 @@ export default function AccountGeneral() {
                 sm: 'repeat(2, 1fr)',
               }}
             >
-              <RHFTextField name="displayName" label="Name" />
-              <RHFTextField name="email" label="Email Address" />
-              <RHFTextField name="phoneNumber" label="Phone Number" />
+              <RHFTextField name="name" label="Name" disabled />
+              <RHFTextField name="email" label="Email Address" disabled />
+              <RHFTextField name="cellphone" label="Phone Number" />
               <RHFTextField name="address" label="Address" />
 
               <RHFAutocomplete

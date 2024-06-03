@@ -34,7 +34,9 @@ export default function ServicesCarrusel({ imageList }: ServicesViewProps) {
             mb: 5,
           }}
         >
-          Somos una empresa 100% mexicana con un amplio arsenal de productos
+          Somos una empresa 100% mexicana con una amplia gama de servicios para resolver tus
+          necesidades de mantenimiento. Atendemos servicios de mantenimiento correctivo y preventivo
+          para así lograr una imagen de calidad en el punto de venta.
         </Typography>
       </m.div>
       <m.div variants={varFade().inRight}>

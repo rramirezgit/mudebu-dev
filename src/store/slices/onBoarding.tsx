@@ -21,6 +21,7 @@ const initialState: OnboardingState = {
   },
   loadingForm: false,
   imagesData: null,
+  initialText: '',
 };
 
 export const onBoardingSlice = createSlice({
@@ -52,6 +53,9 @@ export const onBoardingSlice = createSlice({
     setImagesData: (state, action: PayloadAction<any>) => {
       state.imagesData = action.payload;
     },
+    setInitialText: (state, action: PayloadAction<string>) => {
+      state.initialText = action.payload;
+    },
   },
 });
 
@@ -65,6 +69,7 @@ export const {
   setOnboardingInfo,
   setloadingForm,
   setImagesData,
+  setInitialText,
 } = onBoardingSlice.actions;
 
 export default onBoardingSlice.reducer;

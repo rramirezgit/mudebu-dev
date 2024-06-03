@@ -25,8 +25,10 @@ import { TSeccionForm } from './types';
 export const storageKeys = {
   onboardingProgress: 'onboarding-progress',
   onboardingResult: 'onboarding-result',
-  mudebuIaBenchmark: 'mudebu-ia-benchmark',
+  mudebuIaBenchmarkAi: 'mudebu-ia-benchmark',
   onboardingId: 'onboarding-id',
+  uploadedImages: 'uploaded-images',
+  mudebuAiBlend: 'mudebu-ai-blend',
 };
 
 interface OnboardingFormLayoutProps {

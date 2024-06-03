@@ -14,21 +14,7 @@ import { endpoints_api } from 'src/axios/endpoints';
 import { getStorage, setStorage } from 'src/hooks/use-local-storage';
 import { setImagesData } from 'src/store/slices/onBoarding';
 import { storageKeys } from 'src/sections/onboarding/form/form-layaout';
-
-// const imagesData = {
-//   imagesGoogle: Array.from({ length: 5 }, () => ({
-//     url: `https://source.unsplash.com/featured/?real-estate&t=${Date.now() + Math.random()}`,
-//     id: uuidv4(),
-//   })),
-//   imagesOpenAi: Array.from({ length: 3 }, () => ({
-//     url: `https://source.unsplash.com/featured/?real-estate&t=${Date.now() + Math.random()}`,
-//     id: uuidv4(),
-//   })),
-//   imagesPrintest: Array.from({ length: 3 }, () => ({
-//     url: `https://source.unsplash.com/featured/?real-estate&t=${Date.now() + Math.random()}`,
-//     id: uuidv4(),
-//   })),
-// };
+import LinearBuffer from 'src/components/progresBarBuffer';
 
 export default function MudebuAiGetAi() {
   const [counter, setcounter] = useState(1);
@@ -78,14 +64,15 @@ export default function MudebuAiGetAi() {
   };
 
   useEffect(() => {
-    // const dataStorage = getStorage(storageKeys.mudebuIaBenchmark);
+    const dataStorage = getStorage(storageKeys.mudebuIaBenchmarkAi);
+    if (dataStorage) {
+      dispatch(setImagesData(dataStorage));
+      dispatch(setHaveBenchmarks(true));
+      setLoading(false);
+      setLoadingAll(false);
+      return;
+    }
 
-    // if (dataStorage) {
-    //   dispatch(setImagesData(dataStorage));
-    //   dispatch(setHaveBenchmarks(false));
-    //   setLoading(false);
-    //   return;
-    // }
     setLoadingAll(true);
 
     let prompt = info?.prompt_images;
@@ -108,7 +95,7 @@ export default function MudebuAiGetAi() {
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           if (response.data) {
-            setStorage(storageKeys.mudebuIaBenchmark, response.data);
+            setStorage(storageKeys.mudebuIaBenchmarkAi, response.data);
             dispatch(setImagesData(response.data));
             dispatch(setHaveBenchmarks(false));
 
@@ -233,15 +220,30 @@ export default function MudebuAiGetAi() {
             />
           ))}
       </Box>
-      <Button
-        variant="contained"
-        disabled={loading || loadingAll}
-        sx={{ mt: 3 }}
-        startIcon={<Magicpen size="24" color="white" />}
-        onClick={handleClickMoreImages}
-      >
-        {`Generar mas ${counter}/5`}
-      </Button>
+      {loading ? (
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography variant="subtitle1" sx={{ mt: 3 }}>
+            se esta cargando
+          </Typography>
+          <LinearBuffer />
+        </Box>
+      ) : (
+        <Button
+          variant="contained"
+          disabled={loading || loadingAll}
+          sx={{ mt: 3 }}
+          startIcon={<Magicpen size="24" color="white" />}
+          onClick={handleClickMoreImages}
+        >
+          {`Generar mas ${counter}/5`}
+        </Button>
+      )}
     </Box>
   );
 }

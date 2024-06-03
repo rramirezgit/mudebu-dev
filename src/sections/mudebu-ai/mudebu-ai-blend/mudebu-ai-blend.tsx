@@ -4,7 +4,13 @@ import { Box } from 'src/components/Box/box-component';
 import { varFade } from 'src/components/animate';
 import Carouseldoble from 'src/sections/mudebu-ai/mudebu-ai-blend/carrusel-doble';
 
-export default function MudebuAiblend() {
+export default function MudebuAiblend({
+  mesageLoading,
+  setMesageLoading,
+}: {
+  mesageLoading: string;
+  setMesageLoading: any;
+}) {
   return (
     <Box sx={{ width: 1, textAlign: 'center' }}>
       <Typography
@@ -26,7 +32,7 @@ export default function MudebuAiblend() {
       </Typography>
 
       <m.div variants={varFade().inRight}>
-        <Carouseldoble />
+        <Carouseldoble mesageLoading={mesageLoading} setMesageLoading={setMesageLoading} />
       </m.div>
     </Box>
   );

@@ -14,6 +14,7 @@ export default function CarDataUser({ user }: any) {
                 <Avatar sx={{ mr: 2 }} src={user?.avatar} />
               </Box>
             </Grid>
+
             <Grid xs={12} sm={4}>
               <Typography variant="h6">{user?.name}</Typography>
               <Stack spacing={1}>
@@ -26,13 +27,13 @@ export default function CarDataUser({ user }: any) {
                   <Typography variant="body2"> {user?.cellphone || '-'}</Typography>
                 </Stack>
                 <Stack spacing={1} direction="row">
-                  <Typography variant="body2">Empresa:</Typography>
-                  <Typography variant="body2"> {user?.company || '-'}</Typography>
+                  <Typography variant="body2">country:</Typography>
+                  <Typography variant="body2"> {user?.country || '-'}</Typography>
                 </Stack>
-                <Stack spacing={1} direction="row">
-                  <Typography variant="body2">Puesto:</Typography>
-                  <Typography variant="body2"> {user?.jobTitle || '-'}</Typography>
-                </Stack>
+                {/* <Stack spacing={1} direction="row">
+                  <Typography variant="body2">address:</Typography>
+                  <Typography variant="body2"> {user?.jobaddressTitle || '-'}</Typography>
+                </Stack> */}
                 <Stack spacing={1} direction="row">
                   <Typography variant="body2">Acerca de:</Typography>
                   <Typography variant="body2"> {user?.about || '-'}</Typography>
@@ -42,24 +43,24 @@ export default function CarDataUser({ user }: any) {
             <Grid xs={12} sm={5}>
               <Stack spacing={1} sx={{ mt: 3 }}>
                 <Stack spacing={1} direction="row">
-                  <Typography variant="body2">Dirección:</Typography>
-                  <Typography variant="body2"> - </Typography>
+                  <Typography variant="body2">City:</Typography>
+                  <Typography variant="body2"> {user?.city}</Typography>
                 </Stack>
-                <Stack spacing={1} direction="row">
+                {/* <Stack spacing={1} direction="row">
                   <Typography variant="body2">País:</Typography>
                   <Typography variant="body2"> - </Typography>
-                </Stack>
-                <Stack spacing={1} direction="row">
-                  <Typography variant="body2">Estado:</Typography>
-                  <Typography variant="body2"> - </Typography>
-                </Stack>
-                <Stack spacing={1} direction="row">
-                  <Typography variant="body2">Ciudad:</Typography>
-                  <Typography variant="body2"> - </Typography>
-                </Stack>
+                </Stack> */}
+                {/* <Stack spacing={1} direction="row">
+                    <Typography variant="body2">Estado:</Typography>
+                    <Typography variant="body2"> - </Typography>
+                  </Stack>
+                  <Stack spacing={1} direction="row">
+                    <Typography variant="body2">Ciudad:</Typography>
+                    <Typography variant="body2"> - </Typography>
+                  </Stack> */}
                 <Stack spacing={1} direction="row">
                   <Typography variant="body2">Código Postal:</Typography>
-                  <Typography variant="body2"> - </Typography>
+                  <Typography variant="body2">{user?.zipCode} </Typography>
                 </Stack>
               </Stack>
             </Grid>

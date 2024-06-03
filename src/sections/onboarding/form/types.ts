@@ -7,8 +7,8 @@ export enum TSeccionForm {
   Materiales = ' Materiales',
   Tonos = 'Tonos',
   Colores = 'Colores',
-  Benchmarks = 'Benchmarks',
-  DetallesAdicionalesDeDiseño = 'Detalles Adicionales de Diseño',
+  Benchmarks = 'Inspiración Externa',
+  DetallesAdicionalesDeDiseño = 'Información Adicional',
 }
 
 export enum inputsOnboarding {

@@ -42,6 +42,7 @@ import SettingsTableRow from '../settings-table-row';
 const TABLE_HEAD = [
   { id: 'orderNumber', label: 'Order', width: 116 },
   { id: 'name', label: 'Product' },
+  { id: 'status', label: 'Status', width: 96 },
   { id: 'date', label: 'Fecha', width: 140 },
   { id: '', width: 88 },
 ];

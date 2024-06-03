@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import { alpha, styled } from '@mui/system';
 import { useField } from 'formik';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box } from 'src/components/Box/box-component';
 
 type StyledButtonsProps = {
@@ -24,24 +24,24 @@ type Props = {
 
 export default function OnBoardingMultiButtons({ options, nameFORMIK }: Props) {
   const [field, , helper] = useField(nameFORMIK);
-  const [optionsSelected, setOptionsSelected] = useState<string>(field.value as string);
+  const [optionsSelected, setOptionsSelected] = useState<string>(field.value || '');
 
   const handleClickOption = (nameItem: string) => {
+    let newValue;
     if (optionsSelected.includes(nameItem)) {
-      setOptionsSelected(optionsSelected.replace(`;${nameItem}`, ''));
-      return;
+      const optionsArray = optionsSelected.split(';').filter((option) => option !== nameItem);
+      newValue = optionsArray.join(';');
+    } else {
+      newValue = optionsSelected ? `${optionsSelected};${nameItem}` : nameItem;
     }
-
-    const newValue = optionsSelected ? `${optionsSelected};${nameItem}` : nameItem;
     setOptionsSelected(newValue);
   };
 
-  const isOptionActive = (nameItem: string) => optionsSelected.includes(nameItem);
+  const isOptionActive = (nameItem: string) => optionsSelected.split(';').includes(nameItem);
 
   useEffect(() => {
     helper.setValue(optionsSelected);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [optionsSelected]);
+  }, [optionsSelected, helper]);
 
   return (
     <Box

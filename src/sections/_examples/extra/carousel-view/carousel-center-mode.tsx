@@ -87,6 +87,7 @@ type CarouselItemProps = {
     title?: string;
     to?: string;
     description?: string;
+    miniDescription?: string;
     image: string;
   };
   isActive: boolean;
@@ -151,7 +152,7 @@ function CarouselItem({ item, isActive }: CarouselItemProps) {
             {title}
           </Typography>
           <Typography variant="body2" sx={{ mb: 2, textAlign: 'center' }}>
-            {description}
+            {item.miniDescription}
           </Typography>
           <Button
             variant="contained"

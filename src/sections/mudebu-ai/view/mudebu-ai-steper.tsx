@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-plusplus */
 
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // @mui
 import { alpha, useTheme } from '@mui/material/styles';
 /* eslint-disable import/order */
@@ -22,6 +23,7 @@ import Iconify from 'src/components/iconify/iconify';
 import { RootState } from 'src/store';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  setActiveStep,
   setBlendList,
   setEditImage,
   setHaveBenchmarks,
@@ -106,12 +108,13 @@ function QontoStepIcon(props: StepIconProps) {
 const steps = ['Benchmarking', 'Inteligencia Artificial', 'Edición IA'];
 
 export default function MudebuAiStepper() {
-  const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set<number>());
   const [loading, setLoading] = useState(false);
   const [showGetAi, setShowGetAi] = useState(false);
+  const [mesageLoading, setMesageLoading] = useState('Enviando imagenes a la IA...');
 
   const haveBenchmarks = useSelector((state: RootState) => state.mudebuAi.haveBenchmarks);
+  const activeStep = useSelector((state: RootState) => state.mudebuAi.activeStep);
   const blendList = useSelector((state: RootState) => state.mudebuAi.blendList);
   const benchmarkList = useSelector((state: RootState) => state.mudebuAi.benchmarkList);
   const editImage = useSelector((state: RootState) => state.mudebuAi.editImage);
@@ -137,11 +140,21 @@ export default function MudebuAiStepper() {
       newSkipped.delete(activeStep);
     }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    dispatch(setActiveStep(activeStep + 1));
     setSkipped(newSkipped);
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    const mudebuAiBlend = getStorage(storageKeys.mudebuAiBlend);
+    const uploadedImages = getStorage(storageKeys.uploadedImages);
+    if (mudebuAiBlend) {
+      dispatch(setBlendList(mudebuAiBlend));
+      dispatch(setActiveStep(1));
+    }
+    if (uploadedImages) dispatch(setHaveBenchmarks(true));
+  }, []);
 
   const handleNext = () => {
     if (haveBenchmarks && benchmarkList.length <= 1) {
@@ -151,6 +164,15 @@ export default function MudebuAiStepper() {
     if (activeStep === 0) {
       setLoading(true);
 
+      const imgBlended = getStorage(storageKeys.mudebuAiBlend);
+
+      if (imgBlended) {
+        dispatch(setBlendList(imgBlended));
+        setLoading(false);
+        nextStep();
+        return;
+      }
+
       // tomar de forma random solo dos imagenes del array de promt
 
       const prompt = benchmarkList
@@ -158,6 +180,8 @@ export default function MudebuAiStepper() {
         .sort(() => Math.random() - 0.5)
         .slice(0, 2)
         .join(' ');
+
+      nextStep();
 
       axiosInstace.post(endpoints_api.mudebuAi.blend, { prompt }).then((response) => {
         // dispatch(setBlendList(response.data.upscaled_urls));
@@ -168,9 +192,16 @@ export default function MudebuAiStepper() {
             .then((res2) => {
               if (res2.data?.status === 'completed') {
                 setLoading(false);
+                setMesageLoading('completed');
                 dispatch(setBlendList(res2.data.upscaled_urls));
-                nextStep();
+                setStorage(storageKeys.mudebuAiBlend, res2.data.upscaled_urls);
                 clearInterval(interval);
+              } else if (res2.data?.status === 'pending') {
+                setMesageLoading('Esperando respuesta de la IA...');
+              } else if (res2.data?.status === 'in-progress') {
+                setMesageLoading('Procesando imagenes...');
+              } else {
+                setMesageLoading(res2.data?.status);
               }
             })
             .catch((error) => {
@@ -243,8 +274,14 @@ export default function MudebuAiStepper() {
     if (!haveBenchmarks && activeStep === 0) {
       dispatch(setHaveBenchmarks(true));
     } else {
-      setActiveStep((prevActiveStep) => prevActiveStep - 1);
+      dispatch(setActiveStep(activeStep - 1));
     }
+
+    const uploaBenchmarks = getStorage(storageKeys.uploadedImages);
+    if (uploaBenchmarks) {
+      dispatch(setHaveBenchmarks(true));
+    }
+
     dispatch(setEditImage(false));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -260,7 +297,7 @@ export default function MudebuAiStepper() {
   };
 
   const handleReset = () => {
-    setActiveStep(0);
+    dispatch(setActiveStep(0));
   };
 
   const handleClickEditImage = () => {
@@ -315,7 +352,9 @@ export default function MudebuAiStepper() {
             }}
           >
             {activeStep === 0 && <>{showGetAi ? <MudebuAiGetAi /> : <MudebuAiUpload />}</>}
-            {activeStep === 1 && <MudebuAiblend />}
+            {activeStep === 1 && (
+              <MudebuAiblend mesageLoading={mesageLoading} setMesageLoading={setMesageLoading} />
+            )}
             {activeStep === 2 && <>{editImage ? <MudebuAiEditor /> : <MudebuAiPreview />}</>}
           </Box>
 
@@ -346,7 +385,7 @@ export default function MudebuAiStepper() {
                 onClick={handleNext}
                 disabled={
                   (activeStep === 0 && benchmarkList.length < 2) ||
-                  (activeStep === 1 && blendList.length === 0)
+                  (activeStep === 1 && !imageSelectedFinishing)
                 }
                 variant="contained"
                 loading={loading}

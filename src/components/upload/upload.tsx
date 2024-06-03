@@ -17,7 +17,6 @@ import RejectionFiles from './errors-rejection-files';
 import MultiFilePreview from './preview-multi-file';
 import SingleFilePreview from './preview-single-file';
 import { CircularProgress } from '@mui/material';
-import { useEffect } from 'react';
 
 // ----------------------------------------------------------------------
 

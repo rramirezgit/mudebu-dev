@@ -32,8 +32,7 @@ import { bgBlur } from 'src/theme/css';
 export default function Header() {
   const theme = useTheme();
 
-  const { authenticated } = useAuthContext();
-
+  const { authenticated, user } = useAuthContext();
   const mdUp = useResponsive('up', 'md');
 
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
@@ -90,13 +89,15 @@ export default function Header() {
                 <Button component={RouterLink} href={paths.onboarding} variant="contained">
                   Cotizar
                 </Button>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => router.push(paths.dashboard.general.list)}
-                >
-                  Dashboard
-                </Button>
+                {user?.role === 'admin' && (
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => router.push(paths.dashboard.general.list)}
+                  >
+                    Dashboard
+                  </Button>
+                )}
               </Stack>
             )}
 
