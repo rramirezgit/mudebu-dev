@@ -24,7 +24,7 @@ type Props = {
 
 export default function OnBoardingMultiButtons({ options, nameFORMIK }: Props) {
   const [field, , helper] = useField(nameFORMIK);
-  const [optionsSelected, setOptionsSelected] = useState<string>(field.value || '');
+  const [optionsSelected, setOptionsSelected] = useState<any>(field.value || '');
 
   const handleClickOption = (nameItem: string) => {
     let newValue;
@@ -37,7 +37,15 @@ export default function OnBoardingMultiButtons({ options, nameFORMIK }: Props) {
     setOptionsSelected(newValue);
   };
 
-  const isOptionActive = (nameItem: string) => optionsSelected.split(';').includes(nameItem);
+  const isOptionActive = (nameItem: string) => {
+    if (typeof optionsSelected === 'string') {
+      return optionsSelected?.split(';')?.includes(nameItem);
+    }
+    if (Array.isArray(optionsSelected)) {
+      return optionsSelected?.includes(nameItem);
+    }
+    return false;
+  };
 
   useEffect(() => {
     helper.setValue(optionsSelected);

@@ -280,6 +280,7 @@ export default function MudebuAiStepper() {
     const uploaBenchmarks = getStorage(storageKeys.uploadedImages);
     if (uploaBenchmarks) {
       dispatch(setHaveBenchmarks(true));
+      dispatch(setHaveBenchmarks(true));
     }
 
     dispatch(setEditImage(false));
@@ -393,7 +394,7 @@ export default function MudebuAiStepper() {
                 {activeStep === steps.length - 1 ? 'Finalizar Cotización' : 'Siguiente'}
               </LoadingButton>
             )}
-            {haveBenchmarks && benchmarkList.length === 0 && (
+            {!haveBenchmarks && benchmarkList.length === 0 && (
               <>
                 {isStepOptional(activeStep) && (
                   <LoadingButton

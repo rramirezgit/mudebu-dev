@@ -10,6 +10,8 @@ import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import TableCell from '@mui/material/TableCell';
 import IconButton from '@mui/material/IconButton';
+import { useRouter } from 'src/routes/hooks';
+
 import ListItemText from '@mui/material/ListItemText';
 // hooks
 import { useBoolean } from 'src/hooks/use-boolean';
@@ -22,7 +24,7 @@ import { Tooltip, Typography } from '@mui/material';
 import Label from 'src/components/label/label';
 import { useAxios } from 'src/axios/axios-provider';
 import { endpoints_api } from 'src/axios/endpoints';
-import { getStorage, setStorage } from 'src/hooks/use-local-storage';
+import { getStorage, removeStorage, setStorage } from 'src/hooks/use-local-storage';
 import { storageKeys } from '../onboarding/form/form-layaout';
 
 // ----------------------------------------------------------------------
@@ -107,6 +109,8 @@ export default function SettingsTableRow({
 
   const axiosInstace = useAxios();
 
+  const router = useRouter();
+
   const renderPrimary = (
     <TableRow hover selected={selected}>
       {onSelectRow && (
@@ -190,7 +194,7 @@ export default function SettingsTableRow({
               onClick={() => {
                 axiosInstace.get(`${endpoints_api.onboarding.findOne}/${id}`).then((res) => {
                   const { data } = res;
-                  console.log({ data });
+                  console.log(data);
 
                   //  const storageKeys = {
                   //   onboardingProgress: 'onboarding-progress',
@@ -201,22 +205,30 @@ export default function SettingsTableRow({
                   //   mudebuAiBlend: 'mudebu-ai-blend',
                   // };
 
-                  setStorage(storageKeys.onboardingProgress, {
-                    specification: data?.specification,
-                    espacio: data?.espacio,
-                    [data.espacio]: data[data?.espacio],
-                    mobiliario: data?.mobiliario,
-                    descripcion: data?.descripcion,
-                    estilos: data?.estilos?.split(';'),
-                    texturas: data?.texturas?.split(';'),
-                    materiales: data?.materiales?.split(';'),
-                    colores: data?.colores?.split(';'),
-                    tonos: data?.tonos?.split(';'),
-                    benchmarks: data?.benchmarks,
-                    detalles: data?.detalles,
-                  });
+                  removeStorage(storageKeys.onboardingProgress);
+                  removeStorage(storageKeys.onboardingResult);
+                  removeStorage(storageKeys.onboardingId);
+                  removeStorage(storageKeys.uploadedImages);
+                  removeStorage(storageKeys.mudebuAiBlend);
 
-                  if (data?.colors_ai && data?.dimensions) {
+                  if (data?.description) {
+                    setStorage(storageKeys.onboardingProgress, {
+                      specification: data?.specification,
+                      espacio: data?.space,
+                      [data.space]: data[data?.space],
+                      mobiliario: data?.decoration,
+                      descripcion: data?.description,
+                      estilos: data?.styles?.join(';'),
+                      texturas: data?.textures?.join(';'),
+                      materiales: data?.materials?.join(';'),
+                      colores: data?.colors?.join(';'),
+                      tonos: data?.tones?.join(';'),
+                      benchmarks: data?.benchmark_text,
+                      detalles: data?.additional_details,
+                    });
+                  }
+
+                  if (data?.types_of_furniture) {
                     setStorage(storageKeys.onboardingResult, {
                       colors_ai: data?.colors_ai,
                       dimensions: data?.dimensions,
@@ -226,7 +238,19 @@ export default function SettingsTableRow({
                       types_of_furniture: data?.types_of_furniture,
                       additional_details: data?.additional_details,
                     });
+
+                    setStorage(storageKeys.onboardingId, data?.id);
                   }
+
+                  if (data?.uploadedImages) {
+                    setStorage(storageKeys.uploadedImages, data?.uploadedImages);
+                  }
+
+                  if (data?.mudebuAiBlend) {
+                    setStorage(storageKeys.mudebuAiBlend, data?.mudebuAiBlend);
+                  }
+
+                  router.push('/onboarding');
                 });
               }}
               sx={{
