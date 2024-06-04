@@ -15,11 +15,12 @@ import {
   PaperProps,
 } from '@mui/material';
 import { m } from 'framer-motion';
-import { useSelector } from 'react-redux';
-import { getStorage } from 'src/hooks/use-local-storage';
+import { useDispatch, useSelector } from 'react-redux';
+import { getStorage, removeStorage } from 'src/hooks/use-local-storage';
 import getVariant from 'src/sections/_examples/extra/animate-view/get-variant';
 import { useRouter } from 'src/routes/hooks';
 import { RootState } from 'src/store';
+import { cleanStorage } from 'src/sections/mudebu-ai/view/clean';
 import { SplashScreen } from 'src/components/loading-screen';
 import FormSteps from './form-steps';
 import OnboardingFormLayout, { storageKeys } from './form-layaout';
@@ -30,6 +31,7 @@ export default function OnboardingForm() {
   const [open, setOpen] = useState(false);
   const [initialValues, setInitialValues] = useState({});
   const [position, setPosition] = useState('');
+  const dispatch = useDispatch();
 
   const initialText = useSelector((state: RootState) => state.OnBoarding.initialText);
 
@@ -176,12 +178,7 @@ export default function OnboardingForm() {
                 onClick={() => {
                   setOpen(false);
                   // limpiar el local storage
-                  localStorage.removeItem(storageKeys.onboardingProgress);
-                  localStorage.removeItem(storageKeys.mudebuIaBenchmarkAi);
-                  localStorage.removeItem(storageKeys.onboardingId);
-                  localStorage.removeItem(storageKeys.onboardingResult);
-                  localStorage.removeItem(storageKeys.uploadedImages);
-                  localStorage.removeItem(storageKeys.mudebuAiBlend);
+                  cleanStorage(dispatch);
 
                   if (initialText) {
                     setFieldValue('descripcion', initialText);

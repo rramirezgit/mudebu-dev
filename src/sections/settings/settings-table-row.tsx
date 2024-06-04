@@ -26,6 +26,8 @@ import { useAxios } from 'src/axios/axios-provider';
 import { endpoints_api } from 'src/axios/endpoints';
 import { getStorage, removeStorage, setStorage } from 'src/hooks/use-local-storage';
 import { storageKeys } from '../onboarding/form/form-layaout';
+import { cleanStorage } from '../mudebu-ai/view/clean';
+import { useDispatch } from 'react-redux';
 
 // ----------------------------------------------------------------------
 
@@ -110,6 +112,8 @@ export default function SettingsTableRow({
   const axiosInstace = useAxios();
 
   const router = useRouter();
+
+  const dispatch = useDispatch();
 
   const renderPrimary = (
     <TableRow hover selected={selected}>
@@ -196,20 +200,7 @@ export default function SettingsTableRow({
                   const { data } = res;
                   console.log(data);
 
-                  //  const storageKeys = {
-                  //   onboardingProgress: 'onboarding-progress',
-                  //   onboardingResult: 'onboarding-result',
-                  //   mudebuIaBenchmarkAi: 'mudebu-ia-benchmark',
-                  //   onboardingId: 'onboarding-id',
-                  //   uploadedImages: 'uploaded-images',
-                  //   mudebuAiBlend: 'mudebu-ai-blend',
-                  // };
-
-                  removeStorage(storageKeys.onboardingProgress);
-                  removeStorage(storageKeys.onboardingResult);
-                  removeStorage(storageKeys.onboardingId);
-                  removeStorage(storageKeys.uploadedImages);
-                  removeStorage(storageKeys.mudebuAiBlend);
+                  cleanStorage(dispatch);
 
                   if (data?.description) {
                     setStorage(storageKeys.onboardingProgress, {

@@ -26,8 +26,10 @@ import {
   setActiveStep,
   setBenchmarkList,
   setBlendList,
+  setBrushRadius,
   setEditImage,
   setHaveBenchmarks,
+  setMask,
   setimageSelectedFinishing,
 } from 'src/store/slices/mudebu-ai';
 import MudebuAiblend from '../mudebu-ai-blend/mudebu-ai-blend';
@@ -273,12 +275,7 @@ export default function MudebuAiStepper() {
                         setLoading(false);
                         router.push('/onboarding/ended-process/');
 
-                        removeStorage(storageKeys.uploadedImages);
-                        removeStorage(storageKeys.mudebuAiBlend);
-                        removeStorage(storageKeys.mudebuIaBenchmarkAi);
-                        removeStorage(storageKeys.onboardingId);
-                        removeStorage(storageKeys.onboardingProgress);
-                        removeStorage(storageKeys.onboardingResult);
+                        cleanStorage(dispatch);
                       });
                   }
                 });
