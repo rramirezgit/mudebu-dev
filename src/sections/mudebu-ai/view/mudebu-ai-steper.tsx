@@ -39,12 +39,12 @@ import MudebuAiEditor from '../mudebu-ai-editor/mudebu-ai-editor';
 import { useAxios } from 'src/axios/axios-provider';
 import { useRouter } from 'src/routes/hooks';
 import { endpoints_api } from 'src/axios/endpoints';
+import { cleanStorage } from './clean';
 import { setImagesData } from 'src/store/slices/onBoarding';
 import { LoadingButton } from '@mui/lab';
 import { getStorage, removeStorage, setStorage } from 'src/hooks/use-local-storage';
 import { storageKeys } from 'src/sections/onboarding/form/form-layaout';
 import { convertImageToBase64 } from './tob64';
-import { AxiosInstance } from 'axios';
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
