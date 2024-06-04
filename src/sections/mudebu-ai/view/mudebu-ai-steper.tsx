@@ -24,6 +24,7 @@ import { RootState } from 'src/store';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setActiveStep,
+  setBenchmarkList,
   setBlendList,
   setEditImage,
   setHaveBenchmarks,
@@ -38,9 +39,10 @@ import { useRouter } from 'src/routes/hooks';
 import { endpoints_api } from 'src/axios/endpoints';
 import { setImagesData } from 'src/store/slices/onBoarding';
 import { LoadingButton } from '@mui/lab';
-import { getStorage, setStorage } from 'src/hooks/use-local-storage';
+import { getStorage, removeStorage, setStorage } from 'src/hooks/use-local-storage';
 import { storageKeys } from 'src/sections/onboarding/form/form-layaout';
 import { convertImageToBase64 } from './tob64';
+import { AxiosInstance } from 'axios';
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -149,11 +151,13 @@ export default function MudebuAiStepper() {
   useEffect(() => {
     const mudebuAiBlend = getStorage(storageKeys.mudebuAiBlend);
     const uploadedImages = getStorage(storageKeys.uploadedImages);
+    const mudebuIaBenchmarkAi = getStorage(storageKeys.mudebuIaBenchmarkAi);
+    if (uploadedImages) dispatch(setBenchmarkList(uploadedImages));
+    if (mudebuIaBenchmarkAi) dispatch(setBenchmarkList(mudebuIaBenchmarkAi));
     if (mudebuAiBlend) {
       dispatch(setBlendList(mudebuAiBlend));
       dispatch(setActiveStep(1));
     }
-    if (uploadedImages) dispatch(setHaveBenchmarks(true));
   }, []);
 
   const handleNext = () => {
@@ -182,6 +186,10 @@ export default function MudebuAiStepper() {
         .join(' ');
 
       nextStep();
+
+      axiosInstace.patch(`${endpoints_api.onboarding.update}/${info?.savedOnboarding?.id}`, {
+        benchmark_img: benchmarkList.map((image: any) => image.s3Url),
+      });
 
       axiosInstace.post(endpoints_api.mudebuAi.blend, { prompt }).then((response) => {
         // dispatch(setBlendList(response.data.upscaled_urls));
@@ -258,8 +266,19 @@ export default function MudebuAiStepper() {
                 })
                 .then((response2) => {
                   if (response2.status === 200 || response2.status === 201) {
-                    setLoading(false);
-                    router.push('/onboarding/ended-process/');
+                    axiosInstace
+                      .patch(`${endpoints_api.onboarding.update}/${idOnboarding}/pending`)
+                      .then((res) => {
+                        setLoading(false);
+                        router.push('/onboarding/ended-process/');
+
+                        removeStorage(storageKeys.uploadedImages);
+                        removeStorage(storageKeys.mudebuAiBlend);
+                        removeStorage(storageKeys.mudebuIaBenchmarkAi);
+                        removeStorage(storageKeys.onboardingId);
+                        removeStorage(storageKeys.onboardingProgress);
+                        removeStorage(storageKeys.onboardingResult);
+                      });
                   }
                 });
             }
@@ -271,7 +290,7 @@ export default function MudebuAiStepper() {
   };
 
   const handleBack = () => {
-    if (!haveBenchmarks && activeStep === 0) {
+    if (activeStep === 0) {
       dispatch(setHaveBenchmarks(true));
     } else {
       dispatch(setActiveStep(activeStep - 1));
@@ -279,7 +298,6 @@ export default function MudebuAiStepper() {
 
     const uploaBenchmarks = getStorage(storageKeys.uploadedImages);
     if (uploaBenchmarks) {
-      dispatch(setHaveBenchmarks(true));
       dispatch(setHaveBenchmarks(true));
     }
 
@@ -381,7 +399,7 @@ export default function MudebuAiStepper() {
                 Edición IA
               </LoadingButton>
             )}
-            {benchmarkList.length !== 0 && (
+            {benchmarkList.length > 0 ? (
               <LoadingButton
                 onClick={handleNext}
                 disabled={
@@ -393,8 +411,7 @@ export default function MudebuAiStepper() {
               >
                 {activeStep === steps.length - 1 ? 'Finalizar Cotización' : 'Siguiente'}
               </LoadingButton>
-            )}
-            {!haveBenchmarks && benchmarkList.length === 0 && (
+            ) : (
               <>
                 {isStepOptional(activeStep) && (
                   <LoadingButton

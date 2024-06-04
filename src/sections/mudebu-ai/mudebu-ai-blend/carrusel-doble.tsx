@@ -101,7 +101,7 @@ export default function Carouseldoble({
               } else if (res2.data?.status === 'in-progress') {
                 setMesageLoading('Procesando imagenes...');
               } else {
-                setMesageLoading(res2.data?.status);
+                setMesageLoading('Enviando Imagenes...');
               }
             })
             .catch((error) => {

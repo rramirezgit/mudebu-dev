@@ -144,7 +144,10 @@ export default function ListDetailPage({ id }: props) {
           <CarInfoOnboarding data={cardInfo} />
         </Grid>
         <Grid xs={12} sm={5}>
-          <CardImgData />
+          <CardImgData
+            imagesResult={cardInfo?.imagesResult}
+            benchmark_img={cardInfo?.benchmark_img}
+          />
         </Grid>
       </Grid>
     </Container>

@@ -7,7 +7,7 @@ import { setBenchmarkList } from 'src/store/slices/mudebu-ai';
 import { RootState } from 'src/store';
 import { useAxios } from 'src/axios/axios-provider';
 import { endpoints_api } from 'src/axios/endpoints';
-import { getStorage, setStorage } from 'src/hooks/use-local-storage';
+import { getStorage, removeStorage, setStorage } from 'src/hooks/use-local-storage';
 import { storageKeys } from 'src/sections/onboarding/form/form-layaout';
 
 export default function MudebuAiUpload() {
@@ -72,10 +72,19 @@ export default function MudebuAiUpload() {
     // Guardar las imágenes en localStorage
     const storedFiles = getStorage(storageKeys.uploadedImages) || [];
     setStorage(storageKeys.uploadedImages, [...storedFiles, ...successfulUploads]);
+    removeStorage(storageKeys.mudebuAiBlend);
   };
 
   const handleRemoveFile = (inputFile: File | string) => {
     const filesFiltered = files.filter((fileFiltered) => fileFiltered !== inputFile);
+
+    if (typeof inputFile === 'string') {
+      const storedFiles = getStorage(storageKeys.uploadedImages) || [];
+      const newStoredFiles = storedFiles.filter((file: any) => file.s3Url !== inputFile);
+      setStorage(storageKeys.uploadedImages, newStoredFiles);
+    }
+    removeStorage(storageKeys.mudebuAiBlend);
+
     setFiles(filesFiltered);
   };
 
@@ -83,22 +92,17 @@ export default function MudebuAiUpload() {
     e.preventDefault();
     setFiles([]);
     dispatch(setBenchmarkList([]));
+
+    removeStorage(storageKeys.mudebuAiBlend);
   };
 
   useEffect(() => {
     // Cargar las imágenes guardadas desde localStorage
     const storedFiles = getStorage(storageKeys.uploadedImages) || [];
-    if (storedFiles.length === 0) {
-      dispatch(setBenchmarkList([]));
-    }
 
     if (files.length === 0 && storedFiles.length > 0) {
       setFiles(storedFiles.map((file: any) => file.s3Url));
       dispatch(setBenchmarkList(storedFiles));
-    }
-
-    if (files.length === 0 && benchmarkList.length > 0) {
-      dispatch(setBenchmarkList([]));
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
