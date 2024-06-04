@@ -77,11 +77,26 @@ export default function MudebuAiUpload() {
 
   const handleRemoveFile = (inputFile: File | string) => {
     const filesFiltered = files.filter((fileFiltered) => fileFiltered !== inputFile);
-
     if (typeof inputFile === 'string') {
       const storedFiles = getStorage(storageKeys.uploadedImages) || [];
-      const newStoredFiles = storedFiles.filter((file: any) => file.s3Url !== inputFile);
+      const newStoredFiles = storedFiles.filter((file: any) => {
+        let dataFile = file;
+        if (typeof file === 'string') {
+          dataFile = { s3Url: file };
+        }
+        return dataFile.s3Url !== inputFile;
+      });
       setStorage(storageKeys.uploadedImages, newStoredFiles);
+
+      const newBenchmarkList = benchmarkList.filter((file: any) => {
+        let dataFile = file;
+        if (typeof file === 'string') {
+          dataFile = { s3Url: file };
+        }
+        return dataFile.s3Url !== inputFile;
+      });
+
+      dispatch(setBenchmarkList(newBenchmarkList));
     }
     removeStorage(storageKeys.mudebuAiBlend);
 
