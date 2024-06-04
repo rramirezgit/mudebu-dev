@@ -228,7 +228,7 @@ export default function SettingsTableRow({
                     });
                   }
 
-                  if (data?.types_of_furniture) {
+                  if (data?.colors_ai) {
                     setStorage(storageKeys.onboardingResult, {
                       colors_ai: data?.colors_ai,
                       dimensions: data?.dimensions,
@@ -238,17 +238,12 @@ export default function SettingsTableRow({
                       types_of_furniture: data?.types_of_furniture,
                       additional_details: data?.additional_details,
                     });
-
-                    setStorage(storageKeys.onboardingId, data?.id);
                   }
 
-                  if (data?.uploadedImages) {
-                    setStorage(storageKeys.uploadedImages, data?.uploadedImages);
+                  if (data?.benchmark_img) {
+                    setStorage(storageKeys.uploadedImages, data?.benchmark_img);
                   }
-
-                  if (data?.mudebuAiBlend) {
-                    setStorage(storageKeys.mudebuAiBlend, data?.mudebuAiBlend);
-                  }
+                  setStorage(storageKeys.onboardingId, data?.id);
 
                   router.push('/onboarding');
                 });

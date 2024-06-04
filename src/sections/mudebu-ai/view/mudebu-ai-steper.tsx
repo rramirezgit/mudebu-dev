@@ -187,7 +187,8 @@ export default function MudebuAiStepper() {
 
       nextStep();
 
-      axiosInstace.patch(`${endpoints_api.onboarding.update}/${info?.savedOnboarding?.id}`, {
+      const onboardingId = getStorage(storageKeys.onboardingId);
+      axiosInstace.patch(`${endpoints_api.onboarding.update}/${onboardingId}`, {
         benchmark_img: benchmarkList.map((image: any) => image.s3Url),
       });
 

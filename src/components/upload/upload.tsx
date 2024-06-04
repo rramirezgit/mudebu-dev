@@ -44,7 +44,6 @@ export default function Upload({
     disabled,
     ...other,
   });
-
   const hasFile = !!file && !multiple;
 
   const hasFiles = !!files && multiple && !!files.length;

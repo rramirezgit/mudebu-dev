@@ -99,9 +99,8 @@ export default function MudebuAiUpload() {
   useEffect(() => {
     // Cargar las imágenes guardadas desde localStorage
     const storedFiles = getStorage(storageKeys.uploadedImages) || [];
-
     if (files.length === 0 && storedFiles.length > 0) {
-      setFiles(storedFiles.map((file: any) => file.s3Url));
+      setFiles(storedFiles.map((file: any) => file?.s3Url || file));
       dispatch(setBenchmarkList(storedFiles));
     }
 
