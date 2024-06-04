@@ -19,6 +19,8 @@ export default function ServicesProductsView({ serviceProducstSelected }: Servic
     return null;
   }
 
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
   return (
     <>
       <ServicesHome currentData={serviceProducstSelected} />
