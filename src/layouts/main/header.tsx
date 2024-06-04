@@ -111,14 +111,17 @@ export default function Header() {
                 }}
               />
             )}
-
-            {mdUp && (
-              <SettingsButton
-                sx={{
-                  ml: { xs: 1, md: 0 },
-                  mr: { md: 2 },
-                }}
-              />
+            {authenticated && (
+              <>
+                {mdUp && (
+                  <SettingsButton
+                    sx={{
+                      ml: { xs: 1, md: 0 },
+                      mr: { md: 2 },
+                    }}
+                  />
+                )}
+              </>
             )}
 
             {!mdUp && <NavMobile offsetTop={offsetTop} data={navConfig} />}

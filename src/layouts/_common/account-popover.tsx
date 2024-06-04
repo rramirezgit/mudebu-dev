@@ -37,7 +37,9 @@ export default function AccountPopover() {
 
   const handleLogout = async () => {
     try {
-      await logout();
+      await logout({
+        openUrl(url) {},
+      });
       popover.onClose();
       router.replace('/');
     } catch (error) {
