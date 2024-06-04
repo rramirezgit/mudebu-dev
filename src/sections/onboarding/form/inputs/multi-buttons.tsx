@@ -29,7 +29,7 @@ export default function OnBoardingMultiButtons({ options, nameFORMIK }: Props) {
   const handleClickOption = (nameItem: string) => {
     let newValue;
     if (optionsSelected.includes(nameItem)) {
-      const optionsArray = optionsSelected.split(';').filter((option) => option !== nameItem);
+      const optionsArray = optionsSelected.split(';').filter((option: any) => option !== nameItem);
       newValue = optionsArray.join(';');
     } else {
       newValue = optionsSelected ? `${optionsSelected};${nameItem}` : nameItem;
