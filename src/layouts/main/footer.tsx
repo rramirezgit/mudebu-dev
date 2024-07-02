@@ -31,20 +31,20 @@ const LINKS = [
       { name: 'Catalogo', href: paths.catalogo },
     ],
   },
-  {
-    headline: 'Contact',
-    children: [
-      { name: 'support@minimals.cc', href: '#' },
-      { name: '55 5168 3871', href: '#' },
-      {
-        name: `Camino Santa Teresa 1313
-              Jardines del pedregal
-              CP 01900
-              CDMX`,
-        href: '#',
-      },
-    ],
-  },
+  // {
+  //   headline: 'Contact',
+  //   children: [
+  //     { name: 'support@minimals.cc', href: '#' },
+  //     { name: '55 5168 3871', href: '#' },
+  //     {
+  //       name: `Camino Santa Teresa 1313
+  //             Jardines del pedregal
+  //             CP 01900
+  //             CDMX`,
+  //       href: '#',
+  //     },
+  //   ],
+  // },
 ];
 
 // ----------------------------------------------------------------------

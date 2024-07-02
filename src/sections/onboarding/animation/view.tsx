@@ -9,7 +9,7 @@ import { RootState } from 'src/store';
 import { setContentStep, setStep } from 'src/store/slices/onBoarding';
 import { TSeccionForm } from '../form/types';
 
-const degreesPerSection = 11;
+const degreesPerSection = 13;
 
 export default function AnimationOnboarding() {
   const step = useSelector((state: RootState) => state.OnBoarding.step);

@@ -26,6 +26,7 @@ import { SettingsButton, HeaderShadow, LoginButton, AccountPopover } from '../_c
 import { RouterLink } from 'src/routes/components';
 import { useAuthContext } from 'src/auth/hooks';
 import { bgBlur } from 'src/theme/css';
+import { whiteList } from 'src/auth/context/auth0/auth-provider';
 
 // ----------------------------------------------------------------------
 
@@ -89,7 +90,7 @@ export default function Header() {
                 <Button component={RouterLink} href={paths.onboarding} variant="contained">
                   Cotizar
                 </Button>
-                {user?.role === 'admin' && (
+                {user?.role === 'admin' && whiteList.includes(user?.email ?? '') && (
                   <Button
                     variant="contained"
                     color="secondary"

@@ -43,6 +43,10 @@ export default function HomeContactUs() {
 
   const smUp = useResponsive('up', 'sm');
 
+  const handleClickOpenCalendar = () => {
+    window.open('https://calendly.com/mudebu', '_blank');
+  };
+
   const renderMessage = (
     <svg
       width="207"
@@ -93,6 +97,7 @@ export default function HomeContactUs() {
         <Stack spacing={4}>
           <Stack direction="row" spacing={1}>
             <Button
+              onClick={handleClickOpenCalendar}
               variant="contained"
               sx={{
                 height: '48px',

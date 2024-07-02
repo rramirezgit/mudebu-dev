@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useCallback, useState, useEffect } from 'react';
+import { useMemo, useCallback, useState } from 'react';
 import {
   AppState,
   useAuth0,
@@ -11,9 +11,16 @@ import {
 // config
 import { AUTH0_API } from 'src/config-global';
 //
-import { useAxios } from 'src/axios/axios-provider';
-import { endpoints_api } from 'src/axios/endpoints';
 import { AuthContext } from './auth-context';
+
+export const whiteList = [
+  '97.rramirez@gmail.com',
+  'ksayago7@gmail.com',
+  'leonchavez30@gmail.com',
+  'rafamusi@neodaten.com',
+  'leonchavez@neodaten.com',
+  'nicolecruz2808@gmail.com',
+];
 
 // ----------------------------------------------------------------------
 
@@ -55,15 +62,7 @@ function AuthProviderWrapper({ children }: Props) {
         ...user,
         displayName: user?.name,
         photoURL: user?.picture,
-        role:
-          user?.email === '97.rramirez@gmail.com' ||
-          user?.email === 'ksayago7@gmail.com' ||
-          user?.email === 'leonchavez30@gmail.com' ||
-          user?.email === 'rafamusi@neodaten.com' ||
-          user?.email === 'leonchavez@neodaten.com' ||
-          user?.email === 'nicolecruz2808@gmail.com'
-            ? 'admin'
-            : 'user',
+        role: whiteList.includes(user?.email ?? '') ? 'admin' : 'user',
       },
       method: 'auth0',
       loading: status === 'loading',

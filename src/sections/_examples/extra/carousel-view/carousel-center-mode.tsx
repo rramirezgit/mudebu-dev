@@ -12,6 +12,7 @@ import { bgGradient } from 'src/theme/css';
 // components
 import Carousel, { CarouselArrows, useCarousel } from 'src/components/carousel';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -27,15 +28,7 @@ type Props = {
 
 export default function CarouselCenterMode({ data }: Props) {
   const carousel = useCarousel({
-    slidesToShow: 1,
-    className: 'slider variable-width',
-    swipeToSlide: true,
     variableWidth: true,
-    centerMode: true,
-    autoplay: true,
-    pauseOnHover: true,
-    autoplaySpeed: 2000,
-    infinite: true,
     responsive: [
       {
         breakpoint: 1024,
@@ -70,7 +63,7 @@ export default function CarouselCenterMode({ data }: Props) {
         <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
           {data.map((item, index) => (
             <Box key={item.id} sx={{ px: 1 }}>
-              <CarouselItem item={item} isActive={index === carousel.currentIndex} />
+              <CarouselItem item={item} />
             </Box>
           ))}
         </Carousel>
@@ -90,10 +83,10 @@ type CarouselItemProps = {
     miniDescription?: string;
     image: string;
   };
-  isActive: boolean;
 };
 
-function CarouselItem({ item, isActive }: CarouselItemProps) {
+function CarouselItem({ item }: CarouselItemProps) {
+  const [isActive, setActive] = useState(false);
   const theme = useTheme();
 
   const router = useRouter();
@@ -104,14 +97,15 @@ function CarouselItem({ item, isActive }: CarouselItemProps) {
 
   return (
     <Paper
+      onMouseEnter={() => setActive(true)}
+      onMouseLeave={() => setActive(false)}
       sx={{
-        borderRadius: onlyimage ? 10 : 300,
         overflow: 'hidden',
         position: 'relative',
         width: onlyimage
           ? {
               xs: '287px',
-              sm: '510px',
+              sm: '810px',
             }
           : {
               xs: '287px',

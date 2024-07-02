@@ -75,7 +75,30 @@ const ItemCatalogo = ({ img, text, pdf, title }: ItemCatalogoProps) => {
 
   const smUp = useResponsive('up', 'sm');
 
-  const handleClik = () => {};
+  const handleClikDownload = () => {
+    const link = document.createElement('a');
+
+    switch (title) {
+      case 'Sillas y Bancos':
+        link.href = '/assets/pdfs/MUDEBU.SILLASBANCOScoleccion2023.pdf';
+        break;
+      case 'Muebles Mudebu':
+        link.href = '/assets/pdfs/MUDEBU.MUEBLESEXTERIORcoleccion2023.pdf';
+        break;
+      case 'Muebles de Exterior':
+        link.href = '/assets/pdfs/MUDEBU.MUEBLESEXTERIORcoleccion2023.pdf';
+        break;
+      case 'Sombrillas':
+        link.href = '/assets/pdfs/MUDEBU.SOMBRILLAScoleccion2023.pdf';
+        break;
+      default:
+        break;
+    }
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const theme = useTheme();
 
@@ -110,7 +133,7 @@ const ItemCatalogo = ({ img, text, pdf, title }: ItemCatalogoProps) => {
         variant="contained"
         color="secondary"
         sx={{ fontSize: 14, width: 200 }}
-        onClick={handleClik}
+        onClick={handleClikDownload}
         startIcon={<Iconify icon="ph:arrow-down-bold" />}
       >
         Descargar catalogo

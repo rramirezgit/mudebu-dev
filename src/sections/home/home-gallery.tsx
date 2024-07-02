@@ -112,27 +112,7 @@ const BoxComponent = ({
       onMouseEnter={() => handleMouseEnter(back)}
       onMouseLeave={() => handleMouseLeave(back)}
       onClick={() => hanldeClick(item)}
-    >
-      <Box
-        component={m.div}
-        sx={{
-          position: 'absolute',
-          width: '90%',
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          height: '84px',
-          bottom: 15,
-          left: 15,
-          color: '#fff',
-          padding: 2,
-          textAlign: 'center',
-          borderRadius: '12px',
-          opacity: 0,
-          transition: 'all 0.5s ease',
-        }}
-      >
-        Lorem ipsu dolor sit amet
-      </Box>
-    </Box>
+    />
   );
 };
 
