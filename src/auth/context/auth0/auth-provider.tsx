@@ -20,6 +20,7 @@ export const whiteList = [
   'rafamusi@neodaten.com',
   'leonchavez@neodaten.com',
   'nicolecruz2808@gmail.com',
+  'jolcususario1@gmail.com',
 ];
 
 // ----------------------------------------------------------------------
