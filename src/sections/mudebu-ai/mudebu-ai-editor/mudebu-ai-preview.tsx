@@ -27,7 +27,7 @@ export default function MudebuAiPreview() {
         Esta será la imagen base para su cotización ¿Quiere hacer alguna edición con IA?
       </Typography>
       <Image
-        src={imageSelectedFinishing?.b64 || imageSelectedFinishing.image}
+        src={imageSelectedFinishing?.b64 || imageSelectedFinishing?.image}
         sx={{
           width: {
             xs: '70%',

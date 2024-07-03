@@ -2,6 +2,8 @@
 
 import { LoadingButton } from '@mui/lab';
 import { Avatar, Card, CardContent, CardHeader, Stack, Typography } from '@mui/material';
+import { useAxios } from 'src/axios/axios-provider';
+import { endpoints_api } from 'src/axios/endpoints';
 import { Box } from 'src/components/Box/box-component';
 import Image from 'src/components/image/image';
 
@@ -9,18 +11,24 @@ export default function CardImgData({
   imagesResult = '/static/images/ai/mudebu-ai.png',
   benchmark_img = [],
 }: any) {
-  const downloadImage = (url: string, filename: string) => {
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  };
+  const axiosInstance = useAxios();
 
+  const downloadImage = async (url: string, filename: string) => {
+    try {
+      await axiosInstance.get(`${endpoints_api.mudebuAi.b64}${url}`).then((response) => {
+        const urlData = response.data;
+        const a = document.createElement('a');
+        a.href = urlData;
+        a.download = filename;
+        a.click();
+      });
+    } catch (error) {
+      console.error('There has been a problem with your fetch operation:', error);
+    }
+  };
   const handleDownload = () => {
     if (imagesResult !== '/static/images/ai/mudebu-ai.png') {
-      downloadImage(imagesResult, 'imagesResult.png');
+      downloadImage(imagesResult, 'result.png');
     }
 
     if (benchmark_img.length !== 0) {
