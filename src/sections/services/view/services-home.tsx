@@ -115,6 +115,7 @@ export default function ServicesHome({ currentData }: ServicesViewProps) {
         maxWidth: 1000,
         opacity: opacity > 0 ? opacity : 0,
         mt: {
+          xs: `-${HEADER.H_MOBILE + percent * 1}px`,
           md: `-${HEADER.H_DESKTOP + percent * 2.5}px`,
         },
       }}
@@ -136,7 +137,10 @@ export default function ServicesHome({ currentData }: ServicesViewProps) {
       <m.div variants={varFade().in}>
         <Paper
           sx={{
-            p: 3,
+            p: {
+              xs: 2,
+              md: 3,
+            },
             borderRadius: 2,
             width: 1,
             backgroundColor: (theme) => ({
@@ -151,7 +155,10 @@ export default function ServicesHome({ currentData }: ServicesViewProps) {
           <Typography
             sx={{
               textAlign: 'center',
-              fontSize: '22px',
+              fontSize: {
+                xs: 16,
+                md: 22,
+              },
             }}
           >
             {currentData.description}

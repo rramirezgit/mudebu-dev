@@ -18,7 +18,7 @@ type Props = {
 export default function MainLayout({ children }: Props) {
   const pathname = usePathname();
 
-  const isHome = pathname === '/';
+  const isHome = pathname === '/' || pathname === '/faqs/';
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: 1 }}>

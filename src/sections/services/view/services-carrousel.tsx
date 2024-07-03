@@ -22,16 +22,30 @@ export default function ServicesCarrusel({ imageList }: ServicesViewProps) {
     <Box
       component={MotionViewport}
       sx={{
-        py: { xs: 10, md: 15 },
+        py: { xs: 5, md: 15 },
         bgcolor: (theme) => alpha(theme.palette.grey[500], 0.04),
       }}
     >
-      <m.div variants={varFade().in}>
+      <m.div
+        variants={varFade().in}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          margin: '0 auto',
+        }}
+      >
         <Typography
           variant="h3"
           align="center"
           sx={{
-            mb: 5,
+            mb: {
+              xs: 3,
+              md: 5,
+            },
+            fontSize: { xs: 19, md: 32 },
+            maxWidth: '80%',
           }}
         >
           Somos una empresa 100% mexicana con una amplia gama de servicios para resolver tus

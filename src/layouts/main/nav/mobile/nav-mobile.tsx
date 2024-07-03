@@ -17,6 +17,7 @@ import Scrollbar from 'src/components/scrollbar';
 import { LoginButton } from 'src/layouts/_common';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { useAuthContext } from 'src/auth/hooks';
+import { whiteList } from 'src/auth/context/auth0/auth-provider';
 import NavList from './nav-list';
 import { NavProps } from '../types';
 
@@ -70,7 +71,11 @@ export default function NavMobile({ offsetTop, data }: NavProps) {
 
           <List component="nav" disablePadding>
             {data.map((link) => {
-              if (link.title === 'Dashboard' && user?.role === 'admin') {
+              if (
+                link.title === 'Dashboard' &&
+                user?.role === 'admin' &&
+                !whiteList.includes(user?.email ?? '')
+              ) {
                 return null;
               }
               return <NavList key={link.title} item={link} />;

@@ -6,7 +6,7 @@ import { homeServicesProductsData } from 'src/sections/home/home-service-producs
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'Post: Details',
+  title: 'Mudebu | Servicios y Productos',
 };
 
 type Props = {

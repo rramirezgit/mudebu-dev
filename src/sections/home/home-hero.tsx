@@ -19,7 +19,6 @@ import { HEADER } from 'src/layouts/config-layout';
 // components
 import { MotionContainer, varFade } from 'src/components/animate';
 import { useResponsive } from 'src/hooks/use-responsive';
-import { display } from '@mui/system';
 
 // ----------------------------------------------------------------------
 
@@ -38,7 +37,7 @@ const StyledRoot = styled('div')(({ theme }) => ({
   },
 }));
 
-const StyledWrapper = styled('div')(({ theme }) => ({
+export const StyledWrapper = styled('div')(({ theme }) => ({
   height: '100%',
   overflow: 'hidden',
   background:
@@ -120,6 +119,7 @@ export default function HomeHero() {
               fontWeight: 600,
               mb: 1,
               lineHeight: { xs: '55px', md: '77.141px' },
+              color: '#222E4D',
             }}
           >
             Especialistas en Mobiliario
@@ -135,6 +135,10 @@ export default function HomeHero() {
                 fontWeight: {
                   xs: 500,
                   md: 500,
+                },
+                fontSize: {
+                  xs: 16,
+                  md: 20,
                 },
               }}
             >

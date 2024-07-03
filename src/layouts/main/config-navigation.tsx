@@ -17,6 +17,11 @@ export const navConfig = [
     path: paths.catalogo,
   },
   {
+    title: 'Contanto',
+    icon: <Iconify icon="mdi:telephone" />,
+    path: paths.contact,
+  },
+  {
     title: 'Cotizar',
     icon: <Iconify icon="solar:bill-list-bold" />,
     path: paths.onboarding,
@@ -29,7 +34,7 @@ export const navConfig = [
     mobile: true,
   },
   {
-    title: 'Ajustes',
+    title: 'Admin',
     icon: <Iconify icon="solar:settings-bold-duotone" />,
     path: paths.settings,
     mobile: true,

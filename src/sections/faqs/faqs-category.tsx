@@ -17,38 +17,39 @@ import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 import { MotionViewport, varFade } from 'src/components/animate';
+import { Typography } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
 const CATEGORIES = [
   {
-    label: 'Managing your account',
-    icon: '/assets/icons/faqs/ic_account.svg',
+    label: 'Informacion General y servicios',
+    icon: '/assets/icons/faqs/Information.png',
     href: '#',
   },
   {
-    label: 'Payment',
-    icon: '/assets/icons/faqs/ic_payment.svg',
+    label: 'Financiamiento y Logística',
+    icon: '/assets/icons/faqs/financiamiento.png',
     href: '#',
   },
   {
-    label: 'Delivery',
-    icon: '/assets/icons/faqs/ic_delivery.svg',
+    label: 'Calidad, Tecnología e Innovación',
+    icon: '/assets/icons/faqs/calidad.png',
     href: '#',
   },
   {
-    label: 'Problem with the Product',
-    icon: '/assets/icons/faqs/ic_package.svg',
+    label: 'Mobiliario y Personalización',
+    icon: '/assets/icons/faqs/mobiliario.png',
     href: '#',
   },
   {
-    label: 'Return & Refund',
-    icon: '/assets/icons/faqs/ic_refund.svg',
+    label: 'Proceso de Diseño',
+    icon: '/assets/icons/faqs/diseno.png',
     href: '#',
   },
   {
-    label: 'Guarantees and assurances',
-    icon: '/assets/icons/faqs/ic_assurances.svg',
+    label: 'Mantenimiento, Postventa y Sostenibilidad',
+    icon: '/assets/icons/faqs/mantenimiento.png',
     href: '#',
   },
 ];
@@ -120,6 +121,7 @@ function CardDesktop({ category }: CardDesktopProps) {
       sx={{
         p: 3,
         borderRadius: 2,
+        height: 212,
         bgcolor: 'unset',
         cursor: 'pointer',
         textAlign: 'center',
@@ -127,18 +129,21 @@ function CardDesktop({ category }: CardDesktopProps) {
           bgcolor: 'background.paper',
           boxShadow: (theme) => theme.customShadows.z20,
         },
+        position: 'relative',
       }}
     >
-      <Image
-        disabledEffect
-        alt={icon}
-        src={icon}
-        sx={{ mb: 2, width: 80, height: 80, mx: 'auto' }}
-      />
+      <Image disabledEffect alt={icon} src={icon} sx={{ mb: 2, mx: 'auto' }} />
 
-      <TextMaxLine variant="subtitle2" persistent>
+      <Typography
+        variant="subtitle2"
+        sx={{
+          position: 'absolute',
+          bottom: 20,
+          left: 20,
+        }}
+      >
         {label}
-      </TextMaxLine>
+      </Typography>
     </Paper>
   );
 }

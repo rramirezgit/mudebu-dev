@@ -83,7 +83,10 @@ export default function HomeContactUs() {
   const renderform = (
     <Card
       sx={{
-        p: 3,
+        p: {
+          xs: 0,
+          md: 3,
+        },
         ...bgBlur({
           opacity: 0.1,
           color: theme.palette.grey[900],
@@ -215,10 +218,31 @@ export default function HomeContactUs() {
                 height: '100%',
               }}
             >
-              <Typography variant="h2" sx={{ color: 'white' }}>
+              <Typography
+                variant="h2"
+                sx={{
+                  color: 'white',
+                  maxWidth: 411,
+                  textAlign: {
+                    xs: 'center',
+                    md: 'left',
+                  },
+                  mb: 3,
+                }}
+              >
                 Ponte en Contacto Con nosotros!
               </Typography>
-              <Typography variant="body1" sx={{ color: 'white' }}>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: 'white',
+                  maxWidth: 411,
+                  textAlign: {
+                    xs: 'center',
+                    md: 'left',
+                  },
+                }}
+              >
                 ¡Estamos ansiosos por escucharte! Nuestra página de contacto es tu puerta de entrada
                 para conectarte con nosotros. Ya sea que tengas preguntas, comentarios o estés listo
                 para comenzar un proyecto emocionante, estamos aquí para ayudarte.

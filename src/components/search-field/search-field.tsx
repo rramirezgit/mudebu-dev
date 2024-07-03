@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'src/routes/hooks';
 import { setInitialText } from 'src/store/slices/onBoarding';
+import { useResponsive } from 'src/hooks/use-responsive';
 
 const Container = styled('div')(({ theme }) => ({
   width: '100%',
@@ -32,6 +33,8 @@ const StyledInput = styled('input')(({ theme }) => ({
 const SearchField = () => {
   const router = useRouter();
 
+  const smUp = useResponsive('up', 'sm');
+
   const dispatch = useDispatch();
 
   const handleclickSearch = () => {
@@ -45,7 +48,11 @@ const SearchField = () => {
         onChange={(e) => {
           dispatch(setInitialText(e?.target?.value));
         }}
-        placeholder="Descríbenos tus necesidades para generar una cotización con Inteligencia Artificial"
+        placeholder={
+          smUp
+            ? 'Descríbenos tus necesidades para generar una cotización con Inteligencia Artificial'
+            : 'Descríbenos tus necesidades'
+        }
       />
       <Button variant="contained" onClick={handleclickSearch} color="primary">
         Generate
