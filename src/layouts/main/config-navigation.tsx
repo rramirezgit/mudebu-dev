@@ -17,7 +17,7 @@ export const navConfig = [
     path: paths.catalogo,
   },
   {
-    title: 'Contanto',
+    title: 'Contacto',
     icon: <Iconify icon="mdi:telephone" />,
     path: paths.contact,
   },
