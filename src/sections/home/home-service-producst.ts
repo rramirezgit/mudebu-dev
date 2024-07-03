@@ -37,7 +37,7 @@ export const homeServicesProductsData: any = {
     },
     {
       id: '3',
-      title: 'Diseño e interiorism',
+      title: 'Diseño e interiorismo',
       to: 'services/innovacion-en-diseno-y-funcionalidad',
       miniDescription:
         'Ofrecemos soluciones en mobiliario innovador para decorar tus espacios con los mejores diseños',
