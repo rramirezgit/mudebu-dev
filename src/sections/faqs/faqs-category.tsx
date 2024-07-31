@@ -15,39 +15,46 @@ import { useResponsive } from 'src/hooks/use-responsive';
 // components
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
-import TextMaxLine from 'src/components/text-max-line';
 import { MotionViewport, varFade } from 'src/components/animate';
 import { Typography } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { setFaqsSelected } from 'src/store/slices/onBoarding';
 
 // ----------------------------------------------------------------------
 
 const CATEGORIES = [
   {
+    id: 1,
     label: 'Informacion General y servicios',
     icon: '/assets/icons/faqs/Information.png',
     href: '#',
   },
   {
+    id: 2,
     label: 'Financiamiento y Logística',
     icon: '/assets/icons/faqs/financiamiento.png',
     href: '#',
   },
   {
+    id: 3,
     label: 'Calidad, Tecnología e Innovación',
     icon: '/assets/icons/faqs/calidad.png',
     href: '#',
   },
   {
+    id: 4,
     label: 'Mobiliario y Personalización',
     icon: '/assets/icons/faqs/mobiliario.png',
     href: '#',
   },
   {
+    id: 5,
     label: 'Proceso de Diseño',
     icon: '/assets/icons/faqs/diseno.png',
     href: '#',
   },
   {
+    id: 6,
     label: 'Mantenimiento, Postventa y Sostenibilidad',
     icon: '/assets/icons/faqs/mantenimiento.png',
     href: '#',
@@ -109,14 +116,16 @@ type CardDesktopProps = {
   category: {
     label: string;
     icon: string;
+    id: number;
   };
 };
 
 function CardDesktop({ category }: CardDesktopProps) {
   const { label, icon } = category;
-
+  const distpach = useDispatch();
   return (
     <Paper
+      onClick={() => distpach(setFaqsSelected(category.id))}
       variant="outlined"
       sx={{
         p: 3,
@@ -153,8 +162,11 @@ function CardDesktop({ category }: CardDesktopProps) {
 function CardMobile({ category }: CardDesktopProps) {
   const { label, icon } = category;
 
+  const distpach = useDispatch();
+
   return (
     <ListItemButton
+      onClick={() => distpach(setFaqsSelected(category.id))}
       key={label}
       sx={{
         py: 2,

@@ -6,6 +6,7 @@ export interface OnboardingState {
   loadingForm: boolean;
   imagesData: any;
   initialText: string;
+  faqsSelected: number;
 }
 
 export interface mudebuAIState {

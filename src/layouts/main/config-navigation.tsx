@@ -39,4 +39,9 @@ export const navConfig = [
     path: paths.settings,
     mobile: true,
   },
+  {
+    title: 'Faqs',
+    icon: <Iconify icon="mingcute:question-fill" />,
+    path: paths.faqs,
+  },
 ];

@@ -137,7 +137,7 @@ export default function MudebuAiGetAi() {
               });
             }
 
-            setImages(data.slice(0, 9));
+            setImages(data.slice(0, 4));
           }
         }
       })
@@ -204,7 +204,7 @@ export default function MudebuAiGetAi() {
             />
           ))}
         {loadingAll &&
-          [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item: any) => (
+          [1, 2, 3, 4].map((item: any) => (
             <Skeleton
               sx={{
                 width: {

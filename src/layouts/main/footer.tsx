@@ -29,6 +29,7 @@ const LINKS = [
       { name: 'Contacto', href: paths.contact },
       { name: 'Cotizar', href: paths.onboarding },
       { name: 'Catalogo', href: paths.catalogo },
+      { name: 'Faqs', href: paths.faqs },
     ],
   },
   // {
